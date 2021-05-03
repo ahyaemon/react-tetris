@@ -1,10 +1,13 @@
 import React from 'react';
 import './ControllerRight.scss';
+import CrossKeys from "./cross-keys/CrossKeys";
 
 export default function ControllerRight() {
     return (
         <div className="controllerRight">
-            <p>上下左右</p>
+            <div className="controllerRight__crossKeys">
+                <CrossKeys/>
+            </div>
         </div>
     )
 }
