@@ -1,0 +1,12 @@
+.screen {
+    display: flex;
+
+    &__left {
+        background-color: #fff7f7;
+    }
+
+    &__right {
+        background-color: #f7fdff;
+    }
+}
+
