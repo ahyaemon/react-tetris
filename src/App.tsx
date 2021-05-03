@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Screen from "./components/screen/Screen";
+import Controller from "./components/controller/Controller";
 
 function App() {
     return (
@@ -10,7 +11,7 @@ function App() {
                 <Screen/>
             </div>
             <div className="app_controller">
-                controller
+                <Controller/>
             </div>
         </div>
     );
