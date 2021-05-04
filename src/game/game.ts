@@ -28,9 +28,12 @@ export type Cell = Color
 
 type Row = Cell[]
 
+type Rotation = 0 | 90 | 180 | 270
+
 interface CurrentMino {
     mino: Mino,
-    position: Position
+    position: Position,
+    rotation: Rotation
 }
 
 export type GameState = {
@@ -39,19 +42,23 @@ export type GameState = {
     rows: Row[]
 }
 
-const initialRowsArray = Array(20).fill(0).map(_ => Array(10).fill(Color.None))
-initialRowsArray[18][2] = Color.Red
-initialRowsArray[19][1] = Color.Red
-initialRowsArray[19][2] = Color.Red
-initialRowsArray[19][3] = Color.Red
+function createInitialRowsArray(): Row[] {
+    const initialRowsArray = Array(20).fill(0).map(_ => Array(10).fill(Color.None))
+    initialRowsArray[18][2] = Color.Red
+    initialRowsArray[19][1] = Color.Red
+    initialRowsArray[19][2] = Color.Red
+    initialRowsArray[19][3] = Color.Red
+    return initialRowsArray
+}
 
 export const initialGameState: GameState = {
     value: 1,
     currentMino: {
         mino: Mino.J,
-        position: { row: 0, col: 0 }
+        position: { row: 0, col: 0 },
+        rotation: 0
     },
-    rows: initialRowsArray
+    rows: createInitialRowsArray()
 }
 
 export enum Key {
