@@ -1,0 +1,10 @@
+.cell {
+    border-top: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    width: 20px;
+    height: 20px;
+
+    &--red {
+        background-color: red;
+    }
+}
