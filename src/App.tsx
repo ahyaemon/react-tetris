@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './App.scss';
 import Screen from "./components/screen/Screen";
 import Controller from "./components/controller/Controller";
-import GameContext, { initialGameState } from "./gameContext";
+import GameContext from "./gameContext";
+import {initialGameState} from "./game/game";
 
 function App() {
     const [gameState, setGameState] = useState(initialGameState)

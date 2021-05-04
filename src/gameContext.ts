@@ -1,12 +1,6 @@
 import {createContext} from "react";
+import {GameState} from "./game/game";
 
-type GameState = {
-    value: number
-}
-
-export const initialGameState: GameState = {
-    value: 1,
-}
 
 type GameContextType = {
     gameState: GameState
