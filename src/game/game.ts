@@ -83,6 +83,12 @@ export class Game {
     public input(command: Command): GameState {
         if (command === Command.Up) {
             this.value += 10
+        } else if (command === Command.Right) {
+            this.value += 1
+        } else if (command === Command.Down) {
+            this.value -= 10
+        } else if (command === Command.Left) {
+            this.value -= 1
         }
         return this.state
     }

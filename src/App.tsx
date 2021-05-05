@@ -3,12 +3,14 @@ import './App.scss';
 import Screen from "./components/screen/Screen";
 import Controller from "./components/controller/Controller";
 import GameContext from "./gameContext";
-import {Game} from "./game/game";
+import {Command, Game} from "./game/game";
 import {useKeyDown} from "./hooks/useKeyDown";
 
 const key = {
     down: 'ArrowDown',
-    up: 'ArrowUp'
+    up: 'ArrowUp',
+    right: 'ArrowRight',
+    left: 'ArrowLeft',
 }
 
 export const game = Game.create()
@@ -16,14 +18,10 @@ export const game = Game.create()
 function App() {
     const [gameState, setGameState] = useState(game.state)
     useKeyDown([
-        {
-            key: key.down,
-            f: () => { console.log('down') }
-        },
-        {
-            key: key.up,
-            f: () => { console.log('up') }
-        }
+        { key: key.down,  f: () => { setGameState(game.input(Command.Down)) } },
+        { key: key.up,  f: () => { setGameState(game.input(Command.Up)) } },
+        { key: key.right,  f: () => { setGameState(game.input(Command.Right)) } },
+        { key: key.left,  f: () => { setGameState(game.input(Command.Left)) } },
     ])
 
     return (
