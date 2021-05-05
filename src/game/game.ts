@@ -42,38 +42,48 @@ export type GameState = {
     rows: Row[]
 }
 
-function createInitialRowsArray(): Row[] {
-    const initialRowsArray = Array(20).fill(0).map(_ => Array(10).fill(Color.None))
-    initialRowsArray[18][2] = Color.Red
-    initialRowsArray[19][1] = Color.Red
-    initialRowsArray[19][2] = Color.Red
-    initialRowsArray[19][3] = Color.Red
-    return initialRowsArray
-}
-
-export const initialGameState: GameState = {
-    value: 1,
-    currentMino: {
-        mino: Mino.J,
-        position: { row: 0, col: 0 },
-        rotation: 0
-    },
-    rows: createInitialRowsArray()
-}
-
-export enum Key {
+export enum Command {
     Up,
     Right,
     Down,
     Left,
 }
 
-export function input(gameState: GameState, key: Key): GameState {
-    if (key === Key.Up) {
+export class Game {
+    constructor(
+        private currentMino: CurrentMino,
+        private rows: Row[],
+        private value: number
+    ) {}
+
+    static create(): Game {
+        const rows = Array(20).fill(0).map(_ => Array(10).fill(Color.None))
+        rows[18][2] = Color.Red
+        rows[19][1] = Color.Red
+        rows[19][2] = Color.Red
+        rows[19][3] = Color.Red
+
+        const currentMino: CurrentMino = {
+            mino: Mino.J,
+            position: { row: 0, col: 0 },
+            rotation: 0
+        }
+
+        return new Game(currentMino, rows, 1)
+    }
+
+    get state(): GameState {
         return {
-            ...gameState,
-            value: gameState.value + 10
+            currentMino: this.currentMino,
+            rows: this.rows,
+            value: this.value,
         }
     }
-    return gameState
+
+    public input(command: Command): GameState {
+        if (command === Command.Up) {
+            this.value += 10
+        }
+        return this.state
+    }
 }

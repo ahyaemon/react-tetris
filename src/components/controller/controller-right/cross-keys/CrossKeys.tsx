@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import './CrossKeys.scss';
 import GameContext from "../../../../gameContext";
-import {input, Key } from "../../../../game/game";
+import {Command} from "../../../../game/game";
+import {game} from "../../../../App";
 
 export default function CrossKeys() {
     const { gameState, setGameState } = useContext(GameContext)
@@ -10,7 +11,7 @@ export default function CrossKeys() {
         <div className="crossKeys">
             <button
                 type="button"
-                onClick={() => { setGameState(input(gameState, Key.Up)) }}
+                onClick={() => { setGameState(game.input(Command.Up)) }}
             >
                 {gameState.value}
             </button>
