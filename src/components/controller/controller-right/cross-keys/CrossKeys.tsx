@@ -9,7 +9,6 @@ export default function CrossKeys() {
 
     return (
         <div className="crossKeys">
-            <p>{gameState.value}</p>
             <button
                 type="button"
                 onClick={() => { setGameState(game.input(Command.Up)) }}
