@@ -1,32 +1,8 @@
-enum MinoType {
-    I,
-    O,
-    T,
-    S,
-    Z,
-    L,
-    J,
-}
-
-export type Mino = {
-    minoType: MinoType,
-    shape: boolean[][]
-}
+import {Color, Mino, minoFactory} from "./mino";
 
 type Position = {
     row: number,
     col: number,
-}
-
-export enum Color {
-    None = 'none',
-    LightBlue = 'lightBlue',
-    Yellow = 'yellow',
-    Purple = 'purple',
-    Green = 'green',
-    Red = 'red',
-    Orange = 'orange',
-    Blue = 'blue',
 }
 
 export type Cell = Color
@@ -53,19 +29,22 @@ export enum Command {
 }
 
 export class Game {
+
+    private static ncol = 10
+    private static nrow = 20
+
     constructor(
         private currentMino: CurrentMino,
         private rows: Row[],
     ) {}
 
     static create(): Game {
-        const rows = Array(20).fill(0).map(_ => Array(10).fill(Color.None))
+        const rows = Array(this.nrow)
+            .fill(0)
+            .map(_ => Array(this.ncol).fill(Color.None))
         const currentMino: CurrentMino = {
-            mino: {
-                minoType: MinoType.J,
-                shape: [[]]
-            },
-            position: { row: 0, col: 0 },
+            mino: minoFactory.j(),
+            position: { row: 0, col: 3 },
             rotation: 0
         }
 
@@ -73,21 +52,48 @@ export class Game {
     }
 
     get state(): GameState {
-        return {
-            rows: this.rows,
-        }
+        const rows = this.rows.map(row => row.map(cell => cell))
+        this.currentMino.mino.shape.forEach((row, irow) => {
+            row.forEach((exists, icol) => {
+                if (exists) {
+                    rows[irow + this.currentMino.position.row][icol + this.currentMino.position.col] = this.currentMino.mino.color
+                }
+            })
+        })
+        return { rows }
     }
 
     public input(command: Command): GameState {
         if (command === Command.Up) {
             console.log('up')
         } else if (command === Command.Right) {
-            console.log('right')
+            this.moveRight()
         } else if (command === Command.Down) {
-            console.log('down')
+            this.moveDown()
         } else if (command === Command.Left) {
-            console.log('left')
+            this.moveLeft()
         }
         return this.state
+    }
+
+    private moveRight() {
+        const nextCol = this.currentMino.position.col + 1
+        if (nextCol + this.currentMino.mino.rightPosition() < Game.ncol) {
+            this.currentMino.position.col = nextCol
+        }
+    }
+
+    private moveLeft() {
+        const nextCol = this.currentMino.position.col - 1
+        if (nextCol + this.currentMino.mino.leftPosition() >= 0) {
+            this.currentMino.position.col = nextCol
+        }
+    }
+
+    private moveDown() {
+        const nextRow = this.currentMino.position.row + 1
+        if (nextRow + this.currentMino.mino.bottomPosition() < Game.nrow) {
+            this.currentMino.position.row = nextRow
+        }
     }
 }
