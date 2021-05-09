@@ -1,9 +1,5 @@
 import {Color, Mino, minoFactory} from "./mino";
-
-type Position = {
-    row: number,
-    col: number,
-}
+import {Position} from "./potision";
 
 export type Cell = Color
 
@@ -53,12 +49,8 @@ export class Game {
 
     get state(): GameState {
         const rows = this.rows.map(row => row.map(cell => cell))
-        this.currentMino.mino.shape.forEach((row, irow) => {
-            row.forEach((exists, icol) => {
-                if (exists) {
-                    rows[irow + this.currentMino.position.row][icol + this.currentMino.position.col] = this.currentMino.mino.color
-                }
-            })
+        this.currentMino.mino.shape.forEach(position => {
+            rows[this.currentMino.position.row + position.row][this.currentMino.position.col + position.col] = this.currentMino.mino.color
         })
         return { rows }
     }
@@ -73,7 +65,7 @@ export class Game {
 
             // 次のミノを表示
             this.currentMino = {
-                mino: minoFactory.j(),
+                mino: minoFactory.random(),
                 position: { row: 0, col: 3 },
                 rotation: 0
             }
@@ -88,40 +80,70 @@ export class Game {
     }
 
     private moveRight() {
-        const nextCol = this.currentMino.position.col + 1
-        if (nextCol + this.currentMino.mino.rightPosition() < Game.ncol) {
-            this.currentMino.position.col = nextCol
+        const nextPosition: Position = {
+            row: this.currentMino.position.row,
+            col: this.currentMino.position.col + 1,
+        }
+        if (
+            (nextPosition.col + this.currentMino.mino.rightCol() < Game.ncol) &&
+            (!this.collided(nextPosition))
+        ) {
+            this.currentMino.position = nextPosition
         }
     }
 
     private moveLeft() {
-        const nextCol = this.currentMino.position.col - 1
-        if (nextCol + this.currentMino.mino.leftPosition() >= 0) {
-            this.currentMino.position.col = nextCol
+        const nextPosition: Position = {
+            row: this.currentMino.position.row,
+            col: this.currentMino.position.col - 1,
+        }
+        if (
+            (nextPosition.col + this.currentMino.mino.leftCol() >= 0) &&
+            (!this.collided(nextPosition))
+        )
+        {
+            this.currentMino.position = nextPosition
         }
     }
 
     private moveDown() {
-        const nextRow = this.currentMino.position.row + 1
-        if (nextRow + this.currentMino.mino.bottomPosition() < Game.nrow) {
-            this.currentMino.position.row = nextRow
+        const nextPosition: Position = {
+            row: this.currentMino.position.row + 1,
+            col: this.currentMino.position.col,
+        }
+        if (
+            (nextPosition.row + this.currentMino.mino.bottomRow() < Game.nrow) &&
+            (!this.collided(nextPosition))
+        ) {
+            this.currentMino.position = nextPosition
         }
     }
 
     private drop() {
         while (true) {
-            const nextRow = this.currentMino.position.row + 1
-            if (nextRow + this.currentMino.mino.bottomPosition() < Game.nrow) {
-                this.currentMino.position.row = nextRow
+            const nextPosition: Position = {
+                row: this.currentMino.position.row + 1,
+                col: this.currentMino.position.col
+            }
+            if (
+                (nextPosition.row + this.currentMino.mino.bottomRow() < Game.nrow) &&
+                (!this.collided(nextPosition))
+            ) {
+                this.currentMino.position = nextPosition
             } else {
                 break
             }
         }
     }
 
-    private collided(): boolean {
-        // TODO
-        const cellPositions = this.currentMino.mino.shape
-        return false
+    private collided(position: Position): boolean {
+        return this.currentMino.mino.shape.map(p => {
+            return {
+                row: position.row + p.row,
+                col: position.col + p.col,
+            }
+        }).find(p => {
+            return this.rows[p.row][p.col] !== Color.None
+        }) !== undefined
     }
 }
