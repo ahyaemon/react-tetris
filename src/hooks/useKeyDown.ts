@@ -14,5 +14,6 @@ export function useKeyDown(keyFs: KeyF[]) {
             }
 
         }, false);
+        // eslint-disable-next-line
     }, [])
 }

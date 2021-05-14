@@ -146,4 +146,5 @@ export const minoFactory = {
     }
 }
 
+// eslint-disable-next-line
 const transpose = (a: any[][]) => a[0].map((_, c) => a.map(r => r[c]));
