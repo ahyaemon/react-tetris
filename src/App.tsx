@@ -11,6 +11,8 @@ const key = {
     up: 'ArrowUp',
     right: 'ArrowRight',
     left: 'ArrowLeft',
+    z: 'z',
+    x: 'x',
 }
 
 export const game = Game.create()
@@ -22,6 +24,8 @@ function App() {
         { key: key.up,  f: () => { setGameState(game.input(Command.Up)) } },
         { key: key.right,  f: () => { setGameState(game.input(Command.Right)) } },
         { key: key.left,  f: () => { setGameState(game.input(Command.Left)) } },
+        { key: key.z,  f: () => { setGameState(game.input(Command.RotationLeft)) } },
+        { key: key.x,  f: () => { setGameState(game.input(Command.RotationRight)) } },
     ])
 
     return (

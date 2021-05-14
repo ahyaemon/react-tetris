@@ -1,4 +1,4 @@
-import {Color, Mino, minoFactory} from "./mino";
+import {Color, Mino, minoFactory, rotationRight} from "./mino";
 import {Position} from "./potision";
 
 export type Cell = Color
@@ -7,6 +7,7 @@ type Row = Cell[]
 
 type Rotation = 0 | 90 | 180 | 270
 
+// TODO これを class にして、getShape を加える
 interface CurrentMino {
     mino: Mino,
     position: Position,
@@ -22,6 +23,8 @@ export enum Command {
     Right,
     Down,
     Left,
+    RotationLeft,
+    RotationRight,
 }
 
 export class Game {
@@ -75,6 +78,10 @@ export class Game {
             this.moveDown()
         } else if (command === Command.Left) {
             this.moveLeft()
+        } else if (command === Command.RotationLeft) {
+            // this.currentMino.mino = rotationRight(this.currentMino.mino)
+        } else if (command === Command.RotationRight) {
+            this.currentMino.mino = rotationRight(this.currentMino.mino)
         }
         return this.state
     }
