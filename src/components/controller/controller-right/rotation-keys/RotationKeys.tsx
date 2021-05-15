@@ -14,7 +14,6 @@ export default function RotationKeys() {
                 type="button"
                 onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
             >左回転</button>
-            <br/>
             <button
                 type="button"
                 onClick={() => { setGameState(game.input(Command.RotationRight)) }}
