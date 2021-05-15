@@ -32,8 +32,6 @@ function App() {
     return (
         <GameContext.Provider value={{gameState, setGameState}}>
             <div className="app">
-
-                <header className="app__header">tetris simulator</header>
                 <div className="app__screen">
                     <Screen/>
                 </div>
