@@ -10,24 +10,30 @@ export default function CrossKeys() {
 
     return (
         <div className="crossKeys">
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.Up)) }}
-            >上</button>
-            <br/>
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.Left)) }}
-            >左</button>
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.Right)) }}
-            >右</button>
-            <br/>
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.Down)) }}
-            >下</button>
+            <div className="crossKeys__up">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.Up)) }}
+                >上</button>
+            </div>
+            <div className="crossKeys__left">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.Left)) }}
+                >左</button>
+            </div>
+            <div className="crossKeys__right">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.Right)) }}
+                >右</button>
+            </div>
+            <div className="crossKeys__down">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.Down)) }}
+                >下</button>
+            </div>
         </div>
     )
 }
