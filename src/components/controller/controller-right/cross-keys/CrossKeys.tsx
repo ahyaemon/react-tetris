@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import './CrossKeys.scss';
 import GameContext from "../../../../gameContext";
-import {Command} from "../../../../game/game";
 import {game} from "../../../../App";
+import {Command} from "../../../../game/command";
 
 export default function CrossKeys() {
     // eslint-disable-next-line

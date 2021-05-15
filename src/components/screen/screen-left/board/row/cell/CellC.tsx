@@ -1,6 +1,6 @@
 import React from 'react';
 import './Cell.scss';
-import {Color} from "../../../../../../game/mino";
+import {Color} from "../../../../../../game/color";
 
 type CellProps = {
     color: Color

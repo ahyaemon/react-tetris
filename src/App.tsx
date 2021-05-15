@@ -3,8 +3,9 @@ import './App.scss';
 import Screen from "./components/screen/Screen";
 import Controller from "./components/controller/Controller";
 import GameContext from "./gameContext";
-import {Command, Game} from "./game/game";
+import {Game} from "./game/game";
 import {useKeyDown} from "./hooks/useKeyDown";
+import {Command} from "./game/command";
 
 const key = {
     down: 'ArrowDown',

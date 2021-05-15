@@ -1,17 +1,7 @@
-import {Position} from "./potision";
 import {getRandomInt} from "./random";
-import {rotateMatrix180, rotateMatrix270, rotateMatrix90} from "./lib/matrix";
-
-export enum Color {
-    None = 'none',
-    LightBlue = 'lightBlue',
-    Yellow = 'yellow',
-    Purple = 'purple',
-    Green = 'green',
-    Red = 'red',
-    Orange = 'orange',
-    Blue = 'blue',
-}
+import {Color} from "./color";
+import {Rotation} from "./rotation";
+import {Shape} from "./shape";
 
 enum MinoType {
     I,
@@ -21,24 +11,6 @@ enum MinoType {
     Z,
     L,
     J,
-}
-
-class Rotation {
-    constructor(
-        readonly a: Shape,
-        readonly b: Shape,
-        readonly c: Shape,
-        readonly d: Shape,
-    ) {}
-
-    public static fromMatrix(matrix: boolean[][]): Rotation {
-        return new Rotation(
-            Shape.fromMatrix(matrix),
-            Shape.fromMatrix(rotateMatrix90(matrix)),
-            Shape.fromMatrix(rotateMatrix180(matrix)),
-            Shape.fromMatrix(rotateMatrix270(matrix)),
-        )
-    }
 }
 
 const rotations = {
@@ -79,26 +51,11 @@ const rotations = {
     ]),
 }
 
-class Shape {
-    constructor(
-        readonly positions: Position[]
-    ) {}
-
-    rightCol = (): number => Math.max(...this.positions.map(p => p.col))
-
-    leftCol = (): number => Math.min(...this.positions.map(p => p.col))
-
-    bottomRow = (): number => Math.max(...this.positions.map(p => p.row))
-
-    public static fromMatrix(matrix: boolean[][]): Shape {
-        return new Shape(
-            matrix.flatMap((bs, irow) => {
-                return bs.map((b, icol) => {
-                    return { b: b, position: { row: irow, col: icol } }
-                }).filter(b => b.b)
-            }).map(bs => bs.position)
-        )
-    }
+export enum Direction {
+    A,
+    B,
+    C,
+    D
 }
 
 export class Mino {
@@ -108,6 +65,19 @@ export class Mino {
         readonly rotation: Rotation,
         readonly color: Color,
     ) {}
+
+    public getShape(direction: Direction): Shape {
+        if (direction === Direction.A) {
+            return this.rotation.a
+        } else if (direction === Direction.B) {
+            return this.rotation.b
+        } else if (direction === Direction.C) {
+            return this.rotation.c
+        } else if (direction === Direction.D) {
+            return this.rotation.d
+        }
+        throw Error("no direction found")
+    }
 }
 
 export const minoFactory = {
@@ -173,19 +143,4 @@ export const minoFactory = {
             default: throw Error("failed to create random mino")
         }
     }
-}
-
-function rotationRightL(shape: Position[]): Position[] {
-    return shape
-}
-
-function rotationRightNotL(shape: Position[]): Position[] {
-    // TODO
-    return shape
-}
-
-export function rotationRight(mino: Mino): Mino {
-    // const shape = mino.minoType === MinoType.L ? rotationRightL(mino.shape) : rotationRightNotL(mino.shape)
-    // return { ...mino, shape }
-    return mino
 }

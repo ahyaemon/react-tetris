@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import './RotationKeys.scss';
 import GameContext from "../../../../gameContext";
-import {Command} from "../../../../game/game";
 import {game} from "../../../../App";
+import {Command} from "../../../../game/command";
 
 export default function RotationKeys() {
+    // eslint-disable-next-line
     const { gameState, setGameState } = useContext(GameContext)
 
     return (
