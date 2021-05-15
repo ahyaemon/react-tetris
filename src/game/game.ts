@@ -33,7 +33,21 @@ class CurrentMino {
             return new CurrentMino(this.mino, this.position, Direction.A)
         }
 
-        throw Error('invalid diredtion found: ' + this.direction)
+        throw Error('invalid direction found: ' + this.direction)
+    }
+
+    public rotationLeft(): CurrentMino {
+        if (this.direction === Direction.A) {
+            return new CurrentMino(this.mino, this.position, Direction.D)
+        } else if (this.direction === Direction.B) {
+            return new CurrentMino(this.mino, this.position, Direction.A)
+        } else if (this.direction === Direction.C) {
+            return new CurrentMino(this.mino, this.position, Direction.B)
+        } else if (this.direction === Direction.D) {
+            return new CurrentMino(this.mino, this.position, Direction.C)
+        }
+
+        throw Error('invalid direction found: ' + this.direction)
     }
 
     public moveRight(): CurrentMino {
@@ -113,7 +127,7 @@ export class Game {
         } else if (command === Command.Left) {
             this.moveLeft()
         } else if (command === Command.RotationLeft) {
-            // this.currentMino.mino = rotationRight(this.currentMino.mino)
+            this.currentMino = this.currentMino.rotationLeft()
         } else if (command === Command.RotationRight) {
             this.currentMino = this.currentMino.rotationRight()
         }
