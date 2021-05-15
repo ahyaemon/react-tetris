@@ -6,11 +6,11 @@ import RotationKeys from "./rotation-keys/RotationKeys";
 export default function ControllerRight() {
     return (
         <div className="controllerRight">
-            <div className="controllerRight__crossKeys">
-                <CrossKeys/>
-            </div>
             <div className="controllerRight__rotationKeys">
                 <RotationKeys/>
+            </div>
+            <div className="controllerRight__crossKeys">
+                <CrossKeys/>
             </div>
         </div>
     )

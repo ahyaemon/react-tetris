@@ -9,15 +9,19 @@ export default function RotationKeys() {
     const { gameState, setGameState } = useContext(GameContext)
 
     return (
-        <div className="crossKeys">
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
-            >左回転</button>
-            <button
-                type="button"
-                onClick={() => { setGameState(game.input(Command.RotationRight)) }}
-            >右回転</button>
+        <div className="rotationKeys">
+            <div className="rotationKeys__left">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
+                >L</button>
+            </div>
+            <div className="rotationKeys__right">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.RotationRight)) }}
+                >R</button>
+            </div>
         </div>
     )
 }

@@ -4,8 +4,8 @@ import './ControllerLeft.scss';
 export default function ControllerLeft() {
     return (
         <div className="controllerLeft">
-            <p>prev mino/after mino</p>
-            <p>prev/after</p>
+            <p>pm/am</p>
+            <p>p/a</p>
         </div>
     )
 }
