@@ -4,6 +4,8 @@ import GameContext from "../../../../gameContext";
 import {game} from "../../../../App";
 import {Command} from "../../../../game/command";
 import {useCommandPressed} from "../../../../hooks/useCommandPressed";
+import { useMediaQuery } from 'react-responsive'
+
 
 export default function CrossKeys() {
     // eslint-disable-next-line
@@ -12,6 +14,9 @@ export default function CrossKeys() {
     const setLeftPressed = useCommandPressed(Command.Left)
     const setRightPressed = useCommandPressed(Command.Right)
 
+    const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
     return (
         <div className="crossKeys">
             <div
@@ -19,30 +24,48 @@ export default function CrossKeys() {
                 onClick={() => { setGameState(game.input(Command.Up)) }}
             >
             </div>
-            <div
-                className="crossKeys__left crossKey"
-                onMouseDown={ () => setLeftPressed(true) }
-                onMouseUp={ () => setLeftPressed(false ) }
-                onTouchStart={ () => setLeftPressed(true) }
-                onTouchEnd={ () => setLeftPressed(false ) }
-            >
-            </div>
-            <div
-                className="crossKeys__right crossKey"
-                onMouseDown={ () => setRightPressed(true) }
-                onMouseUp={ () => setRightPressed(false ) }
-                onTouchStart={ () => setRightPressed(true) }
-                onTouchEnd={ () => setRightPressed(false ) }
-            >
-            </div>
-            <div
-                className="crossKeys__down crossKey"
-                onMouseDown={ () => setDownPressed(true) }
-                onMouseUp={ () => setDownPressed(false ) }
-                onTouchStart={ () => setDownPressed(true) }
-                onTouchEnd={ () => setDownPressed(false ) }
-            >
-            </div>
+            { isDesktop && <>
+                <div
+                    className="crossKeys__left crossKey"
+                    onMouseDown={ () => setLeftPressed(true) }
+                    onMouseUp={ () => setLeftPressed(false ) }
+                >
+                </div>
+                <div
+                    className="crossKeys__right crossKey"
+                    onMouseDown={ () => setRightPressed(true) }
+                    onMouseUp={ () => setRightPressed(false ) }
+                >
+                </div>
+                <div
+                    className="crossKeys__down crossKey"
+                    onMouseDown={ () => setDownPressed(true) }
+                    onMouseUp={ () => setDownPressed(false ) }
+                >
+                </div>
+            </>
+            }
+            { isMobile && <>
+                <div
+                    className="crossKeys__left crossKey"
+                    onTouchStart={ () => setLeftPressed(true) }
+                    onTouchEnd={ () => setLeftPressed(false ) }
+                >
+                </div>
+                <div
+                    className="crossKeys__right crossKey"
+                    onTouchStart={ () => setRightPressed(true) }
+                    onTouchEnd={ () => setRightPressed(false ) }
+                >
+                </div>
+                <div
+                    className="crossKeys__down crossKey"
+                    onTouchStart={ () => setDownPressed(true) }
+                    onTouchEnd={ () => setDownPressed(false ) }
+                >
+                </div>
+            </>
+            }
         </div>
     )
 }
