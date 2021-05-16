@@ -48,19 +48,28 @@ export default function CrossKeys() {
             { isMobile && <>
                 <div
                     className="crossKeys__left crossKey"
-                    onTouchStart={ () => setLeftPressed(true) }
+                    onTouchStart={ (e) => {
+                        e.preventDefault()
+                        setLeftPressed(true)
+                    } }
                     onTouchEnd={ () => setLeftPressed(false ) }
                 >
                 </div>
                 <div
                     className="crossKeys__right crossKey"
-                    onTouchStart={ () => setRightPressed(true) }
+                    onTouchStart={ (e) => {
+                        e.preventDefault()
+                        setRightPressed(true)
+                    } }
                     onTouchEnd={ () => setRightPressed(false ) }
                 >
                 </div>
                 <div
                     className="crossKeys__down crossKey"
-                    onTouchStart={ () => setDownPressed(true) }
+                    onTouchStart={ (e) => {
+                        e.preventDefault()
+                        setDownPressed(true)
+                    } }
                     onTouchEnd={ () => setDownPressed(false ) }
                 >
                 </div>
