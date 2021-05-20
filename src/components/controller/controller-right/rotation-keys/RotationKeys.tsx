@@ -10,17 +10,17 @@ export default function RotationKeys() {
 
     return (
         <div className="rotationKeys">
-            <div className="rotationKeys__left">
-                <button
-                    type="button"
-                    onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
-                >L</button>
-            </div>
             <div className="rotationKeys__right">
                 <button
                     type="button"
                     onClick={() => { setGameState(game.input(Command.RotationRight)) }}
                 >R</button>
+            </div>
+            <div className="rotationKeys__left">
+                <button
+                    type="button"
+                    onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
+                >L</button>
             </div>
         </div>
     )
