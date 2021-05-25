@@ -1,7 +1,7 @@
 import React from 'react';
 import './Row.scss';
-import {Cell} from "../../../../../game/game";
 import CellC from "./cell/CellC";
+import {Cell} from "../../../../../game/color";
 
 type RowProps = {
     cells: Cell[]

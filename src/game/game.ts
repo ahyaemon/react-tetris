@@ -1,83 +1,7 @@
-import {Direction, Mino, minoFactory} from "./mino";
-import {Position} from "./potision";
-import {Color} from "./color";
+import {Direction, minoFactory} from "./mino";
+import {Color, Row} from "./color";
 import {Command} from "./command";
-import {Shape} from "./shape";
-
-export type Cell = Color
-
-type Row = Cell[]
-
-
-
-class CurrentMino {
-
-    constructor(
-        readonly mino: Mino,
-        readonly position: Position,
-        readonly direction: Direction,
-    ) {}
-
-    public getShape(): Shape {
-        return this.mino.getShape(this.direction)
-    }
-
-    public rotationRight(): CurrentMino {
-        if (this.direction === Direction.A) {
-            return new CurrentMino(this.mino, this.position, Direction.B)
-        } else if (this.direction === Direction.B) {
-            return new CurrentMino(this.mino, this.position, Direction.C)
-        } else if (this.direction === Direction.C) {
-            return new CurrentMino(this.mino, this.position, Direction.D)
-        } else if (this.direction === Direction.D) {
-            return new CurrentMino(this.mino, this.position, Direction.A)
-        }
-
-        throw Error('invalid direction found: ' + this.direction)
-    }
-
-    public rotationLeft(): CurrentMino {
-        if (this.direction === Direction.A) {
-            return new CurrentMino(this.mino, this.position, Direction.D)
-        } else if (this.direction === Direction.B) {
-            return new CurrentMino(this.mino, this.position, Direction.A)
-        } else if (this.direction === Direction.C) {
-            return new CurrentMino(this.mino, this.position, Direction.B)
-        } else if (this.direction === Direction.D) {
-            return new CurrentMino(this.mino, this.position, Direction.C)
-        }
-
-        throw Error('invalid direction found: ' + this.direction)
-    }
-
-    public moveRight(): CurrentMino {
-        return this.move({ row: this.position.row, col: this.position.col + 1 })
-    }
-
-    public moveLeft(): CurrentMino {
-        return this.move({ row: this.position.row, col: this.position.col - 1 })
-    }
-
-    public moveDown(): CurrentMino {
-        return this.move({ row: this.position.row + 1, col: this.position.col })
-    }
-
-    private move(position: Position): CurrentMino {
-        return new CurrentMino(this.mino, position, this.direction)
-    }
-
-    public rightCol(): number {
-        return this.position.col + this.getShape().rightCol()
-    }
-
-    public leftCol(): number {
-        return this.position.col + this.getShape().leftCol()
-    }
-
-    public bottomRow(): number {
-        return this.position.row + this.getShape().bottomRow()
-    }
-}
+import {CurrentMino} from "./CurrentMino";
 
 export type GameState = {
     rows: Row[]
@@ -127,6 +51,7 @@ export class Game {
         } else if (command === Command.Left) {
             this.moveLeft()
         } else if (command === Command.RotationLeft) {
+            // TODO SRS の導入
             this.currentMino = this.currentMino.rotationLeft()
         } else if (command === Command.RotationRight) {
             this.currentMino = this.currentMino.rotationRight()
@@ -141,7 +66,7 @@ export class Game {
             return
         }
 
-        if (this.collided(nextMino)) {
+        if (nextMino.collided(this.rows)) {
             return
         }
 
@@ -155,7 +80,7 @@ export class Game {
             return
         }
 
-        if(this.collided(nextMino)) {
+        if(nextMino.collided(this.rows)) {
             return
         }
 
@@ -169,7 +94,7 @@ export class Game {
             return
         }
 
-        if(this.collided(nextMino)) {
+        if(nextMino.collided(this.rows)) {
             return
         }
 
@@ -184,22 +109,11 @@ export class Game {
                 break
             }
 
-            if(this.collided(nextMino)) {
+            if(nextMino.collided(this.rows)) {
                 break
             }
 
             this.currentMino = nextMino
         }
-    }
-
-    private collided(currentMino: CurrentMino): boolean {
-        return currentMino.getShape().positions.map(position => {
-            return {
-                row: position.row + currentMino.position.row,
-                col: position.col + currentMino.position.col,
-            }
-        }).find(p => {
-            return this.rows[p.row][p.col] !== Color.None
-        }) !== undefined
     }
 }

@@ -8,3 +8,7 @@ export enum Color {
     Orange = 'orange',
     Blue = 'blue',
 }
+
+export type Cell = Color
+
+export type Row = Cell[]
