@@ -11,6 +11,10 @@ export class CurrentMino {
         readonly direction: Direction,
     ) {}
 
+    public copy(): CurrentMino {
+        return new CurrentMino(this.mino, { row: this.position.row, col: this.position.col }, this.direction)
+    }
+
     public getShape(): Shape {
         return this.mino.getShape(this.direction)
     }

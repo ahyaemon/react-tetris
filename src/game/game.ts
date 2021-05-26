@@ -1,5 +1,5 @@
 import {Direction, minoFactory} from "./mino";
-import {Color, Row} from "./color";
+import {Color, Row, toGhost} from "./color";
 import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
 
@@ -27,29 +27,39 @@ export class Game {
     }
 
     get state(): GameState {
+        // 地形をコピー
         const rows = this.rows.map(row => row.map(cell => cell))
+
+        // ゴーストブロックの表示
+        const ghost = this.drop()
+        ghost.getShape().positions.forEach(position => {
+            rows[ghost.position.row + position.row][ghost.position.col + position.col] = toGhost(this.currentMino.mino.color)
+        })
+
+        // 現在のミノを表示
         this.currentMino.getShape().positions.forEach(position => {
             rows[this.currentMino.position.row + position.row][this.currentMino.position.col + position.col] = this.currentMino.mino.color
         })
+
         return { rows }
     }
 
     public input(command: Command): GameState {
         if (command === Command.Up) {
             // mino を一番下まで落とす
-            this.drop()
+            this.currentMino = this.drop()
 
-            // rows を state().rows に置き換え
+            // rows を state().rows に置き換え（接地）
             this.rows = this.state.rows
 
-            // 次のミノを表示
+            // 次のミノに切り替え
             this.currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
         } else if (command === Command.Right) {
-            this.moveRight()
+            this.currentMino = this.moveRight()
         } else if (command === Command.Down) {
-            this.moveDown()
+            this.currentMino = this.moveDown()
         } else if (command === Command.Left) {
-            this.moveLeft()
+            this.currentMino = this.moveLeft()
         } else if (command === Command.RotationLeft) {
             // TODO SRS の導入
             this.currentMino = this.currentMino.rotationLeft()
@@ -59,51 +69,52 @@ export class Game {
         return this.state
     }
 
-    private moveRight() {
+    private moveRight(): CurrentMino {
         const nextMino = this.currentMino.moveRight()
 
         if (nextMino.rightCol() >= Game.ncol) {
-            return
+            return this.currentMino
         }
 
         if (nextMino.collided(this.rows)) {
-            return
+            return this.currentMino
         }
 
-        this.currentMino = nextMino
+        return nextMino
     }
 
-    private moveLeft() {
+    private moveLeft(): CurrentMino {
         const nextMino = this.currentMino.moveLeft()
 
         if (nextMino.leftCol() < 0) {
-            return
+            return this.currentMino
         }
 
         if(nextMino.collided(this.rows)) {
-            return
+            return this.currentMino
         }
 
-        this.currentMino = nextMino
+        return nextMino
     }
 
-    private moveDown() {
+    private moveDown(): CurrentMino {
         const nextMino = this.currentMino.moveDown()
 
         if (nextMino.bottomRow() >= Game.nrow) {
-            return
+            return this.currentMino
         }
 
         if(nextMino.collided(this.rows)) {
-            return
+            return this.currentMino
         }
 
-        this.currentMino = nextMino
+        return nextMino
     }
 
-    private drop() {
+    private drop(): CurrentMino {
+        let m = this.currentMino.copy()
         while (true) {
-            const nextMino = this.currentMino.moveDown()
+            const nextMino = m.moveDown()
 
             if (nextMino.bottomRow() >= Game.nrow) {
                 break
@@ -113,7 +124,8 @@ export class Game {
                 break
             }
 
-            this.currentMino = nextMino
+            m = nextMino
         }
+        return m
     }
 }

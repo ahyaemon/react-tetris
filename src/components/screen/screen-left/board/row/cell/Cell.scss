@@ -6,29 +6,57 @@
 
     &--lightBlue {
         background-color: #a1edff;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--yellow {
         background-color: yellow;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--purple {
         background-color: purple;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--green {
         background-color: #4ec14e;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--red {
         background-color: red;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--orange {
         background-color: orange;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 
     &--blue {
         background-color: blue;
+
+        &--ghost {
+            background-color: black;
+        }
     }
 }
