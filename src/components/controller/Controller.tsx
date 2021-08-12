@@ -1,15 +1,28 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-import './Controller.scss';
 import ControllerLeft from "./controller-left/ControllerLeft";
 import ControllerRight from "./controller-right/ControllerRight";
+import {css} from "@emotion/react";
+
+const style = {
+    controller: css({
+        display: 'flex'
+    }),
+    controllerLeft: css({
+        backgroundColor: '#fff7f7'
+    }),
+    controllerRight: css({
+        backgroundColor: '#f7fdff'
+    })
+}
 
 export default function Controller() {
     return (
-        <div className="controller">
-            <div className="controller__left">
+        <div className="controller" css={style.controller}>
+            <div css={style.controllerLeft}>
                 <ControllerLeft/>
             </div>
-            <div className="controller__right">
+            <div css={style.controllerRight}>
                 <ControllerRight/>
             </div>
         </div>
