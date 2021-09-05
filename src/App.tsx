@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import './App.scss';
-import Screen from "./components/screen/Screen";
-import Controller from "./components/controller/Controller";
 import GameContext from "./gameContext";
 import {Game} from "./game/game";
 import {useKeyDown} from "./hooks/useKeyDown";
 import {Command} from "./game/command";
+import {Layout} from "./components/Layout";
 
 const key = {
     down: 'ArrowDown',
@@ -31,14 +29,7 @@ function App() {
 
     return (
         <GameContext.Provider value={{gameState, setGameState}}>
-            <div className="app">
-                <div className="app__screen">
-                    <Screen/>
-                </div>
-                <div className="app_controller">
-                    <Controller/>
-                </div>
-            </div>
+            <Layout/>
         </GameContext.Provider>
     );
 }

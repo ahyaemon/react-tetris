@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import './CrossKeys.scss';
-import GameContext from "../../../../gameContext";
-import {game} from "../../../../App";
-import {Command} from "../../../../game/command";
-import {useCommandPressed} from "../../../../hooks/useCommandPressed";
-import { useLongPressMobile } from "../../../../hooks/useLongPress";
+import GameContext from "../../gameContext";
+import {game} from "../../App";
+import {Command} from "../../game/command";
+import {useCommandPressed} from "../../hooks/useCommandPressed";
+import { useLongPressMobile } from "../../hooks/useLongPress";
 import { useMediaQuery } from 'react-responsive'
 
 function CrossKeysDesktop() {
