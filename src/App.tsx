@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import GameContext from "./gameContext";
-import {Game} from "./game/game";
+import React from 'react';
 import {useKeyDown} from "./hooks/useKeyDown";
 import {Command} from "./game/command";
 import {Layout} from "./components/Layout";
+import {useSetRecoilState} from "recoil";
+import {game} from "./gameState";
 
 const key = {
     down: 'ArrowDown',
@@ -14,23 +14,19 @@ const key = {
     x: 'x',
 }
 
-export const game = Game.create()
-
 function App() {
-    const [gameState, setGameState] = useState(game.state)
+    const setGame = useSetRecoilState(game)
     useKeyDown([
-        { key: key.down,  f: () => { setGameState(game.input(Command.Down)) } },
-        { key: key.up,  f: () => { setGameState(game.input(Command.Up)) } },
-        { key: key.right,  f: () => { setGameState(game.input(Command.Right)) } },
-        { key: key.left,  f: () => { setGameState(game.input(Command.Left)) } },
-        { key: key.z,  f: () => { setGameState(game.input(Command.RotationLeft)) } },
-        { key: key.x,  f: () => { setGameState(game.input(Command.RotationRight)) } },
+        { key: key.down,  f: () => { setGame( (game) => game.input(Command.Down)) } },
+        { key: key.up,  f: () => { setGame( (game) => game.input(Command.Up)) } },
+        { key: key.right,  f: () => { setGame((game) => game.input(Command.Right)) } },
+        { key: key.left,  f: () => { setGame((game) => game.input(Command.Left)) } },
+        { key: key.z,  f: () => { setGame((game) => game.input(Command.RotationLeft)) } },
+        { key: key.x,  f: () => { setGame((game) => game.input(Command.RotationRight)) } },
     ])
 
     return (
-        <GameContext.Provider value={{gameState, setGameState}}>
-            <Layout/>
-        </GameContext.Provider>
+        <Layout/>
     );
 }
 

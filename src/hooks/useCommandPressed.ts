@@ -1,22 +1,21 @@
-import {useContext, useEffect, useRef, useState} from "react";
-import GameContext from "../gameContext";
+import {useEffect, useRef, useState} from "react";
 import {Command} from "../game/command";
-import {game} from "../App";
+import {useSetRecoilState} from "recoil";
+import {game} from "../gameState";
 
 export const useCommandPressed = (command: Command) => {
     // eslint-disable-next-line
-    const { gameState, setGameState } = useContext(GameContext)
-
+    const setGame = useSetRecoilState(game)
     const [pressed, setPressed] = useState(false)
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
     useEffect(() => {
         if (pressed) {
-            setGameState(game.input(command))
+            setGame(game => game.input(command))
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
-                    setGameState(game.input(command))
+                    setGame(game => game.input(command))
                 }, 120)
             }, 300)
         } else {

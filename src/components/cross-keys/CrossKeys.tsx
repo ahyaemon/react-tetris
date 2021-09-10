@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './CrossKeys.scss';
-import GameContext from "../../gameContext";
-import {game} from "../../App";
 import {Command} from "../../game/command";
 import {useCommandPressed} from "../../hooks/useCommandPressed";
 import { useLongPressMobile } from "../../hooks/useLongPress";
 import { useMediaQuery } from 'react-responsive'
+import {useSetRecoilState} from "recoil";
+import {game} from "../../gameState";
 
 function CrossKeysDesktop() {
     // eslint-disable-next-line
-    const { gameState, setGameState } = useContext(GameContext)
+    const setGame = useSetRecoilState(game)
     const setDownPressed = useCommandPressed(Command.Down)
     const setLeftPressed = useCommandPressed(Command.Left)
     const setRightPressed = useCommandPressed(Command.Right)
@@ -18,7 +18,7 @@ function CrossKeysDesktop() {
         <div className="crossKeys">
             <div
                 className="crossKeys__up crossKey"
-                onClick={() => { setGameState(game.input(Command.Up)) }}
+                onClick={() => { setGame((game) => game.input(Command.Up)) }}
             >
             </div>
             <div
@@ -45,7 +45,7 @@ function CrossKeysDesktop() {
 
 function CrossKeysMobile() {
     // eslint-disable-next-line
-    const { gameState, setGameState } = useContext(GameContext)
+    const setGame = useSetRecoilState(game)
     const downRef = useLongPressMobile(Command.Down)
     const leftRef = useLongPressMobile(Command.Left)
     const rightRef = useLongPressMobile(Command.Right)
@@ -54,7 +54,7 @@ function CrossKeysMobile() {
         <div className="crossKeys">
             <div
                 className="crossKeys__up crossKey"
-                onClick={() => { setGameState(game.input(Command.Up)) }}
+                onClick={() => { setGame((game) => game.input(Command.Up)) }}
             >
             </div>
             <div

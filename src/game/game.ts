@@ -44,29 +44,33 @@ export class Game {
         return { rows }
     }
 
-    public input(command: Command): GameState {
+    public input(command: Command): Game {
+        let currentMino = this.currentMino.copy()
+        let rows = this.rows
+
         if (command === Command.Up) {
             // mino を一番下まで落とす
-            this.currentMino = this.drop()
+            const droppedMino = this.drop()
+            const newGame = new Game(droppedMino, rows)
 
             // rows を state().rows に置き換え（接地）
-            this.rows = this.state.rows
+            rows = newGame.state.rows
 
             // 次のミノに切り替え
-            this.currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
+            currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
         } else if (command === Command.Right) {
-            this.currentMino = this.moveRight()
+            currentMino = this.moveRight()
         } else if (command === Command.Down) {
-            this.currentMino = this.moveDown()
+            currentMino = this.moveDown()
         } else if (command === Command.Left) {
-            this.currentMino = this.moveLeft()
+            currentMino = this.moveLeft()
         } else if (command === Command.RotationLeft) {
             // TODO SRS の導入
-            this.currentMino = this.currentMino.rotationLeft()
+            currentMino = this.currentMino.rotationLeft()
         } else if (command === Command.RotationRight) {
-            this.currentMino = this.currentMino.rotationRight()
+            currentMino = this.currentMino.rotationRight()
         }
-        return this.state
+        return new Game(currentMino, rows)
     }
 
     private moveRight(): CurrentMino {

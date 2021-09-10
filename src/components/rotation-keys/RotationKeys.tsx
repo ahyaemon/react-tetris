@@ -1,25 +1,25 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './RotationKeys.scss';
-import GameContext from "../../gameContext";
-import {game} from "../../App";
 import {Command} from "../../game/command";
+import {useSetRecoilState} from "recoil";
+import {game} from "../../gameState";
 
 export default function RotationKeys() {
     // eslint-disable-next-line
-    const { gameState, setGameState } = useContext(GameContext)
+    const setGame = useSetRecoilState(game)
 
     return (
         <div className="rotationKeys">
             <div className="rotationKeys__right">
                 <button
                     type="button"
-                    onClick={() => { setGameState(game.input(Command.RotationRight)) }}
+                    onClick={() => { setGame(game => game.input(Command.RotationRight)) }}
                 >R</button>
             </div>
             <div className="rotationKeys__left">
                 <button
                     type="button"
-                    onClick={() => { setGameState(game.input(Command.RotationLeft)) }}
+                    onClick={() => { setGame(game => game.input(Command.RotationLeft)) }}
                 >L</button>
             </div>
         </div>
