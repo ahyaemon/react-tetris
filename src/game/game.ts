@@ -45,32 +45,30 @@ export class Game {
     }
 
     public input(command: Command): Game {
-        let currentMino = this.currentMino.copy()
-        let rows = this.rows
-
         if (command === Command.Up) {
             // mino を一番下まで落とす
             const droppedMino = this.drop()
-            const newGame = new Game(droppedMino, rows)
+            const newGame = new Game(droppedMino, this.rows)
 
             // rows を state().rows に置き換え（接地）
-            rows = newGame.state.rows
+            const rows = newGame.state.rows
 
             // 次のミノに切り替え
-            currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
+            const currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
+            return new Game(currentMino, rows)
         } else if (command === Command.Right) {
-            currentMino = this.moveRight()
+            return new Game(this.moveRight(), this.rows)
         } else if (command === Command.Down) {
-            currentMino = this.moveDown()
+            return new Game(this.moveDown(), this.rows)
         } else if (command === Command.Left) {
-            currentMino = this.moveLeft()
+            return new Game(this.moveLeft(), this.rows)
         } else if (command === Command.RotationLeft) {
-            // TODO SRS の導入
-            currentMino = this.currentMino.rotationLeft()
+            return new Game(this.currentMino.rotationLeft(), this.rows)
         } else if (command === Command.RotationRight) {
-            currentMino = this.currentMino.rotationRight()
+            return new Game(this.currentMino.rotationRight(), this.rows)
+        } else {
+            throw Error("no command found")
         }
-        return new Game(currentMino, rows)
     }
 
     private moveRight(): CurrentMino {
