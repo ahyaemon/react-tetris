@@ -41,3 +41,11 @@ export function toGhost(color: Color): Color {
 export type Cell = Color
 
 export type Row = Cell[]
+
+export function isFilled(row: Row): boolean {
+    return !row.includes(Color.None)
+}
+
+export function createEmptyRow(ncol: number): Row {
+    return Array(ncol).fill(Color.None)
+}

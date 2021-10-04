@@ -1,5 +1,5 @@
 import {Direction, minoFactory} from "./mino";
-import {Color, Row, toGhost} from "./color";
+import {Color, createEmptyRow, isFilled, Row, toGhost} from "./color";
 import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
 
@@ -53,9 +53,12 @@ export class Game {
             // rows を state().rows に置き換え（接地）
             const rows = newGame.state.rows
 
+            // 揃ったラインを消す
+            const clearedRows = this.clearRows(rows, Game.ncol)
+
             // 次のミノに切り替え
             const currentMino = new CurrentMino(minoFactory.random(), { row: 0, col: 3 }, Direction.A)
-            return new Game(currentMino, rows)
+            return new Game(currentMino, clearedRows)
         } else if (command === Command.Right) {
             return new Game(this.moveRight(), this.rows)
         } else if (command === Command.Down) {
@@ -129,5 +132,16 @@ export class Game {
             m = nextMino
         }
         return m
+    }
+
+    private clearRows(rows: Row[], ncol: number): Row[] {
+        const clearingAmount = rows.filter(row => isFilled(row)).length
+        if (clearingAmount === 0) {
+            return rows
+        }
+
+        const remainedRows = rows.filter(row => !isFilled(row))
+        const emptyRows = Array(clearingAmount).fill(0).map(_ => createEmptyRow(ncol))
+        return [...emptyRows, ...remainedRows]
     }
 }
