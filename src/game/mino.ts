@@ -1,4 +1,4 @@
-import {getRandomInt} from "./random";
+import {getRandomInt, Random, shuffle} from "./random";
 import {Color} from "./color";
 import {Rotation} from "./rotation";
 import {Shape} from "./shape";
@@ -142,5 +142,17 @@ export const minoFactory = {
             case 6: return this.j()
             default: throw Error("failed to create random mino")
         }
+    },
+    createMinoSets(random: Random): Mino[] {
+        const ar = [
+            this.l(),
+            this.s(),
+            this.i(),
+            this.j(),
+            this.z(),
+            this.o(),
+            this.t()
+        ]
+        return shuffle(ar, random)
     }
 }
