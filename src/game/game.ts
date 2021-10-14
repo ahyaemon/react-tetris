@@ -70,16 +70,15 @@ export class Game {
                 this.nextMinos.slice(1, this.nextMinos.length)
             return new Game(currentMino, clearedRows, nextMinos, this.random)
         } else if (command === Command.Right) {
-            // TODO this.moveRight を currentMino に持たせる
             return this.updateCurrentMino(this.moveRight())
         } else if (command === Command.Down) {
             return this.updateCurrentMino(this.moveDown())
         } else if (command === Command.Left) {
             return this.updateCurrentMino(this.moveLeft())
+        } else if (command === Command.RotationRight) {
+            return this.updateCurrentMino(this.rotationRight())
         } else if (command === Command.RotationLeft) {
             return this.updateCurrentMino(this.currentMino.rotationLeft())
-        } else if (command === Command.RotationRight) {
-            return this.updateCurrentMino(this.currentMino.rotationRight())
         } else {
             throw Error("no command found")
         }
@@ -89,46 +88,54 @@ export class Game {
         return new Game(currentMino, this.rows, this.nextMinos, this.random)
     }
 
+    private rotationRight(): CurrentMino {
+        // TODO SRS の導入
+        // let tmpMino = this.currentMino.rotationRight()
+        return this.currentMino.rotationRight()
+    }
+
     private moveRight(): CurrentMino {
         const nextMino = this.currentMino.moveRight()
-
-        if (nextMino.rightCol() >= Game.ncol) {
+        if (this.collided(nextMino)) {
             return this.currentMino
         }
-
-        if (nextMino.collided(this.rows)) {
-            return this.currentMino
-        }
-
         return nextMino
     }
 
     private moveLeft(): CurrentMino {
         const nextMino = this.currentMino.moveLeft()
-
-        if (nextMino.leftCol() < 0) {
+        if (this.collided(nextMino)) {
             return this.currentMino
         }
-
-        if(nextMino.collided(this.rows)) {
-            return this.currentMino
-        }
-
         return nextMino
     }
 
     private moveDown(): CurrentMino {
         const nextMino = this.currentMino.moveDown()
-
-        if (nextMino.bottomRow() >= Game.nrow) {
+        if (this.collided(nextMino)) {
             return this.currentMino
         }
-
-        if(nextMino.collided(this.rows)) {
-            return this.currentMino
-        }
-
         return nextMino
+    }
+
+    private collided(mino: CurrentMino): boolean {
+        if (mino.rightCol() >= Game.ncol) {
+            return true
+        }
+
+        if (mino.leftCol() < 0) {
+            return true
+        }
+
+        if (mino.bottomRow() >= Game.nrow) {
+            return true
+        }
+
+        if(mino.collided(this.rows)) {
+            return true
+        }
+
+        return false
     }
 
     private drop(): CurrentMino {
@@ -136,14 +143,9 @@ export class Game {
         while (true) {
             const nextMino = m.moveDown()
 
-            if (nextMino.bottomRow() >= Game.nrow) {
+            if (this.collided(nextMino)) {
                 break
             }
-
-            if(nextMino.collided(this.rows)) {
-                break
-            }
-
             m = nextMino
         }
         return m
