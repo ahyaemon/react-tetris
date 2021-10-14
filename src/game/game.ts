@@ -18,6 +18,8 @@ export class Game {
         private rows: Row[],
         // TODO MinoPool 型にする
         private nextMinos: Mino[],
+        // TODO 一手戻るをやった時もランダムで生成される値が固定されるようにする
+        // random.next() が副作用を持たないように？
         private random: Random
     ) {}
 
