@@ -6,22 +6,28 @@ import Board from "./board/Board";
 import RotationKeys from "./rotation-keys/RotationKeys";
 import CrossKeys from "./cross-keys/CrossKeys";
 
-const style = {
-    controller: css({
-        display: 'flex'
-    }),
-    crossKeys: css({
-        width: 1200
-    })
-}
-
 export function Layout() {
     return (
         <div>
-            <div>
-                <Board/>
+            <div css={css({
+                display: 'flex'
+            })}>
+                <div>
+                    <Board/>
+                </div>
+                <div css={css({
+                    display: 'flex',
+                    justifyContent: 'end',
+                    flexDirection: 'column',
+                    paddingBottom: '20px'
+                })}>
+                    <button type="button">一手戻る</button>
+                </div>
             </div>
-            <div css={style.controller}>
+            <div css={css({
+                display: 'flex',
+                marginTop: '20px'
+            })}>
                 <div>
                     <CrossKeys/>
                 </div>
