@@ -1,12 +1,17 @@
 import {atom, selector} from "recoil";
 import {Game} from "./game/game";
 
-export const game = atom<Game>({
-    key: "game",
-    default: Game.create(),
+export const gameHistory = atom<Game[]>({
+    key: "gameHistory",
+    default: [Game.create()],
 })
 
 export const boardSelector = selector({
     key: 'board',
-    get: ({get}) => get(game).state
+    get: ({get}) => get(gameHistory)[0].state
+})
+
+export const historySizeSelector = selector({
+    key: 'historySize',
+    get: ({get}) => get(gameHistory).length
 })
