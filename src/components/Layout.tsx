@@ -6,6 +6,7 @@ import Board from "./board/Board";
 import RotationKeys from "./rotation-keys/RotationKeys";
 import CrossKeys from "./cross-keys/CrossKeys";
 import HistoryBack from "./history-back/HistoryBack";
+import Hold from "./hold/Hold";
 
 export function Layout() {
     return (
@@ -17,12 +18,10 @@ export function Layout() {
                     <Board/>
                 </div>
                 <div>
-                    <div css={css({
-                        display: 'flex',
-                        justifyContent: 'end',
-                        flexDirection: 'column',
-                        paddingBottom: '20px'
-                    })}>
+                    <div>
+                        <Hold/>
+                    </div>
+                    <div>
                         <HistoryBack/>
                     </div>
                 </div>

@@ -15,3 +15,8 @@ export const historySizeSelector = selector({
     key: 'historySize',
     get: ({get}) => get(gameHistory).length
 })
+
+export const nextMinosSelector = selector({
+    key: 'nextMinos',
+    get: ({get}) => get(gameHistory)[0].nextMinos
+})

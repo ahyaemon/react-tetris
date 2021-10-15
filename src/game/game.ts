@@ -14,13 +14,13 @@ export class Game {
     private static nrow = 20
 
     constructor(
-        private currentMino: CurrentMino,
-        private rows: Row[],
+        private readonly currentMino: CurrentMino,
+        private readonly rows: Row[],
         // TODO MinoPool 型にする
-        private nextMinos: Mino[],
+        readonly nextMinos: Mino[],
         // TODO 一手戻るをやった時もランダムで生成される値が固定されるようにする
         // random.next() が副作用を持たないように？
-        private random: Random
+        private readonly random: Random
     ) {}
 
     static create(): Game {
