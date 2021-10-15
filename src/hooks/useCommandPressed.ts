@@ -1,10 +1,9 @@
 import {useEffect, useRef, useState} from "react";
 import {Command} from "../game/command";
-import {useSetRecoilState} from "recoil";
 import {useGameHistory} from "./useGameHistory";
 
 export const useCommandPressed = (command: Command) => {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { updateRecentlyGame } = useGameHistory()
     const [pressed, setPressed] = useState(false)
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)

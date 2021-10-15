@@ -1,11 +1,12 @@
 import {Game} from "../game/game";
-import {useSetRecoilState} from "recoil";
-import {gameHistory} from "../gameState";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {gameHistory, historySizeSelector} from "../gameState";
 
 type GameHistoryUpdater = {
     updateRecentlyGame: (f: (game: Game) => Game) => void
     addGame: (f: (game: Game) => Game) => void
     back: () => void
+    historySize: number
 }
 
 export function useGameHistory(): GameHistoryUpdater {
@@ -28,6 +29,7 @@ export function useGameHistory(): GameHistoryUpdater {
             setGameHistory( gameHistory => {
                 return gameHistory.slice(1, gameHistory.length)
             })
-        }
+        },
+        historySize: useRecoilValue(historySizeSelector)
     }
 }

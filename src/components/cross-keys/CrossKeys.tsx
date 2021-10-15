@@ -4,12 +4,11 @@ import {Command} from "../../game/command";
 import {useCommandPressed} from "../../hooks/useCommandPressed";
 import { useLongPressMobile } from "../../hooks/useLongPress";
 import { useMediaQuery } from 'react-responsive'
-import {useSetRecoilState} from "recoil";
 import {useGameHistory} from "../../hooks/useGameHistory";
 
 function CrossKeysDesktop() {
     // eslint-disable-next-line
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { addGame } = useGameHistory()
     const setDownPressed = useCommandPressed(Command.Down)
     const setLeftPressed = useCommandPressed(Command.Left)
     const setRightPressed = useCommandPressed(Command.Right)
@@ -44,7 +43,7 @@ function CrossKeysDesktop() {
 }
 
 function CrossKeysMobile() {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { addGame } = useGameHistory()
     const downRef = useLongPressMobile(Command.Down)
     const leftRef = useLongPressMobile(Command.Left)
     const rightRef = useLongPressMobile(Command.Right)

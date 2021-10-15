@@ -2,7 +2,6 @@ import React from 'react';
 import {useKeyDown} from "./hooks/useKeyDown";
 import {Command} from "./game/command";
 import {Layout} from "./components/Layout";
-import {useSetRecoilState} from "recoil";
 import {useGameHistory} from "./hooks/useGameHistory";
 
 const key = {

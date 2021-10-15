@@ -1,11 +1,10 @@
 import React from 'react';
 import './RotationKeys.scss';
 import {Command} from "../../game/command";
-import {useSetRecoilState} from "recoil";
 import {useGameHistory} from "../../hooks/useGameHistory";
 
 export default function RotationKeys() {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { updateRecentlyGame } = useGameHistory()
 
     return (
         <div className="rotationKeys">

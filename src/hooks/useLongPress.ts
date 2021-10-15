@@ -1,11 +1,9 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Command} from "../game/command";
-import {useSetRecoilState} from "recoil";
 import {useGameHistory} from "./useGameHistory";
 
-
 export const useLongPressDesktop = (command: Command) => {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { updateRecentlyGame } = useGameHistory()
     const [pressed, setPressed] = useState(false)
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
@@ -33,7 +31,7 @@ export const useLongPressDesktop = (command: Command) => {
 }
 
 export const useLongPressMobile = (command: Command) => {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { updateRecentlyGame } = useGameHistory()
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
