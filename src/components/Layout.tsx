@@ -6,7 +6,7 @@ import Board from "./board/Board";
 import RotationKeys from "./rotation-keys/RotationKeys";
 import CrossKeys from "./cross-keys/CrossKeys";
 import HistoryBack from "./history-back/HistoryBack";
-import Hold from "./hold/Hold";
+import NextMinos from "./hold/NextMinos";
 
 export function Layout() {
     return (
@@ -19,7 +19,7 @@ export function Layout() {
                 </div>
                 <div>
                     <div>
-                        <Hold/>
+                        <NextMinos/>
                     </div>
                     <div>
                         <HistoryBack/>

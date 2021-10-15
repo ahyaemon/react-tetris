@@ -78,6 +78,26 @@ export class Mino {
         }
         throw Error("no direction found")
     }
+
+    public getMinoAlphabet(): 'l' | 'j' | 'i' | 'o' | 's' | 't' | 'z' {
+        if (this.minoType === MinoType.L) {
+            return 'l'
+        } else if (this.minoType === MinoType.J) {
+            return 'j'
+        } else if (this.minoType === MinoType.I) {
+            return 'i'
+        } else if (this.minoType === MinoType.O) {
+            return 'o'
+        } else if (this.minoType === MinoType.S) {
+            return 's'
+        } else if (this.minoType === MinoType.T) {
+            return 't'
+        } else if (this.minoType === MinoType.Z) {
+            return 'z'
+        }
+
+        throw Error("no mino types found")
+    }
 }
 
 export const minoFactory = {
