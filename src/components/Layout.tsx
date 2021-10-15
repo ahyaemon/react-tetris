@@ -18,7 +18,9 @@ export function Layout() {
                     <Board/>
                 </div>
                 <div>
-                    <div>
+                    <div css={css({
+                        marginLeft: '4px'
+                    })}>
                         <NextMinos/>
                     </div>
                     <div>

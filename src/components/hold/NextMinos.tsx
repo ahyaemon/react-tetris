@@ -27,7 +27,8 @@ export default function NextMinos() {
                             <div css={css({
                                 width: '50px',
                                 height: '50px',
-                                border: '1px solid black'
+                                border: '1px solid grey',
+                                marginBottom: '2px'
                             })}>
                                 <img src={imgSource} alt={mino.getMinoAlphabet()} css={css({
                                     width: '80%'
