@@ -255,7 +255,7 @@ export class Game {
                         { row: 0, col: 1 },
                         { row: -1, col: 0 },
                         { row: 3, col: -1 },
-                        { row: 0, col: 2 },
+                        { row: 0, col: 1 },
                     ]) || this.currentMino
             } else if (this.currentMino.isBDirection) {
                 // B -> A
