@@ -16,10 +16,7 @@ export function Layout() {
                 display: 'flex'
             })}>
                 <div css={css({
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "end",
-                    paddingBottom: "40px"
+                    paddingTop: "260px"
                 })}>
                     <Hold/>
                 </div>
