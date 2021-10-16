@@ -11,6 +11,7 @@ const key = {
     left: 'ArrowLeft',
     z: 'z',
     x: 'x',
+    shift: 'Shift'
 }
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         { key: key.left,  f: () => { updateRecentlyGame(game => game.input(Command.Left)) }},
         { key: key.z,  f: () => { updateRecentlyGame(game => game.input(Command.RotationLeft)) }},
         { key: key.x,  f: () => { updateRecentlyGame(game => game.input(Command.RotationRight)) }},
+        { key: key.shift,  f: () => { addGame(game => game.hold()) }},
     ])
 
     return (
