@@ -1,34 +1,9 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useRef} from "react";
 import {Command} from "../game/command";
 import {useGameHistory} from "./useGameHistory";
 
-export const useLongPressDesktop = (command: Command) => {
-    const { updateRecentlyGame } = useGameHistory()
-    const [pressed, setPressed] = useState(false)
-    let intervalRef: any = useRef(null)
-    let timeoutRef: any = useRef(null)
-
-    useEffect(() => {
-        if (pressed) {
-            updateRecentlyGame(game => game.input(command))
-            timeoutRef.current = setTimeout(() => {
-                intervalRef.current = setInterval(() => {
-                    updateRecentlyGame(game => game.input(command))
-                }, 120)
-            }, 300)
-        } else {
-            if (intervalRef !== null) {
-                clearInterval(intervalRef.current)
-            }
-            if (timeoutRef !== null) {
-                clearTimeout(timeoutRef.current)
-            }
-        }
-        // eslint-disable-next-line
-    }, [pressed])
-
-    return setPressed
-}
+const firstTouchMilliSeconds = 300
+const intervalMilliSeconds = 120
 
 export const useLongPressMobile = (command: Command) => {
     const { updateRecentlyGame } = useGameHistory()
@@ -44,8 +19,8 @@ export const useLongPressMobile = (command: Command) => {
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
                     updateRecentlyGame(game => game.input(command))
-                }, 120)
-            }, 300)
+                }, intervalMilliSeconds)
+            }, firstTouchMilliSeconds)
         }, {passive: false})
 
         target.addEventListener('touchend', (e: any) => {

@@ -2,6 +2,9 @@ import {useEffect, useRef, useState} from "react";
 import {Command} from "../game/command";
 import {useGameHistory} from "./useGameHistory";
 
+const firstTouchMilliSeconds = 300
+const intervalMilliSeconds = 80
+
 export const useCommandPressed = (command: Command) => {
     const { updateRecentlyGame } = useGameHistory()
     const [pressed, setPressed] = useState(false)
@@ -14,8 +17,8 @@ export const useCommandPressed = (command: Command) => {
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
                     updateRecentlyGame(game => game.input(command))
-                }, 120)
-            }, 300)
+                }, intervalMilliSeconds)
+            }, firstTouchMilliSeconds)
         } else {
             if (intervalRef !== null) {
                 clearInterval(intervalRef.current)
