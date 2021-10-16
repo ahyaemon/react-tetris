@@ -5,11 +5,15 @@ import {Color, Row} from "./color";
 
 export class CurrentMino {
 
-    constructor(
+    private constructor(
         readonly mino: Mino,
         readonly position: Position,
         readonly direction: Direction,
     ) {}
+
+    static create(mino: Mino): CurrentMino {
+        return new CurrentMino(mino, { row: 0, col: 3 }, Direction.A)
+    }
 
     public copy(): CurrentMino {
         return new CurrentMino(this.mino, { row: this.position.row, col: this.position.col }, this.direction)

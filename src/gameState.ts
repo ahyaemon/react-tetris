@@ -20,3 +20,8 @@ export const nextMinosSelector = selector({
     key: 'nextMinos',
     get: ({get}) => get(gameHistory)[0].nextMinos
 })
+
+export const heldMinoSelector = selector({
+    key: 'heldMino',
+    get: ({get}) => get(gameHistory)[0].heldMino
+})

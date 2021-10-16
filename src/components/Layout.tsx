@@ -6,7 +6,8 @@ import Board from "./board/Board";
 import RotationKeys from "./rotation-keys/RotationKeys";
 import CrossKeys from "./cross-keys/CrossKeys";
 import HistoryBack from "./history-back/HistoryBack";
-import NextMinos from "./hold/NextMinos";
+import NextMinos from "./mino/NextMinos";
+import {Hold} from "./mino/Hold";
 
 export function Layout() {
     return (
@@ -14,6 +15,9 @@ export function Layout() {
             <div css={css({
                 display: 'flex'
             })}>
+                <div>
+                    <Hold/>
+                </div>
                 <div>
                     <Board/>
                 </div>
