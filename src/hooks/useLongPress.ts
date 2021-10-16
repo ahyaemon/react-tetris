@@ -3,7 +3,7 @@ import {Command} from "../game/command";
 import {useGameHistory} from "./useGameHistory";
 
 const firstTouchMilliSeconds = 300
-const intervalMilliSeconds = 120
+const intervalMilliSeconds = 80
 
 export const useLongPressMobile = (command: Command) => {
     const { updateRecentlyGame } = useGameHistory()
