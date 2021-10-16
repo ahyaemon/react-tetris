@@ -81,7 +81,7 @@ export class Game {
         } else if (command === Command.RotationRight) {
             return this.updateCurrentMino(this.rotationRight())
         } else if (command === Command.RotationLeft) {
-            return this.updateCurrentMino(this.currentMino.rotationLeft())
+            return this.updateCurrentMino(this.rotationLeft())
         } else {
             throw Error("no command found")
         }
@@ -186,6 +186,99 @@ export class Game {
                     ]) || this.currentMino
             } else {
                 // D -> A
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: 1, col: 0 },
+                        { row: -3, col: 1 },
+                        { row: 0, col: -1 },
+                    ]) || this.currentMino
+            }
+        }
+    }
+
+    private rotationLeft(): CurrentMino {
+        let m = this.currentMino.rotationLeft()
+        if (!this.collided(m)) {
+            return m
+        }
+
+        if (this.currentMino.isIMino) {
+            if (this.currentMino.isADirection) {
+                // A -> D
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: 0, col: 3 },
+                        { row: -2, col: -3 },
+                        { row: 3, col: 3 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isBDirection) {
+                // B -> A
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 2 },
+                        { row: 0, col: -3 },
+                        { row: -1, col: 3 },
+                        { row: -3, col: 3 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isCDirection) {
+                // C -> B
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: 0, col: -3 },
+                        { row: 2, col: 3 },
+                        { row: -3, col: -3 },
+                    ]) || this.currentMino
+            } else {
+                // D -> C
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: 0, col: -3 },
+                        { row: 0, col: 1 },
+                        { row: 3, col: 3 },
+                    ]) || this.currentMino
+            }
+        } else {
+            if (this.currentMino.isADirection) {
+                // A -> D
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: -1, col: 0 },
+                        { row: 3, col: -1 },
+                        { row: 0, col: 2 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isBDirection) {
+                // B -> A
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: 1, col: 0 },
+                        { row: 3, col: -1 },
+                        { row: 0, col: 1 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isCDirection) {
+                // C -> B
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: -1, col: 0 },
+                        { row: 3, col: 1 },
+                        { row: 0, col: -1 },
+                    ]) || this.currentMino
+            } else {
+                // D -> C
                 return this.moveHitRelations(
                     m,
                     [
