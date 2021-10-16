@@ -98,6 +98,10 @@ export class Mino {
 
         throw Error("no mino types found")
     }
+
+    get isIMino(): boolean {
+        return this.minoType === MinoType.I
+    }
 }
 
 export const minoFactory = {

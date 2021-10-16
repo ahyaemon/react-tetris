@@ -3,6 +3,7 @@ import {Color, createEmptyRow, isFilled, Row, toGhost} from "./color";
 import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
 import {Random} from "./random";
+import {Position} from "./potision";
 
 export type GameState = {
     rows: Row[]
@@ -17,7 +18,6 @@ export class Game {
         private readonly currentMino: CurrentMino,
         private readonly rows: Row[],
         readonly heldMino: Mino | null,
-        // TODO MinoPool 型にする
         readonly nextMinos: Mino[],
         // TODO 一手戻るをやった時もランダムで生成される値が固定されるようにする
         // random.next() が副作用を持たないように？
@@ -106,9 +106,113 @@ export class Game {
     }
 
     private rotationRight(): CurrentMino {
-        // TODO SRS の導入
-        // let tmpMino = this.currentMino.rotationRight()
-        return this.currentMino.rotationRight()
+        let m = this.currentMino.rotationRight()
+        if (!this.collided(m)) {
+            return m
+        }
+
+        if (this.currentMino.isIMino) {
+            if (this.currentMino.isADirection) {
+                // A -> B
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: 0, col: 3 },
+                        { row: 1, col: -3 },
+                        { row: -3, col: 3 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isBDirection) {
+                // B -> C
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: 0, col: 3 },
+                        { row: -3, col: 2 },
+                        { row: 3, col: 3 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isCDirection) {
+                // C -> D
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 2 },
+                        { row: 0, col: -3 },
+                        { row: -1, col: 3 },
+                        { row: 3, col: -3 },
+                    ]) || this.currentMino
+            } else {
+                // D -> A
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -2 },
+                        { row: 0, col: 3 },
+                        { row: 2, col: 0 },
+                        { row: -3, col: -3 },
+                    ]) || this.currentMino
+            }
+        } else {
+            if (this.currentMino.isADirection) {
+                // A -> B
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: -1, col: 0 },
+                        { row: 3, col: 1 },
+                        { row: 0, col: -1 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isBDirection) {
+                // B -> C
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: 1, col: 0 },
+                        { row: -3, col: -1 },
+                        { row: 0, col: 1 },
+                    ]) || this.currentMino
+            } else if (this.currentMino.isCDirection) {
+                // C -> D
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: 1 },
+                        { row: -1, col: 0 },
+                        { row: 3, col: -1 },
+                        { row: 0, col: 1 },
+                    ]) || this.currentMino
+            } else {
+                // D -> A
+                return this.moveHitRelations(
+                    m,
+                    [
+                        { row: 0, col: -1 },
+                        { row: 1, col: 0 },
+                        { row: -3, col: 1 },
+                        { row: 0, col: -1 },
+                    ]) || this.currentMino
+            }
+        }
+    }
+
+    /**
+     * 回転して行き先がない場合は null
+     * @param currentMino
+     * @param positions
+     * @private
+     */
+    private moveHitRelations(currentMino: CurrentMino, positions: Position[]): CurrentMino | null {
+        let c = currentMino.copy()
+        for (const p of positions) {
+            c = c.moveRelational(p)
+            if (!this.collided(c)) {
+                return c
+            }
+        }
+        return null
     }
 
     private moveRight(): CurrentMino {

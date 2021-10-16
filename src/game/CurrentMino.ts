@@ -67,6 +67,14 @@ export class CurrentMino {
         return new CurrentMino(this.mino, position, this.direction)
     }
 
+    public moveRelational(position: Position) {
+        const newPosition: Position = {
+            row: this.position.row + position.row,
+            col: this.position.col + position.col
+        }
+        return this.move(newPosition)
+    }
+
     public rightCol(): number {
         return this.position.col + this.getShape().rightCol()
     }
@@ -92,5 +100,25 @@ export class CurrentMino {
         return this.cellPositions().find(p => {
             return rows[p.row][p.col] !== Color.None
         }) !== undefined
+    }
+
+    get isIMino(): boolean {
+        return this.mino.isIMino
+    }
+
+    get isADirection(): boolean {
+        return this.direction === Direction.A
+    }
+
+    get isBDirection(): boolean {
+        return this.direction === Direction.B
+    }
+
+    get isCDirection(): boolean {
+        return this.direction === Direction.C
+    }
+
+    get isDDirection(): boolean {
+        return this.direction === Direction.D
     }
 }
