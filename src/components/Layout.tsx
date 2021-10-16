@@ -15,7 +15,12 @@ export function Layout() {
             <div css={css({
                 display: 'flex'
             })}>
-                <div>
+                <div css={css({
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "end",
+                    paddingBottom: "40px"
+                })}>
                     <Hold/>
                 </div>
                 <div>
