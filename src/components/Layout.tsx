@@ -45,6 +45,12 @@ export function Layout() {
                     <RotationKeys/>
                 </div>
             </div>
+            <div>
+                <p>キーボード操作</p>
+                <p>移動 : [←][↓][→] or [a][s][d]</p>
+                <p>ハードドロップ : [↑] or [w]</p>
+                <p>ホールド : [Shift]</p>
+            </div>
         </div>
     )
 }
