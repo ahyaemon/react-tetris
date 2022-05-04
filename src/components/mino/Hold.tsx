@@ -11,11 +11,20 @@ export function Hold() {
     const { addGame } = useGameHistory()
 
     return (
-        <div css={css({
-            width: '60px',
-        })}>
-            <MinoFrame mino={heldMino}/>
-            <button onClick={ () => addGame(game => game.hold()) }>Hold</button>
+        <div
+            css={css({
+                width: '60px',
+            })}
+            onClick={ () => addGame(game => game.hold()) }
+        >
+            <button>Hold</button>
+            <div
+                css={css({
+                    marginTop: '4px',
+                })}
+            >
+                <MinoFrame mino={heldMino}/>
+            </div>
         </div>
     )
 }

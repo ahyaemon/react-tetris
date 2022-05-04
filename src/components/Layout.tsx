@@ -16,42 +16,58 @@ export function Layout() {
             <div css={css({
                 display: 'flex'
             })}>
-                <div css={css({
-                    paddingTop: "260px"
-                })}>
-                    <Hold/>
+                <div
+                    css={css({
+                      paddingTop: "260px"
+                    })}
+                >
+                    <div>
+                        <ReloadPopup/>
+                    </div>
+                    <div
+                        css={css({
+                            marginTop: '10px',
+                        })}
+                    >
+                        <HistoryBack/>
+                    </div>
                 </div>
                 <div>
                     <Board/>
                 </div>
                 <div>
-                    <div css={css({
-                        marginLeft: '4px'
-                    })}>
+                    <div
+                        css={css({
+                            marginLeft: '4px'
+                        })}
+                    >
                         <NextMinos/>
                     </div>
-                    <div css={css({
-                        marginTop: '10px',
-                        marginLeft: '4px',
-                    })}>
-                        <ReloadPopup/>
-                    </div>
-                    <div css={css({
-                        marginTop: '10px',
-                        marginLeft: '4px',
-                    })}>
-                        <HistoryBack/>
+                    <div
+                        css={css({
+                            marginTop: '10px',
+                            marginLeft: '4px',
+                        })}
+                    >
+                        <Hold/>
                     </div>
                 </div>
             </div>
-            <div css={css({
-                display: 'flex',
-                marginTop: '20px'
-            })}>
+            <div
+                css={css({
+                    display: 'flex',
+                    marginTop: '20px',
+                    marginLeft: '50px',
+                })}
+            >
                 <div>
                     <CrossKeys/>
                 </div>
-                <div>
+                <div
+                    css={css({
+                        marginLeft: '20px',
+                    })}
+                >
                     <RotationKeys/>
                 </div>
             </div>
