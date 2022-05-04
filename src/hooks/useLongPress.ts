@@ -10,7 +10,7 @@ export const useLongPressMobile = (command: Command) => {
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
-    return useCallback(target => {
+    return useCallback((target: any) => {
         target.addEventListener('touchstart', (e: any) => {
             e.preventDefault()
 
