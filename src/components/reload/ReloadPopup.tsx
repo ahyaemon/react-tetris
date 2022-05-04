@@ -12,7 +12,11 @@ export function ReloadPopup() {
 
   return (
     <Popup trigger={
-      <button>
+      <button
+          css={css({
+            height: '100%',
+          })}
+      >
         <MdRefresh size={'2em'}/>
       </button>
     } position="right center" modal>
@@ -23,6 +27,9 @@ export function ReloadPopup() {
           flexDirection: 'column',
         })}>
           <button
+            css={css({
+              height: '100%',
+            })}
             onClick={() => {
               newGame()
               close()
@@ -33,6 +40,7 @@ export function ReloadPopup() {
           <button
             css={css({
               marginTop: '10px',
+              height: '100%',
             })}
             onClick={() => {
               retry()
