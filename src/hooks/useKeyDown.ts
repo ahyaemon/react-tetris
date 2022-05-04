@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 
 type KeyCallback = {
     key: string,
@@ -10,7 +10,13 @@ function match(keyCallbacks: KeyCallback[], key: string): (() => void) | undefin
 }
 
 export function useKeyDown(keyCallbacks: KeyCallback[], showKey: boolean = false) {
+    const didRef = useRef(false)
     useEffect(() => {
+        if (didRef.current) {
+            return
+        }
+
+        didRef.current = true
         document.addEventListener("keydown", e => {
             if (showKey) {
                 console.log(e.key)
