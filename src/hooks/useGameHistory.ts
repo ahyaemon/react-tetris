@@ -11,6 +11,7 @@ type GameHistoryUpdater = {
 
 export function useGameHistory(): GameHistoryUpdater {
     const setGameHistory = useSetRecoilState(gameHistory)
+    const historySize = useRecoilValue(historySizeSelector)
 
     return {
         updateRecentlyGame: f => {
@@ -30,6 +31,6 @@ export function useGameHistory(): GameHistoryUpdater {
                 return gameHistory.slice(1, gameHistory.length)
             })
         },
-        historySize: useRecoilValue(historySizeSelector)
+        historySize,
     }
 }
