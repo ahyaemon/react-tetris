@@ -1,0 +1,7 @@
+button {
+    -webkit-appearance: none;
+    border: 1px solid grey;
+    border-radius: 4px;
+    background-color: #eee;
+    padding: 10px;
+}

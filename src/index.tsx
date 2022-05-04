@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from "recoil";
 import './popup.css';
+import './global.css';
 
 const container = document.getElementById('app');
 const root = createRoot(container!);
