@@ -8,6 +8,7 @@ import CrossKeys from "./cross-keys/CrossKeys";
 import HistoryBack from "./history-back/HistoryBack";
 import NextMinos from "./mino/NextMinos";
 import {Hold} from "./mino/Hold";
+import { MdRefresh } from 'react-icons/md';
 
 export function Layout() {
     return (
@@ -29,7 +30,20 @@ export function Layout() {
                     })}>
                         <NextMinos/>
                     </div>
-                    <div>
+                    <div css={css({
+                        border: '1px solid grey',
+                        borderRadius: '4px',
+                        textAlign: 'center',
+                        marginTop: '10px',
+                        marginLeft: '4px',
+                        paddingTop: '6px',
+                    })}>
+                        <MdRefresh size={'2em'}/>
+                    </div>
+                    <div css={css({
+                        marginTop: '10px',
+                        marginLeft: '4px',
+                    })}>
                         <HistoryBack/>
                     </div>
                 </div>
