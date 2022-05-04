@@ -49,7 +49,7 @@ export function Layout() {
                     </div>
                     <div
                         css={css({
-                            marginTop: '10px',
+                            marginTop: '20px',
                             marginLeft: '4px',
                         })}
                     >

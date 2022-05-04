@@ -17,14 +17,15 @@ export function Hold() {
             })}
             onClick={ () => addGame(game => game.hold()) }
         >
-            <button>Hold</button>
-            <div
-                css={css({
-                    marginTop: '4px',
-                })}
+            <p
+              css={css({
+                margin: 0,
+                padding: 0,
+              })}
             >
-                <MinoFrame mino={heldMino}/>
-            </div>
+              Hold
+            </p>
+            <MinoFrame mino={heldMino}/>
         </div>
     )
 }
