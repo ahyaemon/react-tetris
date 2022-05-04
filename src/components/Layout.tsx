@@ -8,6 +8,7 @@ import CrossKeys from "./cross-keys/CrossKeys";
 import HistoryBack from "./history-back/HistoryBack";
 import NextMinos from "./mino/NextMinos";
 import {Hold} from "./mino/Hold";
+import {ReloadPopup} from "./reload/ReloadPopup";
 
 export function Layout() {
     return (
@@ -29,7 +30,16 @@ export function Layout() {
                     })}>
                         <NextMinos/>
                     </div>
-                    <div>
+                    <div css={css({
+                        marginTop: '10px',
+                        marginLeft: '4px',
+                    })}>
+                        <ReloadPopup/>
+                    </div>
+                    <div css={css({
+                        marginTop: '10px',
+                        marginLeft: '4px',
+                    })}>
                         <HistoryBack/>
                     </div>
                 </div>
