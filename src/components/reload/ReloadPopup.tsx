@@ -13,8 +13,14 @@ export function ReloadPopup() {
   return (
     <Popup trigger={
       <button
+        type="button"
           css={css({
-            height: '100%',
+            padding: '10px',
+            width: '100%',
+            border: '1px solid grey',
+            borderRadius: '4px',
+            backgroundColor: '#eee',
+            "-webkit-appearance": "none"
           })}
       >
         <MdRefresh size={'2em'}/>
@@ -28,7 +34,10 @@ export function ReloadPopup() {
         })}>
           <button
             css={css({
-              height: '100%',
+              "-webkit-appearance": "none",
+              border: '1px solid grey',
+              borderRadius: '4px',
+              backgroundColor: '#eee',
             })}
             onClick={() => {
               newGame()
@@ -40,7 +49,10 @@ export function ReloadPopup() {
           <button
             css={css({
               marginTop: '10px',
-              height: '100%',
+              "-webkit-appearance": "none",
+              border: '1px solid grey',
+              borderRadius: '4px',
+              backgroundColor: '#eee',
             })}
             onClick={() => {
               retry()

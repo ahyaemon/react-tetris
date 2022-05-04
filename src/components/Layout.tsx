@@ -32,7 +32,11 @@ export function Layout() {
                         <HistoryBack/>
                     </div>
                 </div>
-                <div>
+                <div
+                    css={css({
+                      marginLeft: '4px',
+                    })}
+                >
                     <Board/>
                 </div>
                 <div>
