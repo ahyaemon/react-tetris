@@ -3,7 +3,7 @@ import {Game} from "./game/game";
 
 export const gameHistory = atom<Game[]>({
     key: "gameHistory",
-    default: [Game.create()],
+    default: [Game.create(Math.random() * 1000000)],
 })
 
 export const boardSelector = selector({

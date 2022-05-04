@@ -6,7 +6,9 @@ type GameHistoryUpdater = {
     updateRecentlyGame: (f: (game: Game) => Game) => void
     addGame: (f: (game: Game) => Game) => void
     back: () => void
-    historySize: number
+    historySize: number,
+    newGame: () => void,
+    retry: () => void,
 }
 
 export function useGameHistory(): GameHistoryUpdater {
@@ -32,5 +34,13 @@ export function useGameHistory(): GameHistoryUpdater {
             })
         },
         historySize,
+        newGame: () => {
+            setGameHistory([Game.create(Math.random() * 1000000)])
+        },
+        retry: () => {
+            setGameHistory(gameHistory => {
+                return [gameHistory[0].retry()]
+            })
+        }
     }
 }

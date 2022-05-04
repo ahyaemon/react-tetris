@@ -21,11 +21,12 @@ export class Game {
         readonly nextMinos: Mino[],
         // TODO 一手戻るをやった時もランダムで生成される値が固定されるようにする
         // random.next() が副作用を持たないように？
-        private readonly random: Random
+        private readonly random: Random,
+        private readonly seed: number,
     ) {}
 
-    static create(): Game {
-        const random = new Random(Math.random() * 1000000)
+    static create(seed: number): Game {
+        const random = new Random(seed)
         const rows = Array(this.nrow)
             .fill(0)
             .map(_ => Array(this.ncol).fill(Color.None))
@@ -33,7 +34,11 @@ export class Game {
         const currentMino = CurrentMino.create(minoSets[0])
         const nextMinos = minoSets.slice(1, minoSets.length)
 
-        return new Game(currentMino, rows, null, nextMinos, random)
+        return new Game(currentMino, rows, null, nextMinos, random, seed)
+    }
+
+    public retry(): Game {
+      return Game.create(this.seed)
     }
 
     get state(): GameState {
@@ -58,7 +63,7 @@ export class Game {
         if (command === Command.Up) {
             // mino を一番下まで落とす
             const droppedMino = this.drop()
-            const newGame = new Game(droppedMino, this.rows, this.heldMino, this.nextMinos, this.random)
+            const newGame = new Game(droppedMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed)
 
             // rows を state().rows に置き換え（接地）
             const rows = newGame.state.rows
@@ -71,7 +76,7 @@ export class Game {
             const nextMinos = (this.nextMinos.length <= 5) ?
                 [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(this.random.nextRandom())] :
                 this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, this.random)
+            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, this.random, this.seed)
         } else if (command === Command.Right) {
             return this.updateCurrentMino(this.moveRight())
         } else if (command === Command.Down) {
@@ -93,16 +98,16 @@ export class Game {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.nextMinos[0])
             const nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, this.rows, heldMino, nextMinos, this.random)
+            return new Game(currentMino, this.rows, heldMino, nextMinos, this.random, this.seed)
         } else {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.heldMino)
-            return new Game(currentMino, this.rows, heldMino, this.nextMinos, this.random)
+            return new Game(currentMino, this.rows, heldMino, this.nextMinos, this.random, this.seed)
         }
     }
 
     private updateCurrentMino(currentMino: CurrentMino): Game {
-        return new Game(currentMino, this.rows, this.heldMino, this.nextMinos, this.random)
+        return new Game(currentMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed)
     }
 
     private rotationRight(): CurrentMino {
