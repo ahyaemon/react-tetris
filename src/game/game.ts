@@ -21,6 +21,7 @@ export class Game {
         readonly nextMinos: Mino[],
         private readonly random: Random,
         private readonly seed: number,
+        readonly clearedRowCount: number,
     ) {}
 
     static create(seed: number): Game {
@@ -32,7 +33,7 @@ export class Game {
         const currentMino = CurrentMino.create(minoSets[0])
         const nextMinos = minoSets.slice(1, minoSets.length)
 
-        return new Game(currentMino, rows, null, nextMinos, random, seed)
+        return new Game(currentMino, rows, null, nextMinos, random, seed, 0)
     }
 
     public retry(): Game {
@@ -61,7 +62,7 @@ export class Game {
         if (command === Command.Up) {
             // mino を一番下まで落とす
             const droppedMino = this.drop()
-            const newGame = new Game(droppedMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed)
+            const newGame = new Game(droppedMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
 
             // rows を state().rows に置き換え（接地）
             const rows = newGame.state.rows
@@ -75,7 +76,7 @@ export class Game {
             const nextMinos = (this.nextMinos.length <= 5) ?
                 [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())] :
                 this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, nextRandom, this.seed)
+            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, nextRandom, this.seed, this.clearedRowCount + this.getClearingAmount(rows))
         } else if (command === Command.Right) {
             return this.updateCurrentMino(this.moveRight())
         } else if (command === Command.Down) {
@@ -97,16 +98,16 @@ export class Game {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.nextMinos[0])
             const nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, this.rows, heldMino, nextMinos, this.random, this.seed)
+            return new Game(currentMino, this.rows, heldMino, nextMinos, this.random, this.seed, this.clearedRowCount)
         } else {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.heldMino)
-            return new Game(currentMino, this.rows, heldMino, this.nextMinos, this.random, this.seed)
+            return new Game(currentMino, this.rows, heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
         }
     }
 
     private updateCurrentMino(currentMino: CurrentMino): Game {
-        return new Game(currentMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed)
+        return new Game(currentMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
     }
 
     private rotationRight(): CurrentMino {
@@ -370,7 +371,7 @@ export class Game {
     }
 
     private clearRows(rows: Row[], ncol: number): Row[] {
-        const clearingAmount = rows.filter(row => isFilled(row)).length
+        const clearingAmount = this.getClearingAmount(rows)
         if (clearingAmount === 0) {
             return rows
         }
@@ -378,5 +379,9 @@ export class Game {
         const remainedRows = rows.filter(row => !isFilled(row))
         const emptyRows = Array(clearingAmount).fill(0).map(_ => createEmptyRow(ncol))
         return [...emptyRows, ...remainedRows]
+    }
+
+    private getClearingAmount(rows: Row[]): number {
+      return rows.filter(row => isFilled(row)).length
     }
 }

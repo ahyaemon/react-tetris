@@ -25,3 +25,8 @@ export const heldMinoSelector = selector({
     key: 'heldMino',
     get: ({get}) => get(gameHistory)[0].heldMino
 })
+
+export const clearedLineCountSelector = selector({
+    key: 'clearedLineCount',
+    get: ({get}) => get(gameHistory)[0].clearedRowCount
+})
