@@ -19,8 +19,6 @@ export class Game {
         private readonly rows: Row[],
         readonly heldMino: Mino | null,
         readonly nextMinos: Mino[],
-        // TODO 一手戻るをやった時もランダムで生成される値が固定されるようにする
-        // random.next() が副作用を持たないように？
         private readonly random: Random,
         private readonly seed: number,
     ) {}
@@ -73,10 +71,11 @@ export class Game {
 
             // 次のミノに切り替え
             const currentMino = CurrentMino.create(this.nextMinos[0])
+            const nextRandom = this.random.nextRandom()
             const nextMinos = (this.nextMinos.length <= 5) ?
-                [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(this.random.nextRandom())] :
+                [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())] :
                 this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, this.random, this.seed)
+            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, nextRandom, this.seed)
         } else if (command === Command.Right) {
             return this.updateCurrentMino(this.moveRight())
         } else if (command === Command.Down) {

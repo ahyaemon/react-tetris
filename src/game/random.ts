@@ -8,26 +8,30 @@ export class Random {
 
     private prng: PRNG
 
+    public _value: number
+
     constructor(readonly seed: number) {
         this.prng = seedrandom(seed.toString())
+        this._value = this.prng.int32()
     }
 
-    public next(max: number): number {
-        return Math.abs(this.prng.int32()) % (max + 1)
+    public value(max: number): number {
+        return Math.abs(this._value) % (max + 1)
     }
 
     public nextRandom(): Random {
-        return new Random(this.next(1000000))
+        return new Random(this.value(1000000))
     }
 }
 
-// FIXME random に対して副作用がある
 export function shuffle<T>(ar: T[], random: Random): T[] {
     let result = [...ar]
+    let r = random.nextRandom()
 
     for (let i = result.length; 1 < i; i--) {
-        const k = random.next(result.length - 1) as number
+        const k = r.value(result.length - 1) as number
         [result[k], result[i - 1]] = [result[i - 1], result[k]]
+        r = r.nextRandom()
     }
 
     return result
