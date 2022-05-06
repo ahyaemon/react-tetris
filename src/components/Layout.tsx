@@ -9,8 +9,12 @@ import HistoryBack from "./history-back/HistoryBack";
 import NextMinos from "./mino/NextMinos";
 import {Hold} from "./mino/Hold";
 import {ReloadPopup} from "./reload/ReloadPopup";
+import {clearedLineCountSelector} from "../gameState";
+import {useRecoilValue} from "recoil";
 
 export function Layout() {
+    const clearedLineCount = useRecoilValue(clearedLineCountSelector)
+
     return (
         <div>
             <div css={css({
@@ -21,6 +25,9 @@ export function Layout() {
                       paddingTop: "260px"
                     })}
                 >
+                    <div>
+                        LINE: {clearedLineCount}
+                    </div>
                     <div>
                         <ReloadPopup/>
                     </div>
