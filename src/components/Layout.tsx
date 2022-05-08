@@ -9,11 +9,14 @@ import HistoryBack from "./history-back/HistoryBack";
 import NextMinos from "./mino/NextMinos";
 import {Hold} from "./mino/Hold";
 import {ReloadPopup} from "./reload/ReloadPopup";
-import {clearedLineCountSelector} from "../gameState";
+import {clearedLineCountSelector, renCountSelector} from "../gameState";
 import {useRecoilValue} from "recoil";
 
 export function Layout() {
+
     const clearedLineCount = useRecoilValue(clearedLineCountSelector)
+
+    const renCount = useRecoilValue(renCountSelector)
 
     return (
         <div>
@@ -22,9 +25,14 @@ export function Layout() {
             })}>
                 <div
                     css={css({
-                      paddingTop: "260px"
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'end',
                     })}
                 >
+                    <div>
+                        REN: {renCount}
+                    </div>
                     <div>
                         LINE: {clearedLineCount}
                     </div>

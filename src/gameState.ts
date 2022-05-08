@@ -30,3 +30,8 @@ export const clearedLineCountSelector = selector({
     key: 'clearedLineCount',
     get: ({get}) => get(gameHistory)[0].clearedRowCount
 })
+
+export const renCountSelector = selector({
+    key: 'renCount',
+    get: ({get}) => get(gameHistory)[0].renCount()
+})
