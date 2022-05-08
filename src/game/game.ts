@@ -4,6 +4,7 @@ import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
 import {Random} from "./random";
 import {Position} from "./potision";
+import {RenCounter} from "./RenCounter";
 
 export type GameState = {
     rows: Row[]
@@ -22,6 +23,7 @@ export class Game {
         private readonly random: Random,
         private readonly seed: number,
         readonly clearedRowCount: number,
+        private readonly renCounter: RenCounter,
     ) {}
 
     static create(seed: number): Game {
@@ -32,14 +34,18 @@ export class Game {
         const minoSets = minoFactory.createMinoSets(random.nextRandom())
         const currentMino = CurrentMino.create(minoSets[0])
         const nextMinos = minoSets.slice(1, minoSets.length)
+        const renCounter = RenCounter.create()
 
-        return new Game(currentMino, rows, null, nextMinos, random, seed, 0)
+        return new Game(currentMino, rows, null, nextMinos, random, seed, 0, renCounter)
     }
 
     public retry(): Game {
       return Game.create(this.seed)
     }
 
+    // FIXME この変換ロジックはここに入れるべき？
+    // 表示用に color をセットするだけだから表示側？
+    // 名前も state と言うよりは rowColors と思われる
     get state(): GameState {
         // 地形をコピー
         const rows = this.rows.map(row => row.map(cell => cell))
@@ -62,7 +68,16 @@ export class Game {
         if (command === Command.Up) {
             // mino を一番下まで落とす
             const droppedMino = this.drop()
-            const newGame = new Game(droppedMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
+            const newGame = new Game(
+                droppedMino,
+                this.rows,
+                this.heldMino,
+                this.nextMinos,
+                this.random,
+                this.seed,
+                this.clearedRowCount,
+                this.renCounter,
+            )
 
             // rows を state().rows に置き換え（接地）
             const rows = newGame.state.rows
@@ -70,13 +85,26 @@ export class Game {
             // 揃ったラインを消す
             const clearedRows = this.clearRows(rows, Game.ncol)
 
+            // REN と LINE
+            const clearingAmount = this.getClearingAmount(rows)
+            const renCounter = this.renCounter.next(clearingAmount !== 0)
+
             // 次のミノに切り替え
             const currentMino = CurrentMino.create(this.nextMinos[0])
             const nextRandom = this.random.nextRandom()
             const nextMinos = (this.nextMinos.length <= 5) ?
                 [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())] :
                 this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, clearedRows, this.heldMino, nextMinos, nextRandom, this.seed, this.clearedRowCount + this.getClearingAmount(rows))
+            return new Game(
+                currentMino,
+                clearedRows,
+                this.heldMino,
+                nextMinos,
+                nextRandom,
+                this.seed,
+                this.clearedRowCount + this.getClearingAmount(rows),
+                renCounter,
+            )
         } else if (command === Command.Right) {
             return this.updateCurrentMino(this.moveRight())
         } else if (command === Command.Down) {
@@ -98,16 +126,43 @@ export class Game {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.nextMinos[0])
             const nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
-            return new Game(currentMino, this.rows, heldMino, nextMinos, this.random, this.seed, this.clearedRowCount)
+            return new Game(
+                currentMino,
+                this.rows,
+                heldMino,
+                nextMinos,
+                this.random,
+                this.seed,
+                this.clearedRowCount,
+                this.renCounter,
+            )
         } else {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.heldMino)
-            return new Game(currentMino, this.rows, heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
+            return new Game(
+                currentMino,
+                this.rows,
+                heldMino,
+                this.nextMinos,
+                this.random,
+                this.seed,
+                this.clearedRowCount,
+                this.renCounter,
+            )
         }
     }
 
     private updateCurrentMino(currentMino: CurrentMino): Game {
-        return new Game(currentMino, this.rows, this.heldMino, this.nextMinos, this.random, this.seed, this.clearedRowCount)
+        return new Game(
+            currentMino,
+            this.rows,
+            this.heldMino,
+            this.nextMinos,
+            this.random,
+            this.seed,
+            this.clearedRowCount,
+            this.renCounter,
+        )
     }
 
     private rotationRight(): CurrentMino {
@@ -383,5 +438,9 @@ export class Game {
 
     private getClearingAmount(rows: Row[]): number {
       return rows.filter(row => isFilled(row)).length
+    }
+
+    public renCount(): number {
+        return this.renCounter.count
     }
 }
