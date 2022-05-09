@@ -21,7 +21,8 @@ export function Layout() {
     return (
         <div>
             <div css={css({
-                display: 'flex'
+                display: 'flex',
+                marginLeft: '4px',
             })}>
                 <div
                     css={css({

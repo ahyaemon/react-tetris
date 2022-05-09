@@ -4,6 +4,7 @@ import {Command} from "./game/command";
 import {Layout} from "./components/Layout";
 import {useGameHistory} from "./hooks/useGameHistory";
 import {Game} from "./game/game";
+import {Menu} from "./components/Menu";
 
 const key = {
     w: 'w',
@@ -47,7 +48,10 @@ function App() {
     ])
 
     return (
-        <Layout/>
+        <div>
+            <Menu/>
+            <Layout/>
+        </div>
     );
 }
 
