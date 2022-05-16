@@ -72,7 +72,7 @@ export function GamePage() {
                     css={css({
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'end',
+                        justifyContent: 'flex-end',
                     })}
                 >
                     <div>
