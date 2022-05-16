@@ -12,7 +12,7 @@ type LinkWithCloseProps = {
 }
 
 function LinkWithClose(props: LinkWithCloseProps) {
-    return <Link to={props.to} onClick={ () => {props.setIsOpen(false)} } >{ props.title }</Link>
+    return <div><Link to={props.to} onClick={ () => {props.setIsOpen(false)} } >{ props.title }</Link></div>
 }
 
 export function Menu() {
@@ -25,9 +25,9 @@ export function Menu() {
                 lineHeight: "2",
             })}
         >
-            <BurgerMenu width="280px" isOpen={isOpen} onOpen={() => { setIsOpen(true)}}>
+            <BurgerMenu width="280px" isOpen={isOpen} onOpen={() => setIsOpen(true)} onClose={() => setIsOpen(false)}>
                 <LinkWithClose to="/react-tetris" title="メインコンテンツ" setIsOpen={setIsOpen}/>
-                <p>テンプレ練習</p>
+                <LinkWithClose to="/react-tetris/practice" title="テンプレ練習" setIsOpen={setIsOpen}/>
                 <LinkWithClose to="/react-tetris/about" title="About" setIsOpen={setIsOpen}/>
             </BurgerMenu>
         </div>
