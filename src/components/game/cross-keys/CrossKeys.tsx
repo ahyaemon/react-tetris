@@ -1,10 +1,10 @@
 import React from 'react';
 import './CrossKeys.scss';
-import {Command} from "../../game/command";
-import {useCommandPressed} from "../../hooks/useCommandPressed";
-import { useLongPressMobile } from "../../hooks/useLongPress";
+import {Command} from "../../../game/command";
+import {useCommandPressed} from "../../../hooks/useCommandPressed";
+import { useLongPressMobile } from "../../../hooks/useLongPress";
 import { useMediaQuery } from 'react-responsive'
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameHistory} from "../../../hooks/useGameHistory";
 
 function CrossKeysDesktop() {
     // eslint-disable-next-line

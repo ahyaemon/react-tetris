@@ -1,18 +1,61 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
-import {css} from "@emotion/react";
-import Board from "./board/Board";
-import RotationKeys from "./rotation-keys/RotationKeys";
-import CrossKeys from "./cross-keys/CrossKeys";
-import HistoryBack from "./history-back/HistoryBack";
-import NextMinos from "./mino/NextMinos";
-import {Hold} from "./mino/Hold";
-import {ReloadPopup} from "./reload/ReloadPopup";
-import {clearedLineCountSelector, renCountSelector} from "../gameState";
+import {useGameHistory} from "../hooks/useGameHistory";
+import {useKeyDown} from "../hooks/useKeyDown";
+import {Command} from "../game/command";
+import {Game} from "../game/game";
 import {useRecoilValue} from "recoil";
+import {clearedLineCountSelector, renCountSelector} from "../gameState";
+import {css} from "@emotion/react";
+import {ReloadPopup} from "../components/game/reload/ReloadPopup";
+import HistoryBack from "../components/game/history-back/HistoryBack";
+import Board from "../components/game/board/Board";
+import NextMinos from "../components/game/mino/NextMinos";
+import {Hold} from "../components/game/mino/Hold";
+import CrossKeys from "../components/game/cross-keys/CrossKeys";
+import RotationKeys from "../components/game/rotation-keys/RotationKeys";
+import React from "react";
 
-export function Layout() {
+const key = {
+    w: 'w',
+    a: 'a',
+    s: 's',
+    d: 'd',
+    l: 'l',
+    k: 'k',
+    down: 'ArrowDown',
+    up: 'ArrowUp',
+    right: 'ArrowRight',
+    left: 'ArrowLeft',
+    z: 'z',
+    x: 'x',
+    shift: 'Shift',
+    space: ' ',
+}
+
+function input(command: Command) {
+    return (game: Game) => game.input(command)
+}
+
+export function GamePage() {
+    const { updateRecentlyGame, addGame } = useGameHistory()
+    useKeyDown([
+        { key: key.s,  f: () => { updateRecentlyGame(input(Command.Down)) }},
+        { key: key.w,  f: () => { addGame( input(Command.Up)) }},
+        { key: key.d,  f: () => { updateRecentlyGame(input(Command.Right)) }},
+        { key: key.a,  f: () => { updateRecentlyGame(input(Command.Left)) }},
+        { key: key.k,  f: () => { updateRecentlyGame(input(Command.RotationLeft)) }},
+        { key: key.l,  f: () => { updateRecentlyGame(input(Command.RotationRight)) }},
+
+        { key: key.down,  f: () => { updateRecentlyGame(input(Command.Down)) }},
+        { key: key.up,  f: () => { addGame(input(Command.Up)) }},
+        { key: key.right,  f: () => { updateRecentlyGame(input(Command.Right)) }},
+        { key: key.left,  f: () => { updateRecentlyGame(input(Command.Left)) }},
+        { key: key.z,  f: () => { updateRecentlyGame(input(Command.RotationLeft)) }},
+        { key: key.x,  f: () => { updateRecentlyGame(input(Command.RotationRight)) }},
+
+        { key: key.shift,  f: () => { addGame(game => game.hold()) }},
+    ])
 
     const clearedLineCount = useRecoilValue(clearedLineCountSelector)
 
@@ -50,7 +93,7 @@ export function Layout() {
                 </div>
                 <div
                     css={css({
-                      marginLeft: '4px',
+                        marginLeft: '4px',
                     })}
                 >
                     <Board/>
