@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import {useRecoilValue} from "recoil";
-import {nextMinosSelector} from "../../gameState";
+import {nextMinosSelector} from "../../../gameState";
 import {MinoFrame} from "./MinoFrame";
 
 export default function NextMinos() {

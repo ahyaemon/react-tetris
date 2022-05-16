@@ -1,4 +1,4 @@
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameHistory} from "../../../hooks/useGameHistory";
 import React from "react";
 
 export default function HistoryBack() {

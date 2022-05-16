@@ -4,7 +4,7 @@ import React from 'react';
 import {css} from "@emotion/react";
 import CellC from "./cell/CellC";
 import {useRecoilValue} from "recoil";
-import {boardSelector} from "../../gameState";
+import {boardSelector} from "../../../gameState";
 
 const style = {
     board: css({

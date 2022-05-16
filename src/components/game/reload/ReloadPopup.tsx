@@ -4,7 +4,7 @@ import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
 import {css} from "@emotion/react";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameHistory} from "../../../hooks/useGameHistory";
 
 export function ReloadPopup() {
 

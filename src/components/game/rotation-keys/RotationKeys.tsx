@@ -1,7 +1,7 @@
 import React from 'react';
 import './RotationKeys.scss';
-import {Command} from "../../game/command";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {Command} from "../../../game/command";
+import {useGameHistory} from "../../../hooks/useGameHistory";
 
 export default function RotationKeys() {
     const { updateRecentlyGame } = useGameHistory()
