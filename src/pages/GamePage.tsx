@@ -15,6 +15,7 @@ import {Hold} from "../components/game/mino/Hold";
 import CrossKeys from "../components/game/cross-keys/CrossKeys";
 import RotationKeys from "../components/game/rotation-keys/RotationKeys";
 import React from "react";
+import {useMediaQuery} from "react-responsive";
 
 const key = {
     w: 'w',
@@ -61,6 +62,8 @@ export function GamePage() {
     const clearedLineCount = useRecoilValue(clearedLineCountSelector)
 
     const renCount = useRecoilValue(renCountSelector)
+
+    const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
     return (
         <div>
@@ -135,12 +138,16 @@ export function GamePage() {
                     <RotationKeys/>
                 </div>
             </div>
-            <div>
-                <p>キーボード操作</p>
-                <p>移動 : [←][↓][→] or [a][s][d]</p>
-                <p>ハードドロップ : [↑] or [w]</p>
-                <p>ホールド : [Shift]</p>
-            </div>
+            {
+                isDesktop && (
+                    <div>
+                        <p>キーボード操作</p>
+                        <p>移動 : [←][↓][→] or [a][s][d]</p>
+                        <p>ハードドロップ : [↑] or [w]</p>
+                        <p>ホールド : [Shift]</p>
+                    </div>
+                )
+            }
         </div>
     )
 }
