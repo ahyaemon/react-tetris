@@ -9,24 +9,29 @@ function match(keyCallbacks: KeyCallback[], key: string): (() => void) | undefin
     return keyCallbacks.find(keyCallback => keyCallback.key === key)?.f
 }
 
-export function useKeyDown(keyCallbacks: KeyCallback[], showKey: boolean = false) {
-    const didRef = useRef(false)
-    useEffect(() => {
-        if (didRef.current) {
-            return
+function createEventListener(keyCallbacks: KeyCallback[], showKey: boolean) {
+    return (e: KeyboardEvent) => {
+        if (showKey) {
+            console.log(e.key)
         }
 
-        didRef.current = true
-        document.addEventListener("keydown", e => {
-            if (showKey) {
-                console.log(e.key)
-            }
+        const callback = match(keyCallbacks, e.key)
+        if (callback) {
+            callback()
+        }
+    }
+}
 
-            const callback = match(keyCallbacks, e.key)
-            if (callback) {
-                callback()
-            }
-        }, false);
+export function useKeyDown(keyCallbacks: KeyCallback[], showKey: boolean = false) {
+
+    useEffect(() => {
+        const eventListener = createEventListener(keyCallbacks, showKey)
+
+        document.addEventListener("keydown", eventListener, false)
+
+        return () => {
+            document.removeEventListener("keydown", eventListener)
+        }
         // eslint-disable-next-line
-    }, [])
+    }, [showKey])
 }
