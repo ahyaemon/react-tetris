@@ -11,9 +11,9 @@ function App() {
         <div>
             <Menu/>
             <Routes>
-                <Route path="/react-tetris" element={<GamePage />}/>
-                <Route path="/react-tetris/practice" element={<PracticePage/>}/>
-                <Route path="/react-tetris/about" element={<AboutPage />}/>
+                <Route path="/" element={<GamePage />}/>
+                <Route path="/practice" element={<PracticePage/>}/>
+                <Route path="/about" element={<AboutPage />}/>
             </Routes>
         </div>
     );

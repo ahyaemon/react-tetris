@@ -6,17 +6,17 @@ import {RecoilRoot} from "recoil";
 import './popup.css';
 import './global.css';
 import './menu.css';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 
 const container = document.getElementById('app');
 const root = createRoot(container!);
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter basename="/">
             <RecoilRoot>
                 <App />
             </RecoilRoot>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 );
 
