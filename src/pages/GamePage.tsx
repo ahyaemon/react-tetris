@@ -39,6 +39,7 @@ function input(command: Command) {
 
 export function GamePage() {
     const { updateRecentlyGame, addGame } = useGameHistory()
+    // FIXME レンダリングされるたびにメソッドが再生成される問題をどうにかできないか
     useKeyDown([
         { key: key.s,  f: () => { updateRecentlyGame(input(Command.Down)) }},
         { key: key.w,  f: () => { addGame( input(Command.Up)) }},
