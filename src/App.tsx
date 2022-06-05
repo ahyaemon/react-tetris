@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menu} from "./components/menu/Menu";
 import { Routes, Route } from 'react-router-dom';
-import {GamePage} from "./pages/GamePage";
+import {EndlessPage} from "./pages/EndlessPage";
 import {AboutPage} from "./pages/AboutPage";
 import {PracticePage} from "./pages/PracticePage";
 
@@ -11,7 +11,7 @@ function App() {
         <div>
             <Menu/>
             <Routes>
-                <Route path="/" element={<GamePage />}/>
+                <Route path="/" element={<EndlessPage />}/>
                 <Route path="/practice" element={<PracticePage/>}/>
                 <Route path="/about" element={<AboutPage />}/>
             </Routes>
