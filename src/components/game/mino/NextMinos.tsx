@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
 import {useRecoilValue} from "recoil";
-import {nextMinosSelector} from "../../../gameState";
 import {MinoFrame} from "./MinoFrame";
+import {endlessStore} from "../../../stores/EndlessStore";
 
 export default function NextMinos() {
-    const nextMinos = useRecoilValue(nextMinosSelector)
+    const nextMinos = useRecoilValue(endlessStore.nextMinos)
     return (
         <div>
             { nextMinos

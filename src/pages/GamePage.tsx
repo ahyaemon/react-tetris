@@ -5,7 +5,6 @@ import {useKeyDown} from "../hooks/useKeyDown";
 import {Command} from "../game/command";
 import {Game} from "../game/game";
 import {useRecoilValue} from "recoil";
-import {boardSelector, clearedLineCountSelector, renCountSelector} from "../gameState";
 import {css} from "@emotion/react";
 import {ReloadPopup} from "../components/game/reload/ReloadPopup";
 import HistoryBack from "../components/game/history-back/HistoryBack";
@@ -16,6 +15,7 @@ import CrossKeys from "../components/game/cross-keys/CrossKeys";
 import RotationKeys from "../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {useMediaQuery} from "react-responsive";
+import {endlessStore} from "../stores/EndlessStore";
 
 const key = {
     w: 'w',
@@ -59,13 +59,13 @@ export function GamePage() {
         { key: key.shift,  f: () => { addGame(game => game.hold()) }},
     ])
 
-    const clearedLineCount = useRecoilValue(clearedLineCountSelector)
+    const clearedLineCount = useRecoilValue(endlessStore.clearedLineCount)
 
-    const renCount = useRecoilValue(renCountSelector)
+    const renCount = useRecoilValue(endlessStore.renCount)
 
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
-    const boardState = useRecoilValue(boardSelector)
+    const boardState = useRecoilValue(endlessStore.board)
 
     return (
         <div>
