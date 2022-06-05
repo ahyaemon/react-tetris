@@ -5,11 +5,11 @@ import {useKeyDown} from "../hooks/useKeyDown";
 import {Command} from "../game/command";
 import {Game} from "../game/game";
 import {useRecoilValue} from "recoil";
-import {clearedLineCountSelector, renCountSelector} from "../gameState";
+import {boardSelector, clearedLineCountSelector, renCountSelector} from "../gameState";
 import {css} from "@emotion/react";
 import {ReloadPopup} from "../components/game/reload/ReloadPopup";
 import HistoryBack from "../components/game/history-back/HistoryBack";
-import Board from "../components/game/board/Board";
+import {Board} from "../components/game/board/Board";
 import NextMinos from "../components/game/mino/NextMinos";
 import {Hold} from "../components/game/mino/Hold";
 import CrossKeys from "../components/game/cross-keys/CrossKeys";
@@ -65,6 +65,8 @@ export function GamePage() {
 
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
+    const boardState = useRecoilValue(boardSelector)
+
     return (
         <div>
             <div css={css({
@@ -100,7 +102,7 @@ export function GamePage() {
                         marginLeft: '4px',
                     })}
                 >
-                    <Board/>
+                    <Board boardState={boardState}/>
                 </div>
                 <div>
                     <div

@@ -3,8 +3,7 @@
 import React from 'react';
 import {css} from "@emotion/react";
 import CellC from "./cell/CellC";
-import {useRecoilValue} from "recoil";
-import {boardSelector} from "../../../gameState";
+import {BoardState} from "../../../game/game";
 
 const style = {
     board: css({
@@ -16,12 +15,14 @@ const style = {
     })
 }
 
-export default function Board() {
-    const board = useRecoilValue(boardSelector)
+type BoardProps = {
+    boardState: BoardState,
+}
 
+export const Board: React.FC<BoardProps> = (props) => {
     return (
         <div css={style.board}>
-            { board.rows.map((row, index) => (
+            { props.boardState.rows.map((row, index) => (
                 <div css={style.row} key={index}>
                     { row.map((cell, index) => (
                         <div className="row__cells" key={index}>
