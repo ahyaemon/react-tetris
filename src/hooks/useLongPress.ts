@@ -6,7 +6,6 @@ const firstTouchMilliSeconds = 300
 const intervalMilliSeconds = 80
 
 export const useLongPressMobile = (command: Command) => {
-    console.log('use long press mobile')
     const { updateRecentlyGame } = useGameHistory()
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
