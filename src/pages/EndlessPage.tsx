@@ -9,7 +9,7 @@ import {css} from "@emotion/react";
 import {ReloadPopup} from "../components/game/reload/ReloadPopup";
 import HistoryBack from "../components/game/history-back/HistoryBack";
 import {Board} from "../components/game/board/Board";
-import NextMinos from "../components/game/mino/NextMinos";
+import {NextMinos} from "../components/game/mino/NextMinos";
 import {Hold} from "../components/game/mino/Hold";
 import CrossKeys from "../components/game/cross-keys/CrossKeys";
 import RotationKeys from "../components/game/rotation-keys/RotationKeys";
@@ -144,6 +144,8 @@ const Left: React.FC = () => {
 
 const Right: React.FC = () => {
 
+    const nextMinos = useRecoilValue(endlessStore.nextMinos)
+
     const heldMino = useRecoilValue(endlessStore.heldMino)
     const { addGame } = useGameHistory()
 
@@ -154,7 +156,7 @@ const Right: React.FC = () => {
                     marginLeft: '4px'
                 })}
             >
-                <NextMinos/>
+                <NextMinos minos={nextMinos}/>
             </div>
             <div
                 css={css({

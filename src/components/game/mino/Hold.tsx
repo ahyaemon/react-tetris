@@ -11,7 +11,7 @@ type HoldProps = {
     addGame: (f: (game: Game) => Game) => void
 }
 
-export const Hold: React.FC<HoldProps> = ({ heldMino, addGame }) => (
+export const Hold: React.FC<HoldProps> = ({ heldMino, addGame }) =>
     <div
         css={css({
             width: '60px',
@@ -28,4 +28,4 @@ export const Hold: React.FC<HoldProps> = ({ heldMino, addGame }) => (
         </p>
         <MinoFrame mino={heldMino}/>
     </div>
-)
+
