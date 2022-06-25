@@ -7,7 +7,7 @@ import {Game} from "../game/game";
 import {useRecoilValue} from "recoil";
 import {css} from "@emotion/react";
 import {ReloadPopup} from "../components/game/reload/ReloadPopup";
-import HistoryBack from "../components/game/history-back/HistoryBack";
+import {HistoryBack} from "../components/game/history-back/HistoryBack";
 import {Board} from "../components/game/board/Board";
 import {NextMinos} from "../components/game/mino/NextMinos";
 import {Hold} from "../components/game/mino/Hold";
@@ -120,6 +120,8 @@ const Left: React.FC = () => {
 
     const renCount = useRecoilValue(endlessStore.renCount)
 
+    const { back, historySize } = useGameHistory()
+
     return (
         <>
             <div>
@@ -136,7 +138,7 @@ const Left: React.FC = () => {
                     marginTop: '10px',
                 })}
             >
-                <HistoryBack/>
+                <HistoryBack back={back} historySize={historySize}/>
             </div>
         </>
     )
