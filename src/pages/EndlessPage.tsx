@@ -59,10 +59,6 @@ export function EndlessPage() {
         { key: key.shift,  f: () => { addGame(game => game.hold()) }},
     ])
 
-    const clearedLineCount = useRecoilValue(endlessStore.clearedLineCount)
-
-    const renCount = useRecoilValue(endlessStore.renCount)
-
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
     const boardState = useRecoilValue(endlessStore.board)
@@ -80,22 +76,7 @@ export function EndlessPage() {
                         justifyContent: 'flex-end',
                     })}
                 >
-                    <div>
-                        REN: {renCount}
-                    </div>
-                    <div>
-                        LINE: {clearedLineCount}
-                    </div>
-                    <div>
-                        <ReloadPopup/>
-                    </div>
-                    <div
-                        css={css({
-                            marginTop: '10px',
-                        })}
-                    >
-                        <HistoryBack/>
-                    </div>
+                    <Left/>
                 </div>
                 <div
                     css={css({
@@ -105,21 +86,7 @@ export function EndlessPage() {
                     <Board boardState={boardState}/>
                 </div>
                 <div>
-                    <div
-                        css={css({
-                            marginLeft: '4px'
-                        })}
-                    >
-                        <NextMinos/>
-                    </div>
-                    <div
-                        css={css({
-                            marginTop: '20px',
-                            marginLeft: '4px',
-                        })}
-                    >
-                        <Hold/>
-                    </div>
+                    <Right/>
                 </div>
             </div>
             <div
@@ -141,16 +108,72 @@ export function EndlessPage() {
                 </div>
             </div>
             {
-                isDesktop && (
-                    <div>
-                        <p>キーボード操作</p>
-                        <p>移動 : [←][↓][→] or [a][s][d]</p>
-                        <p>回転 : [z][x] or [k][l]</p>
-                        <p>ハードドロップ : [↑] or [w]</p>
-                        <p>ホールド : [Shift]</p>
-                    </div>
-                )
+                isDesktop && <KeyboardExplanation/>
             }
         </div>
     )
 }
+
+const Left: React.FC = () => {
+
+    const clearedLineCount = useRecoilValue(endlessStore.clearedLineCount)
+
+    const renCount = useRecoilValue(endlessStore.renCount)
+
+    return (
+        <>
+            <div>
+                REN: {renCount}
+            </div>
+            <div>
+                LINE: {clearedLineCount}
+            </div>
+            <div>
+                <ReloadPopup/>
+            </div>
+            <div
+                css={css({
+                    marginTop: '10px',
+                })}
+            >
+                <HistoryBack/>
+            </div>
+        </>
+    )
+}
+
+const Right: React.FC = () => {
+
+    const heldMino = useRecoilValue(endlessStore.heldMino)
+    const { addGame } = useGameHistory()
+
+    return (
+        <>
+            <div
+                css={css({
+                    marginLeft: '4px'
+                })}
+            >
+                <NextMinos/>
+            </div>
+            <div
+                css={css({
+                    marginTop: '20px',
+                    marginLeft: '4px',
+                })}
+            >
+                <Hold heldMino={heldMino} addGame={addGame}/>
+            </div>
+        </>
+    )
+}
+
+const KeyboardExplanation: React.FC = () => (
+    <div>
+        <p>キーボード操作</p>
+        <p>移動 : [←][↓][→] or [a][s][d]</p>
+        <p>回転 : [z][x] or [k][l]</p>
+        <p>ハードドロップ : [↑] or [w]</p>
+        <p>ホールド : [Shift]</p>
+    </div>
+)
