@@ -1,12 +1,10 @@
 import {useCallback, useRef} from "react";
 import {Command} from "../game/command";
-import {useGameHistory} from "./useGameHistory";
 
 const firstTouchMilliSeconds = 300
 const intervalMilliSeconds = 80
 
-export const useLongPressMobile = (command: Command) => {
-    const { updateRecentlyGame } = useGameHistory()
+export const useLongPressMobile = (command: Command, f: (command: Command) => void) => {
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
@@ -21,11 +19,11 @@ export const useLongPressMobile = (command: Command) => {
         target.addEventListener('touchstart', (e: any) => {
             e.preventDefault()
 
-            updateRecentlyGame(game => game.input(command))
+            f(command)
 
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
-                    updateRecentlyGame(game => game.input(command))
+                    f(command)
                 }, intervalMilliSeconds)
             }, firstTouchMilliSeconds)
         }, {passive: false})

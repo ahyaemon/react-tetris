@@ -48,9 +48,13 @@ function CrossKeysDesktop() {
 
 function CrossKeysMobile() {
     const { addGame } = useGameHistory()
-    const downRef = useLongPressMobile(Command.Down)
-    const leftRef = useLongPressMobile(Command.Left)
-    const rightRef = useLongPressMobile(Command.Right)
+    const { updateRecentlyGame } = useGameHistory()
+    const inputCommandToGame = (command: Command) => {
+        updateRecentlyGame(game => game.input(command))
+    }
+    const downRef = useLongPressMobile(Command.Down, inputCommandToGame)
+    const leftRef = useLongPressMobile(Command.Left, inputCommandToGame)
+    const rightRef = useLongPressMobile(Command.Right, inputCommandToGame)
 
     return (
         <div className="crossKeys">
