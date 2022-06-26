@@ -11,7 +11,7 @@ import {HistoryBack} from "../components/game/history-back/HistoryBack";
 import {Board} from "../components/game/board/Board";
 import {NextMinos} from "../components/game/mino/NextMinos";
 import {Hold} from "../components/game/mino/Hold";
-import CrossKeys from "../components/game/cross-keys/CrossKeys";
+import {CrossKeys} from "../components/game/cross-keys/CrossKeys";
 import RotationKeys from "../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {useMediaQuery} from "react-responsive";
@@ -97,7 +97,7 @@ export function EndlessPage() {
                 })}
             >
                 <div>
-                    <CrossKeys/>
+                    <CrossKeys addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>
                 </div>
                 <div
                     css={css({
