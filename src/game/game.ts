@@ -6,7 +6,7 @@ import {Random} from "./random";
 import {Position} from "./potision";
 import {RenCounter} from "./RenCounter";
 
-export type GameState = {
+export type BoardState = {
     rows: Row[]
 }
 
@@ -46,7 +46,7 @@ export class Game {
     // FIXME この変換ロジックはここに入れるべき？
     // 表示用に color をセットするだけだから表示側？
     // 名前も state と言うよりは rowColors と思われる
-    get state(): GameState {
+    get state(): BoardState {
         // 地形をコピー
         const rows = this.rows.map(row => row.map(cell => cell))
 

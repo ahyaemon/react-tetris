@@ -4,14 +4,21 @@ import {Command} from "../../../game/command";
 import {useCommandPressed} from "../../../hooks/useCommandPressed";
 import { useLongPressMobile } from "../../../hooks/useLongPress";
 import { useMediaQuery } from 'react-responsive'
-import {useGameHistory} from "../../../hooks/useGameHistory";
+import {Game} from "../../../game/game";
 
-function CrossKeysDesktop() {
-    // eslint-disable-next-line
-    const { addGame } = useGameHistory()
-    const setDownPressed = useCommandPressed(Command.Down)
-    const setLeftPressed = useCommandPressed(Command.Left)
-    const setRightPressed = useCommandPressed(Command.Right)
+type CrossKeysProps = {
+    addGame: (f: (game: Game) => Game) => void,
+    updateRecentlyGame: (f: (game: Game) => Game) => void,
+}
+
+const CrossKeysDesktop: React.FC<CrossKeysProps> = (props) => {
+    const { addGame, updateRecentlyGame } = props
+    const inputCommandToGame = (command: Command) => {
+        updateRecentlyGame(game => game.input(command))
+    }
+    const setDownPressed = useCommandPressed(Command.Down, inputCommandToGame)
+    const setLeftPressed = useCommandPressed(Command.Left, inputCommandToGame)
+    const setRightPressed = useCommandPressed(Command.Right, inputCommandToGame)
 
     return (
         <div className="crossKeys">
@@ -42,11 +49,14 @@ function CrossKeysDesktop() {
     )
 }
 
-function CrossKeysMobile() {
-    const { addGame } = useGameHistory()
-    const downRef = useLongPressMobile(Command.Down)
-    const leftRef = useLongPressMobile(Command.Left)
-    const rightRef = useLongPressMobile(Command.Right)
+const CrossKeysMobile: React.FC<CrossKeysProps> = (props) => {
+    const { addGame, updateRecentlyGame } = props
+    const inputCommandToGame = (command: Command) => {
+        updateRecentlyGame(game => game.input(command))
+    }
+    const downRef = useLongPressMobile(Command.Down, inputCommandToGame)
+    const leftRef = useLongPressMobile(Command.Left, inputCommandToGame)
+    const rightRef = useLongPressMobile(Command.Right, inputCommandToGame)
 
     return (
         <div className="crossKeys">
@@ -74,14 +84,15 @@ function CrossKeysMobile() {
     )
 }
 
-export default function CrossKeys() {
+export const CrossKeys: React.FC<CrossKeysProps> = (props) => {
+    const { addGame, updateRecentlyGame } = props
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     return (
         <>
-            { isDesktop && <CrossKeysDesktop/> }
-            { isMobile && <CrossKeysMobile/>}
+            { isDesktop && <CrossKeysDesktop addGame={addGame} updateRecentlyGame={updateRecentlyGame}/> }
+            { isMobile && <CrossKeysMobile addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>}
         </>
     )
 }

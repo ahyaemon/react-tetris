@@ -1,7 +1,15 @@
-import {useGameHistory} from "../../../hooks/useGameHistory";
 import React from "react";
 
-export default function HistoryBack() {
-    const { back, historySize } = useGameHistory()
-    return <button type="button" onClick={() => {back()}} disabled={historySize === 1}>一手戻る</button>
+type HistoryBackProps = {
+    back: () => void
+    historySize: number
 }
+
+export const HistoryBack: React.FC<HistoryBackProps> = ({ back, historySize }) =>
+    <button
+        type="button"
+        onClick={() => {back()}}
+        disabled={historySize === 1}
+    >
+        一手戻る
+    </button>

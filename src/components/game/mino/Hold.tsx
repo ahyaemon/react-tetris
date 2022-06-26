@@ -1,31 +1,31 @@
 /** @jsxImportSource @emotion/react */
 
 import {css} from "@emotion/react";
-import {useRecoilValue} from "recoil";
-import {heldMinoSelector} from "../../../gameState";
 import {MinoFrame} from "./MinoFrame";
-import {useGameHistory} from "../../../hooks/useGameHistory";
+import {Mino} from "../../../game/mino";
+import {Game} from "../../../game/game";
+import React from "react";
 
-export function Hold() {
-    const heldMino = useRecoilValue(heldMinoSelector)
-    const { addGame } = useGameHistory()
+type HoldProps = {
+    heldMino: Mino | null
+    addGame: (f: (game: Game) => Game) => void
+}
 
-    return (
-        <div
+export const Hold: React.FC<HoldProps> = ({ heldMino, addGame }) =>
+    <div
+        css={css({
+            width: '60px',
+        })}
+        onClick={ () => addGame(game => game.hold()) }
+    >
+        <p
             css={css({
-                width: '60px',
-            })}
-            onClick={ () => addGame(game => game.hold()) }
-        >
-            <p
-              css={css({
                 margin: 0,
                 padding: 0,
-              })}
-            >
-              Hold
-            </p>
-            <MinoFrame mino={heldMino}/>
-        </div>
-    )
-}
+            })}
+        >
+            Hold
+        </p>
+        <MinoFrame mino={heldMino}/>
+    </div>
+

@@ -26,7 +26,7 @@ export function Menu() {
             })}
         >
             <BurgerMenu width="280px" isOpen={isOpen} onOpen={() => setIsOpen(true)} onClose={() => setIsOpen(false)}>
-                <LinkWithClose to="/" title="メインコンテンツ" setIsOpen={setIsOpen}/>
+                <LinkWithClose to="/" title="エンドレス" setIsOpen={setIsOpen}/>
                 <LinkWithClose to="/practice" title="テンプレ練習" setIsOpen={setIsOpen}/>
                 <LinkWithClose to="/about" title="About" setIsOpen={setIsOpen}/>
             </BurgerMenu>
