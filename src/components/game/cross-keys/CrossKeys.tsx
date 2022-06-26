@@ -9,9 +9,13 @@ import {useGameHistory} from "../../../hooks/useGameHistory";
 function CrossKeysDesktop() {
     // eslint-disable-next-line
     const { addGame } = useGameHistory()
-    const setDownPressed = useCommandPressed(Command.Down)
-    const setLeftPressed = useCommandPressed(Command.Left)
-    const setRightPressed = useCommandPressed(Command.Right)
+    const { updateRecentlyGame } = useGameHistory()
+    const inputCommandToGame = (command: Command) => {
+        updateRecentlyGame(game => game.input(command))
+    }
+    const setDownPressed = useCommandPressed(Command.Down, inputCommandToGame)
+    const setLeftPressed = useCommandPressed(Command.Left, inputCommandToGame)
+    const setRightPressed = useCommandPressed(Command.Right, inputCommandToGame)
 
     return (
         <div className="crossKeys">
