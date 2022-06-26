@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menu} from "./components/menu/Menu";
 import { Routes, Route } from 'react-router-dom';
-import {EndlessPage} from "./pages/EndlessPage";
+import {EndlessPage} from "./pages/endless/EndlessPage";
 import {AboutPage} from "./pages/AboutPage";
 import {PracticePage} from "./pages/PracticePage";
 
