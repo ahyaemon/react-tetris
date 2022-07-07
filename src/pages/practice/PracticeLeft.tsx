@@ -1,6 +1,6 @@
 import css from "./PracticeLeft.module.scss"
 import React from "react";
-import {ReloadPopup} from "../../components/game/reload/ReloadPopup";
+import {ReloadPopup} from "../endless/ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 
 export const PracticeLeft: React.FC = () => {

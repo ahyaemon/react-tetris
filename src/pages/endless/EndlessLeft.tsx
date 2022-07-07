@@ -3,7 +3,7 @@ import React from "react";
 import {useRecoilValue} from "recoil";
 import {endlessStore} from "../../stores/EndlessStore";
 import {useGameHistory} from "../../hooks/useGameHistory";
-import {ReloadPopup} from "../../components/game/reload/ReloadPopup";
+import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 
 export const EndlessLeft: React.FC = () => {
