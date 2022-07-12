@@ -7,7 +7,7 @@ import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {useMediaQuery} from "react-responsive";
-import {Game} from "../../game/game";
+import {BoardState, Game} from "../../game/game";
 import {Color} from "../../game/color";
 
 function createRows(): Color[][] {
@@ -22,7 +22,62 @@ function createRows(): Color[][] {
     return rows
 }
 
+function rows1(): Color[][] {
+    const rows = createRows()
+
+    rows[19][3] = Color.LightBlueTemplate
+    rows[19][4] = Color.LightBlueTemplate
+    rows[19][5] = Color.LightBlueTemplate
+    rows[19][6] = Color.LightBlueTemplate
+
+    rows[18][0] = Color.YellowTemplate
+    rows[18][1] = Color.YellowTemplate
+    rows[19][0] = Color.YellowTemplate
+    rows[19][1] = Color.YellowTemplate
+
+    rows[17][3] = Color.RedTemplate
+    rows[18][2] = Color.RedTemplate
+    rows[18][3] = Color.RedTemplate
+    rows[19][2] = Color.RedTemplate
+
+    rows[17][5] = Color.GreenTemplate
+    rows[17][6] = Color.GreenTemplate
+    rows[18][4] = Color.GreenTemplate
+    rows[18][5] = Color.GreenTemplate
+
+    rows[17][9] = Color.OrangeTemplate
+    rows[18][9] = Color.OrangeTemplate
+    rows[19][8] = Color.OrangeTemplate
+    rows[19][9] = Color.OrangeTemplate
+
+    return rows
+}
+
+type BoardTemplate = BoardState
+
+function createBoardStateWithTemplate(template: BoardTemplate, boardState: BoardState): BoardState {
+    const rows = []
+    for (let i = 0; i < 20; i++) {
+        const colors = []
+        for (let j = 0; j < 10; j++) {
+            if (boardState.rows[i][j] === Color.None) {
+                colors.push(template.rows[i][j])
+            } else {
+                colors.push(boardState.rows[i][j])
+            }
+
+        }
+        rows.push(colors)
+    }
+    return { rows }
+}
+
 export function PracticePage() {
+
+    // ラインが消える時の Board を保持したリスト or その直前も含む？
+    // -> 画面として残したいものを含ませる
+    // -> 一致したら次に移行する
+    const templates: BoardTemplate[] = [{ rows: rows1() }]
 
     const boardState = { rows: createRows() }
 
@@ -39,7 +94,7 @@ export function PracticePage() {
                     <PracticeLeft/>
                 </div>
                 <div className={css.board}>
-                    <Board boardState={boardState}/>
+                    <Board boardState={createBoardStateWithTemplate(templates[0], boardState)}/>
                 </div>
                 <div>
                     <PracticeRight/>

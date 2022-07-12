@@ -9,10 +9,10 @@ export const PracticeRight: React.FC = () => {
 
     const nextMinos = [
         minoFactory.i(),
-        minoFactory.i(),
-        minoFactory.i(),
-        minoFactory.i(),
-        minoFactory.i(),
+        minoFactory.o(),
+        minoFactory.s(),
+        minoFactory.z(),
+        minoFactory.j(),
     ]
 
     const heldMino = null

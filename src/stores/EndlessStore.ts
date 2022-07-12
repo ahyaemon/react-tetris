@@ -1,6 +1,8 @@
 import {atom, selector} from "recoil";
 import {Game} from "../game/game";
 
+// TODO createGameStore にリネーム
+// TODO gameHistory の default を引数で受け取るようにして、Practice でも使えるようにする
 function createEndlessStore() {
     const gameHistory = atom<Game[]>({
         key: "gameHistory",

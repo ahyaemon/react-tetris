@@ -10,6 +10,10 @@
         &--ghost {
             background-color: black;
         }
+
+        &--template {
+            background-color: rgba(161, 237, 255, 0.2);
+        }
     }
 
     &--yellow {
@@ -17,6 +21,10 @@
 
         &--ghost {
             background-color: black;
+        }
+
+        &--template {
+            background-color: rgba(255, 255, 0, 0.2);
         }
     }
 
@@ -26,6 +34,10 @@
         &--ghost {
             background-color: black;
         }
+
+        &--template {
+            background-color: rgba(128, 0, 128, 0.2);
+        }
     }
 
     &--green {
@@ -33,6 +45,10 @@
 
         &--ghost {
             background-color: black;
+        }
+
+        &--template {
+            background-color: rgba(78, 193, 78, 0.2);
         }
     }
 
@@ -42,6 +58,10 @@
         &--ghost {
             background-color: black;
         }
+
+        &--template {
+            background-color: rgba(255, 0, 0, 0.2);
+        }
     }
 
     &--orange {
@@ -50,13 +70,20 @@
         &--ghost {
             background-color: black;
         }
-    }
+
+        &--template {
+            background-color: rgba(255, 165, 0, 0.2);
+        }    }
 
     &--blue {
         background-color: blue;
 
         &--ghost {
             background-color: black;
+        }
+
+        &--template {
+            background-color: rgba(0, 0, 255, 0.2);
         }
     }
 }
