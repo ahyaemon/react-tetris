@@ -9,6 +9,8 @@ import {PracticeRight} from "./PracticeRight";
 import {useMediaQuery} from "react-responsive";
 import {BoardState, Game} from "../../game/game";
 import {Color} from "../../game/color";
+import {useRecoilValue} from "recoil";
+import {practiceStore} from "../../stores/GameStore";
 
 function createRows(): Color[][] {
     const rows = []
@@ -79,7 +81,7 @@ export function PracticePage() {
     // -> 一致したら次に移行する
     const templates: BoardTemplate[] = [{ rows: rows1() }]
 
-    const boardState = { rows: createRows() }
+    const boardState = useRecoilValue(practiceStore.board)
 
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
