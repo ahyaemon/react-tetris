@@ -9,7 +9,7 @@ import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import RotationKeys from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {useMediaQuery} from "react-responsive";
-import {endlessStore} from "../../stores/EndlessStore";
+import {endlessStore} from "../../stores/GameStore";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import {EndlessRight} from "./EndlessRight";
 import {EndlessLeft} from "./EndlessLeft";

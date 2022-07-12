@@ -1,6 +1,6 @@
 import {Game} from "../game/game";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {endlessStore} from "../stores/EndlessStore";
+import {endlessStore} from "../stores/GameStore";
 
 type GameHistoryUpdater = {
     updateRecentlyGame: (f: (game: Game) => Game) => void
