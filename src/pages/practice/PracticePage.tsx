@@ -7,10 +7,11 @@ import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {useMediaQuery} from "react-responsive";
-import {BoardState, Game} from "../../game/game";
+import {BoardState} from "../../game/game";
 import {Color} from "../../game/color";
 import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
+import {useGameHistory} from "../../hooks/useGameHistory";
 
 function createRows(): Color[][] {
     const rows = []
@@ -83,11 +84,9 @@ export function PracticePage() {
 
     const boardState = useRecoilValue(practiceStore.board)
 
+    const { updateRecentlyGame, addGame } = useGameHistory(practiceStore)
+
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
-
-    const addGame = (f: (game: Game) => Game) => {}
-
-    const updateRecentlyGame = (f: (game: Game) => Game) => {}
 
     return (
         <div>

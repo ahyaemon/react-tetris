@@ -36,7 +36,7 @@ function input(command: Command) {
 }
 
 export function EndlessPage() {
-    const { updateRecentlyGame, addGame } = useGameHistory()
+    const { updateRecentlyGame, addGame } = useGameHistory(endlessStore)
     // FIXME レンダリングされるたびにメソッドが再生成される問題をどうにかできないか
     useKeyDown([
         { key: key.s,  f: () => { updateRecentlyGame(input(Command.Down)) }},

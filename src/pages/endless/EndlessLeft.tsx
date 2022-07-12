@@ -12,7 +12,7 @@ export const EndlessLeft: React.FC = () => {
 
     const renCount = useRecoilValue(endlessStore.renCount)
 
-    const {back, historySize} = useGameHistory()
+    const {back, historySize} = useGameHistory(endlessStore)
 
     return (
         <>

@@ -1,6 +1,6 @@
 import {Game} from "../game/game";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {endlessStore} from "../stores/GameStore";
+import {GameStore} from "../stores/GameStore";
 
 type GameHistoryUpdater = {
     updateRecentlyGame: (f: (game: Game) => Game) => void
@@ -11,9 +11,9 @@ type GameHistoryUpdater = {
     retry: () => void,
 }
 
-export function useGameHistory(): GameHistoryUpdater {
-    const setGameHistory = useSetRecoilState(endlessStore.gameHistory)
-    const historySize = useRecoilValue(endlessStore.historySize)
+export function useGameHistory(gameStore: GameStore): GameHistoryUpdater {
+    const setGameHistory = useSetRecoilState(gameStore.gameHistory)
+    const historySize = useRecoilValue(gameStore.historySize)
 
     return {
         updateRecentlyGame: f => {

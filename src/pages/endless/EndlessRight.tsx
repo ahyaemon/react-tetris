@@ -11,7 +11,7 @@ export const EndlessRight: React.FC = () => {
     const nextMinos = useRecoilValue(endlessStore.nextMinos)
 
     const heldMino = useRecoilValue(endlessStore.heldMino)
-    const {addGame} = useGameHistory()
+    const {addGame} = useGameHistory(endlessStore)
 
     return (
         <>

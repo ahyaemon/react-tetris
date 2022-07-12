@@ -6,6 +6,8 @@ import {Color} from "../game/color";
 import {Random} from "../game/random";
 import {RenCounter} from "../game/RenCounter";
 
+export type GameStore = ReturnType<typeof createGameStore>
+
 function createGameStore(game: Game) {
     const gameHistory = atom<Game[]>({
         key: "gameHistory",
