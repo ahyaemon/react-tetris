@@ -2,16 +2,17 @@ import css from "./PracticeLeft.module.scss"
 import React from "react";
 import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
+import {useRecoilValue} from "recoil";
+import {practiceStore} from "../../stores/GameStore";
+import {useGameHistory} from "../../hooks/useGameHistory";
 
 export const PracticeLeft: React.FC = () => {
 
-    const renCount = 0
+    const clearedLineCount = useRecoilValue(practiceStore.clearedLineCount)
 
-    const clearedLineCount = 0
+    const renCount = useRecoilValue(practiceStore.renCount)
 
-    const back = () => {}
-
-    const historySize = 1
+    const {back, historySize} = useGameHistory(practiceStore)
 
     return (
         <>
