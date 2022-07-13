@@ -2,6 +2,8 @@ import css from "./ReloadPopup.module.scss"
 import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
+import {useGameHistory} from "../../hooks/useGameHistory";
+import {practiceStore} from "../../stores/GameStore";
 
 export const ReloadPopup: React.FC = () => {
     return (
@@ -26,7 +28,7 @@ type ButtonProps = {
 
 const RetryButton:React.FC<ButtonProps> = ({ close }) => {
 
-    const  retry = () => {}
+    const { retry } = useGameHistory(practiceStore)
 
     return (
         <button

@@ -39,10 +39,6 @@ export class Game {
         return new Game(currentMino, rows, null, nextMinos, random, seed, 0, renCounter)
     }
 
-    public retry(): Game {
-      return Game.create(this.seed)
-    }
-
     // FIXME この変換ロジックはここに入れるべき？
     // 表示用に color をセットするだけだから表示側？
     // 名前も state と言うよりは rowColors と思われる

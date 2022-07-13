@@ -39,7 +39,7 @@ export function useGameHistory(gameStore: GameStore): GameHistoryUpdater {
         },
         retry: () => {
             setGameHistory(gameHistory => {
-                return [gameHistory[0].retry()]
+                return [gameHistory[gameHistory.length - 1]]
             })
         }
     }
