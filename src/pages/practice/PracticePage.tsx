@@ -1,7 +1,7 @@
 import css from "../endless/EndlessPage.module.scss";
 import {Board} from "../../components/game/board/Board";
 import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
-import RotationKeys from "../../components/game/rotation-keys/RotationKeys";
+import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
@@ -119,7 +119,7 @@ export function PracticePage() {
                     <CrossKeys addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>
                 </div>
                 <div className={css.rotationKeys}>
-                    <RotationKeys/>
+                    <RotationKeys gameStore={practiceStore}/>
                 </div>
             </div>
             {

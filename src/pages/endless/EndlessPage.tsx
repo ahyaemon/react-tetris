@@ -4,7 +4,7 @@ import {useKeyDown} from "../../hooks/useKeyDown";
 import {useRecoilValue} from "recoil";
 import {Board} from "../../components/game/board/Board";
 import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
-import RotationKeys from "../../components/game/rotation-keys/RotationKeys";
+import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {useMediaQuery} from "react-responsive";
 import {endlessStore} from "../../stores/GameStore";
@@ -43,7 +43,7 @@ export function EndlessPage() {
                     <CrossKeys addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>
                 </div>
                 <div className={css.rotationKeys}>
-                    <RotationKeys/>
+                    <RotationKeys gameStore={endlessStore}/>
                 </div>
             </div>
             {
