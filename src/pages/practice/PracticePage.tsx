@@ -12,6 +12,8 @@ import {Color} from "../../game/color";
 import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
 import {useGameHistory} from "../../hooks/useGameHistory";
+import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
+import {useKeyDown} from "../../hooks/useKeyDown";
 
 function createRows(): Color[][] {
     const rows = []
@@ -87,6 +89,10 @@ export function PracticePage() {
     const { updateRecentlyGame, addGame } = useGameHistory(practiceStore)
 
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+
+    const keyCallbacks = useKeyCallbacks(practiceStore)
+
+    useKeyDown(keyCallbacks)
 
     return (
         <div>
