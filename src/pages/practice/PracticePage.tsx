@@ -50,10 +50,17 @@ function rows1(): Color[][] {
     rows[18][4] = Color.GreenTemplate
     rows[18][5] = Color.GreenTemplate
 
-    rows[17][9] = Color.OrangeTemplate
-    rows[18][9] = Color.OrangeTemplate
-    rows[19][8] = Color.OrangeTemplate
-    rows[19][9] = Color.OrangeTemplate
+    rows[17][9] = Color.BlueTemplate
+    rows[18][9] = Color.BlueTemplate
+    rows[19][8] = Color.BlueTemplate
+    rows[19][9] = Color.BlueTemplate
+
+    rows[16][4] = Color.OrangeTemplate
+    rows[16][5] = Color.OrangeTemplate
+    rows[16][6] = Color.OrangeTemplate
+    rows[17][4] = Color.OrangeTemplate
+
+
 
     return rows
 }
