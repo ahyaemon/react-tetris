@@ -8,49 +8,50 @@ import {RenCounter} from "../game/RenCounter";
 
 export type GameStore = ReturnType<typeof createGameStore>
 
-function createGameStore(game: Game) {
+function createGameStore(key: string, game: Game) {
     const gameHistory = atom<Game[]>({
-        key: "gameHistory",
+        key: key + "gameHistory",
         default: [game],
     })
 
     return {
         gameHistory,
         nextMinos: selector({
-            key: 'nextMinos',
+            key: key + 'nextMinos',
             get: ({get}) => get(gameHistory)[0].nextMinos
         }),
 
         heldMino: selector({
-            key: 'heldMino',
+            key: key + 'heldMino',
             get: ({get}) => get(gameHistory)[0].heldMino
         }),
 
         clearedLineCount: selector({
-            key: 'clearedLineCount',
+            key: key + 'clearedLineCount',
             get: ({get}) => get(gameHistory)[0].clearedRowCount
         }),
 
         renCount: selector({
-            key: 'renCount',
+            key: key + 'renCount',
             get: ({get}) => get(gameHistory)[0].renCount()
         }),
         board: selector({
-            key: 'board',
+            key: key + 'board',
             get: ({get}) => get(gameHistory)[0].state
         }),
 
         historySize: selector({
-            key: 'historySize',
+            key: key + 'historySize',
             get: ({get}) => get(gameHistory).length
         }),
     }
 }
 
-export const endlessStore = createGameStore(Game.create(Math.random() * 1000000))
+export const endlessStore = createGameStore("endless", Game.create(Math.random() * 1000000))
 
 const seed = Math.random() * 1000000
 export const practiceStore = createGameStore(
+    "practice",
     new Game(
         CurrentMino.create(minoFactory.i()),
         Array(20).fill(0).map(_ => Array(10).fill(Color.None)),
