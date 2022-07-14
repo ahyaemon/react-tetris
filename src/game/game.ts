@@ -17,7 +17,7 @@ export class Game {
 
     constructor(
         private readonly currentMino: CurrentMino,
-        private readonly rows: Row[],
+        readonly rows: Row[],
         readonly heldMino: Mino | null,
         readonly nextMinos: Mino[],
         private readonly random: Random,
@@ -37,10 +37,6 @@ export class Game {
         const renCounter = RenCounter.create()
 
         return new Game(currentMino, rows, null, nextMinos, random, seed, 0, renCounter)
-    }
-
-    public retry(): Game {
-      return Game.create(this.seed)
     }
 
     // FIXME この変換ロジックはここに入れるべき？

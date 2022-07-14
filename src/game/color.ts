@@ -16,6 +16,14 @@ export enum Color {
     RedGhost = 'red--ghost',
     OrangeGhost = 'orange--ghost',
     BlueGhost = 'blue--ghost',
+
+    LightBlueTemplate = 'lightBlue--template',
+    YellowTemplate = 'yellow--template',
+    PurpleTemplate = 'purple--template',
+    GreenTemplate = 'green--template',
+    RedTemplate = 'red--template',
+    OrangeTemplate = 'orange--template',
+    BlueTemplate = 'blue--template',
 }
 
 export function toGhost(color: Color): Color {

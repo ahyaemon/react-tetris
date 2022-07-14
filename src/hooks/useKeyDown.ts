@@ -1,9 +1,5 @@
 import {useEffect} from "react";
-
-type KeyCallback = {
-    key: string,
-    f: () => void
-}
+import {KeyCallback} from "./KeyCallback";
 
 function match(keyCallbacks: KeyCallback[], key: string): (() => void) | undefined {
     return keyCallbacks.find(keyCallback => keyCallback.key === key)?.f

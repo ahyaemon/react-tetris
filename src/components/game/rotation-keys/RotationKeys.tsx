@@ -2,9 +2,14 @@ import React from 'react';
 import './RotationKeys.scss';
 import {Command} from "../../../game/command";
 import {useGameHistory} from "../../../hooks/useGameHistory";
+import {GameStore} from "../../../stores/GameStore";
 
-export default function RotationKeys() {
-    const { updateRecentlyGame } = useGameHistory()
+type RotationKeysProps = {
+    gameStore: GameStore
+}
+
+export const RotationKeys: React.FC<RotationKeysProps> = (props) => {
+    const { updateRecentlyGame } = useGameHistory(props.gameStore)
 
     return (
         <div className="rotationKeys">

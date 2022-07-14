@@ -1,0 +1,24 @@
+.top {
+    display: flex;
+    margin-left: 4px;
+}
+
+.topLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.board {
+    margin-left: 4px;
+}
+
+.bottom {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.rotationKeys {
+    margin-left: 20px;
+}
