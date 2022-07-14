@@ -1,7 +1,7 @@
 import React from 'react';
 import './RotationKeys.scss';
 import {Command} from "../../../game/command";
-import {useGameHistory} from "../../../hooks/useGameHistory";
+import {useGameUpdater} from "../../../hooks/useGameUpdater";
 import {GameStore} from "../../../stores/GameStore";
 
 type RotationKeysProps = {
@@ -9,7 +9,7 @@ type RotationKeysProps = {
 }
 
 export const RotationKeys: React.FC<RotationKeysProps> = (props) => {
-    const { updateRecentlyGame } = useGameHistory(props.gameStore)
+    const { updateRecentlyGame } = useGameUpdater(props.gameStore)
 
     return (
         <div className="rotationKeys">

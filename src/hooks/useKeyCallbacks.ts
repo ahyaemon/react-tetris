@@ -1,5 +1,5 @@
 import {GameStore} from "../stores/GameStore";
-import {useGameHistory} from "./useGameHistory";
+import {useGameUpdater} from "./useGameUpdater";
 import {Command} from "../game/command";
 import {Game} from "../game/game";
 
@@ -25,7 +25,7 @@ function input(command: Command) {
 }
 
 export function useKeyCallbacks (gameStore: GameStore) {
-    const { updateRecentlyGame, addGame } = useGameHistory(gameStore)
+    const { updateRecentlyGame, addGame } = useGameUpdater(gameStore)
     // FIXME レンダリングされるたびにメソッドが再生成される問題をどうにかできないか
     return[
         { key: key.s,  f: () => { updateRecentlyGame(input(Command.Down)) }},

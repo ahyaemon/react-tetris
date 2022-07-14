@@ -3,7 +3,7 @@ import React from "react";
 import {NextMinos} from "../../components/game/mino/NextMinos";
 import {Hold} from "../../components/game/mino/Hold";
 import {useRecoilValue} from "recoil";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameUpdater} from "../../hooks/useGameUpdater";
 import {practiceStore} from "../../stores/GameStore";
 
 export const PracticeRight: React.FC = () => {
@@ -11,7 +11,7 @@ export const PracticeRight: React.FC = () => {
     const nextMinos = useRecoilValue(practiceStore.nextMinos)
 
     const heldMino = useRecoilValue(practiceStore.heldMino)
-    const {addGame} = useGameHistory(practiceStore)
+    const {addGame} = useGameUpdater(practiceStore)
 
     return (
         <>

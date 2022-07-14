@@ -4,7 +4,7 @@ import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameUpdater} from "../../hooks/useGameUpdater";
 
 export const PracticeLeft: React.FC = () => {
 
@@ -12,7 +12,9 @@ export const PracticeLeft: React.FC = () => {
 
     const renCount = useRecoilValue(practiceStore.renCount)
 
-    const {back, historySize} = useGameHistory(practiceStore)
+    const { back } = useGameUpdater(practiceStore)
+
+    const historySize = useRecoilValue(practiceStore.historySize)
 
     return (
         <>

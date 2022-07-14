@@ -35,6 +35,7 @@ function createGameStore(key: string, game: Game) {
             key: key + 'renCount',
             get: ({get}) => get(gameHistory)[0].renCount()
         }),
+
         board: selector({
             key: key + 'board',
             get: ({get}) => get(gameHistory)[0].state
@@ -44,6 +45,11 @@ function createGameStore(key: string, game: Game) {
             key: key + 'historySize',
             get: ({get}) => get(gameHistory).length
         }),
+
+        rows: selector({
+            key: key + 'rows',
+            get: ({get}) => get(gameHistory)[0].rows
+        })
     }
 }
 

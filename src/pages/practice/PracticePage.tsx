@@ -10,7 +10,7 @@ import {BoardState} from "../../game/game";
 import {Color, Row} from "../../game/color";
 import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameUpdater} from "../../hooks/useGameUpdater";
 import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
@@ -74,7 +74,9 @@ export function PracticePage() {
 
     const boardState = useRecoilValue(practiceStore.board)
 
-    const { updateRecentlyGame, addGame, rows } = useGameHistory(practiceStore)
+    const { updateRecentlyGame, addGame } = useGameUpdater(practiceStore)
+
+    const rows = useRecoilValue(practiceStore.rows)
 
     const { isDesktop } = useResponsive()
 

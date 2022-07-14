@@ -1,22 +1,18 @@
 import {Game} from "../game/game";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useSetRecoilState} from "recoil";
 import {GameStore} from "../stores/GameStore";
-import {Row} from "../game/color";
 
-type GameHistoryUpdater = {
+type GameUpdaterReturnType = {
     updateRecentlyGame: (f: (game: Game) => Game) => void
     addGame: (f: (game: Game) => Game) => void
     back: () => void
-    historySize: number,
     newGame: () => void,
     retry: () => void,
-    rows: Row[],
 }
 
-export function useGameHistory(gameStore: GameStore): GameHistoryUpdater {
+export function useGameUpdater(gameStore: GameStore): GameUpdaterReturnType {
+
     const setGameHistory = useSetRecoilState(gameStore.gameHistory)
-    const historySize = useRecoilValue(gameStore.historySize)
-    const gameHistory = useRecoilValue(gameStore.gameHistory)
 
     return {
         updateRecentlyGame: f => {
@@ -36,7 +32,6 @@ export function useGameHistory(gameStore: GameStore): GameHistoryUpdater {
                 return gameHistory.slice(1, gameHistory.length)
             })
         },
-        historySize,
         newGame: () => {
             setGameHistory([Game.create(Math.random() * 1000000)])
         },
@@ -45,6 +40,5 @@ export function useGameHistory(gameStore: GameStore): GameHistoryUpdater {
                 return [gameHistory[gameHistory.length - 1]]
             })
         },
-        rows: gameHistory[0].rows
     }
 }

@@ -1,5 +1,5 @@
 import css from "./EndlessPage.module.scss"
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameUpdater} from "../../hooks/useGameUpdater";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {useRecoilValue} from "recoil";
 import {Board} from "../../components/game/board/Board";
@@ -15,7 +15,7 @@ import {useResponsive} from "../../hooks/useResponsive";
 
 export function EndlessPage() {
 
-    const { updateRecentlyGame, addGame } = useGameHistory(endlessStore)
+    const { updateRecentlyGame, addGame } = useGameUpdater(endlessStore)
 
     const keyCallbacks = useKeyCallbacks(endlessStore)
 

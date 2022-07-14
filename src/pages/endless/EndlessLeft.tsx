@@ -2,7 +2,7 @@ import css from "./EndlessLeft.module.scss"
 import React from "react";
 import {useRecoilValue} from "recoil";
 import {endlessStore} from "../../stores/GameStore";
-import {useGameHistory} from "../../hooks/useGameHistory";
+import {useGameUpdater} from "../../hooks/useGameUpdater";
 import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 
@@ -12,7 +12,9 @@ export const EndlessLeft: React.FC = () => {
 
     const renCount = useRecoilValue(endlessStore.renCount)
 
-    const {back, historySize} = useGameHistory(endlessStore)
+    const { back } = useGameUpdater(endlessStore)
+
+    const historySize = useRecoilValue(endlessStore.historySize)
 
     return (
         <>
