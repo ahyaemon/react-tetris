@@ -6,12 +6,12 @@ import {Board} from "../../components/game/board/Board";
 import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
-import {useMediaQuery} from "react-responsive";
 import {endlessStore} from "../../stores/GameStore";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import {EndlessRight} from "./EndlessRight";
 import {EndlessLeft} from "./EndlessLeft";
 import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
+import {useResponsive} from "../../hooks/useResponsive";
 
 export function EndlessPage() {
 
@@ -21,7 +21,7 @@ export function EndlessPage() {
 
     useKeyDown(keyCallbacks)
 
-    const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+    const { isDesktop } = useResponsive()
 
     const boardState = useRecoilValue(endlessStore.board)
 

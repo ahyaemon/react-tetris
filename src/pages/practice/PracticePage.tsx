@@ -6,7 +6,6 @@ import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
-import {useMediaQuery} from "react-responsive";
 import {BoardState} from "../../game/game";
 import {Color, Row} from "../../game/color";
 import {useRecoilValue} from "recoil";
@@ -15,6 +14,7 @@ import {useGameHistory} from "../../hooks/useGameHistory";
 import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
+import {useResponsive} from "../../hooks/useResponsive";
 
 type BoardTemplate = BoardState
 
@@ -76,7 +76,7 @@ export function PracticePage() {
 
     const { updateRecentlyGame, addGame, rows } = useGameHistory(practiceStore)
 
-    const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+    const { isDesktop } = useResponsive()
 
     const keyCallbacks = useKeyCallbacks(practiceStore)
 

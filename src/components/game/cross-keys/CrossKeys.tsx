@@ -3,8 +3,8 @@ import './CrossKeys.scss';
 import {Command} from "../../../game/command";
 import {useCommandPressed} from "../../../hooks/useCommandPressed";
 import { useLongPressMobile } from "../../../hooks/useLongPress";
-import { useMediaQuery } from 'react-responsive'
 import {Game} from "../../../game/game";
+import {useResponsive} from "../../../hooks/useResponsive";
 
 type CrossKeysProps = {
     addGame: (f: (game: Game) => Game) => void,
@@ -86,8 +86,8 @@ const CrossKeysMobile: React.FC<CrossKeysProps> = (props) => {
 
 export const CrossKeys: React.FC<CrossKeysProps> = (props) => {
     const { addGame, updateRecentlyGame } = props
-    const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+    const { isMobile, isDesktop } = useResponsive()
 
     return (
         <>
