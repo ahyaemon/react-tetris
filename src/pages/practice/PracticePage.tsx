@@ -8,62 +8,13 @@ import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {useMediaQuery} from "react-responsive";
 import {BoardState} from "../../game/game";
-import {Color} from "../../game/color";
+import {Color, Row} from "../../game/color";
 import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
 import {useGameHistory} from "../../hooks/useGameHistory";
 import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
-
-function createRows(): Color[][] {
-    const rows = []
-    for (let i = 0; i < 20; i++) {
-        const colors = []
-        for (let j = 0; j < 10; j++) {
-            colors.push(Color.None)
-        }
-        rows.push(colors)
-    }
-    return rows
-}
-
-function rows1(): Color[][] {
-    const rows = createRows()
-
-    rows[19][3] = Color.LightBlueTemplate
-    rows[19][4] = Color.LightBlueTemplate
-    rows[19][5] = Color.LightBlueTemplate
-    rows[19][6] = Color.LightBlueTemplate
-
-    rows[18][0] = Color.YellowTemplate
-    rows[18][1] = Color.YellowTemplate
-    rows[19][0] = Color.YellowTemplate
-    rows[19][1] = Color.YellowTemplate
-
-    rows[17][3] = Color.RedTemplate
-    rows[18][2] = Color.RedTemplate
-    rows[18][3] = Color.RedTemplate
-    rows[19][2] = Color.RedTemplate
-
-    rows[17][5] = Color.GreenTemplate
-    rows[17][6] = Color.GreenTemplate
-    rows[18][4] = Color.GreenTemplate
-    rows[18][5] = Color.GreenTemplate
-
-    rows[17][9] = Color.BlueTemplate
-    rows[18][9] = Color.BlueTemplate
-    rows[19][8] = Color.BlueTemplate
-    rows[19][9] = Color.BlueTemplate
-
-    rows[16][4] = Color.OrangeTemplate
-    rows[16][5] = Color.OrangeTemplate
-    rows[16][6] = Color.OrangeTemplate
-    rows[17][4] = Color.OrangeTemplate
-
-
-
-    return rows
-}
+import {sampleTemplates} from "./sample";
 
 type BoardTemplate = BoardState
 
@@ -84,22 +35,58 @@ function createBoardStateWithTemplate(template: BoardTemplate, boardState: Board
     return { rows }
 }
 
-export function PracticePage() {
+function createTemplateMap(): Map<Color, Color> {
+    const map = new Map()
+    map.set(Color.OrangeTemplate, Color.Orange)
+    map.set(Color.PurpleTemplate, Color.Purple)
+    map.set(Color.RedTemplate, Color.Red)
+    map.set(Color.GreenTemplate, Color.Green)
+    map.set(Color.YellowTemplate, Color.Yellow)
+    map.set(Color.BlueTemplate, Color.Blue)
+    map.set(Color.LightBlueTemplate, Color.LightBlue)
+    map.set(Color.None, Color.None)
+    return map
+}
 
-    // ラインが消える時の Board を保持したリスト or その直前も含む？
-    // -> 画面として残したいものを含ませる
-    // -> 一致したら次に移行する
-    const templates: BoardTemplate[] = [{ rows: rows1() }]
+const templateMap = createTemplateMap()
+
+function templateToRows(template: BoardTemplate): Row[] {
+    return template.rows.map(
+        row => row.map(
+            cell => templateMap.get(cell)!
+        )
+    )
+}
+
+function matchTemplate(rows: Row[], template: BoardTemplate): boolean {
+    const templateRows = templateToRows(template)
+    for(let i = 0; i < 20; i++) {
+        for(let j = 0; j < 10; j++) {
+            if (rows[i][j] !== templateRows[i][j]) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
+export function PracticePage() {
 
     const boardState = useRecoilValue(practiceStore.board)
 
-    const { updateRecentlyGame, addGame } = useGameHistory(practiceStore)
+    const { updateRecentlyGame, addGame, rows } = useGameHistory(practiceStore)
 
     const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
 
     const keyCallbacks = useKeyCallbacks(practiceStore)
 
     useKeyDown(keyCallbacks)
+
+    const templates: BoardTemplate[] = sampleTemplates
+
+    if(matchTemplate(rows, templates[0])) {
+        templates.shift()
+    }
 
     return (
         <div>

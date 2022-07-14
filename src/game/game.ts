@@ -17,7 +17,7 @@ export class Game {
 
     constructor(
         private readonly currentMino: CurrentMino,
-        private readonly rows: Row[],
+        readonly rows: Row[],
         readonly heldMino: Mino | null,
         readonly nextMinos: Mino[],
         private readonly random: Random,
