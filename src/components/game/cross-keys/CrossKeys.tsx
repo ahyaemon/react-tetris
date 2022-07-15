@@ -1,8 +1,7 @@
 import React from 'react';
 import './CrossKeys.scss';
 import {Command} from "../../../game/command";
-import {useCommandPressed} from "../../../hooks/useCommandPressed";
-import { useLongPressMobile } from "../../../hooks/useLongPress";
+import {useLongPressDesktop, useLongPressMobile} from "../../../hooks/useLongPress";
 import {Game} from "../../../game/game";
 import {useResponsive} from "../../../hooks/useResponsive";
 
@@ -11,14 +10,15 @@ type CrossKeysProps = {
     updateRecentlyGame: (f: (game: Game) => Game) => void,
 }
 
+// TODO 下を押した時何が起きるか、上を押した時何が起きるか、といったように各コマンドに対する関数を props で受け取るようにする
 const CrossKeysDesktop: React.FC<CrossKeysProps> = (props) => {
     const { addGame, updateRecentlyGame } = props
     const inputCommandToGame = (command: Command) => {
         updateRecentlyGame(game => game.input(command))
     }
-    const setDownPressed = useCommandPressed(Command.Down, inputCommandToGame)
-    const setLeftPressed = useCommandPressed(Command.Left, inputCommandToGame)
-    const setRightPressed = useCommandPressed(Command.Right, inputCommandToGame)
+    const setDownPressed = useLongPressDesktop(Command.Down, inputCommandToGame)
+    const setLeftPressed = useLongPressDesktop(Command.Left, inputCommandToGame)
+    const setRightPressed = useLongPressDesktop(Command.Right, inputCommandToGame)
 
     return (
         <div className="crossKeys">

@@ -24,6 +24,10 @@ function input(command: Command) {
     return (game: Game) => game.input(command)
 }
 
+// TODO endless と practice で、接地した時の挙動が変わる
+// practice では、テンプレートの更新も入る
+// どう処理を分ける？
+// -> 各 Command に対する更新処理を、store に持っておく？（場面によってコマンドの動きが変わる時は？ -> それは Game 側に任せる）
 export function useKeyCallbacks (gameStore: GameStore) {
     const { updateRecentlyGame, addGame } = useGameUpdater(gameStore)
     // FIXME レンダリングされるたびにメソッドが再生成される問題をどうにかできないか
