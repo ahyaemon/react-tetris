@@ -15,6 +15,7 @@ import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
 import {useResponsive} from "../../hooks/useResponsive";
+import {Command} from "../../game/command";
 
 type BoardTemplate = BoardState
 
@@ -90,6 +91,13 @@ export function PracticePage() {
         templates.shift()
     }
 
+    const input = {
+        up: () => addGame(game => game.input(Command.Up)),
+        right: () => updateRecentlyGame(game => game.input(Command.Right)),
+        down: () => updateRecentlyGame(game => game.input(Command.Down)),
+        left: () => updateRecentlyGame(game => game.input(Command.Left)),
+    }
+
     return (
         <div>
             <div className={css.top}>
@@ -105,7 +113,7 @@ export function PracticePage() {
             </div>
             <div className={css.bottom}>
                 <div>
-                    <CrossKeys addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>
+                    <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
                     <RotationKeys gameStore={practiceStore}/>

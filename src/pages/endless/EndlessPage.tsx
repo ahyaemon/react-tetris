@@ -12,6 +12,7 @@ import {EndlessRight} from "./EndlessRight";
 import {EndlessLeft} from "./EndlessLeft";
 import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useResponsive} from "../../hooks/useResponsive";
+import {Command} from "../../game/command";
 
 export function EndlessPage() {
 
@@ -24,6 +25,13 @@ export function EndlessPage() {
     const { isDesktop } = useResponsive()
 
     const boardState = useRecoilValue(endlessStore.board)
+
+    const input = {
+        up: () => addGame(game => game.input(Command.Up)),
+        right: () => updateRecentlyGame(game => game.input(Command.Right)),
+        down: () => updateRecentlyGame(game => game.input(Command.Down)),
+        left: () => updateRecentlyGame(game => game.input(Command.Left)),
+    }
 
     return (
         <div>
@@ -40,7 +48,7 @@ export function EndlessPage() {
             </div>
             <div className={css.bottom}>
                 <div>
-                    <CrossKeys addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>
+                    <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
                     <RotationKeys gameStore={endlessStore}/>

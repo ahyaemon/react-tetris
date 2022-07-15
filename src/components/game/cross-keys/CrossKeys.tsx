@@ -1,30 +1,28 @@
 import React from 'react';
 import './CrossKeys.scss';
-import {Command} from "../../../game/command";
 import {useLongPressDesktop, useLongPressMobile} from "../../../hooks/useLongPress";
-import {Game} from "../../../game/game";
 import {useResponsive} from "../../../hooks/useResponsive";
 
 type CrossKeysProps = {
-    addGame: (f: (game: Game) => Game) => void,
-    updateRecentlyGame: (f: (game: Game) => Game) => void,
+    input: {
+        up: () => void,
+        right: () => void,
+        down: () => void,
+        left: () => void,
+    }
 }
 
-// TODO 下を押した時何が起きるか、上を押した時何が起きるか、といったように各コマンドに対する関数を props で受け取るようにする
-const CrossKeysDesktop: React.FC<CrossKeysProps> = (props) => {
-    const { addGame, updateRecentlyGame } = props
-    const inputCommandToGame = (command: Command) => () => {
-        updateRecentlyGame(game => game.input(command))
-    }
-    const setDownPressed = useLongPressDesktop(inputCommandToGame(Command.Down))
-    const setLeftPressed = useLongPressDesktop(inputCommandToGame(Command.Left))
-    const setRightPressed = useLongPressDesktop(inputCommandToGame(Command.Right))
+const CrossKeysDesktop: React.FC<CrossKeysProps> = ({ input }) => {
+
+    const setDownPressed = useLongPressDesktop(input.down)
+    const setLeftPressed = useLongPressDesktop(input.left)
+    const setRightPressed = useLongPressDesktop(input.right)
 
     return (
         <div className="crossKeys">
             <div
                 className="crossKeys__up crossKey"
-                onClick={() => { addGame(game => game.input(Command.Up)) }}
+                onClick={input.up}
             >
             </div>
             <div
@@ -49,20 +47,17 @@ const CrossKeysDesktop: React.FC<CrossKeysProps> = (props) => {
     )
 }
 
-const CrossKeysMobile: React.FC<CrossKeysProps> = (props) => {
-    const { addGame, updateRecentlyGame } = props
-    const inputCommandToGame = (command: Command) => () => {
-        updateRecentlyGame(game => game.input(command))
-    }
-    const downRef = useLongPressMobile(inputCommandToGame(Command.Down))
-    const leftRef = useLongPressMobile(inputCommandToGame(Command.Left))
-    const rightRef = useLongPressMobile(inputCommandToGame(Command.Right))
+const CrossKeysMobile: React.FC<CrossKeysProps> = ({ input }) => {
+
+    const downRef = useLongPressMobile(input.down)
+    const leftRef = useLongPressMobile(input.left)
+    const rightRef = useLongPressMobile(input.right)
 
     return (
         <div className="crossKeys">
             <div
                 className="crossKeys__up crossKey"
-                onClick={() => { addGame((game) => game.input(Command.Up)) }}
+                onClick={input.up}
             >
             </div>
             <div
@@ -84,15 +79,14 @@ const CrossKeysMobile: React.FC<CrossKeysProps> = (props) => {
     )
 }
 
-export const CrossKeys: React.FC<CrossKeysProps> = (props) => {
-    const { addGame, updateRecentlyGame } = props
+export const CrossKeys: React.FC<CrossKeysProps> = ({ input }) => {
 
     const { isMobile, isDesktop } = useResponsive()
 
     return (
         <>
-            { isDesktop && <CrossKeysDesktop addGame={addGame} updateRecentlyGame={updateRecentlyGame}/> }
-            { isMobile && <CrossKeysMobile addGame={addGame} updateRecentlyGame={updateRecentlyGame}/>}
+            { isDesktop && <CrossKeysDesktop input={input}/> }
+            { isMobile && <CrossKeysMobile input={input}/>}
         </>
     )
 }
