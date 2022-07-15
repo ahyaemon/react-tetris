@@ -1,10 +1,9 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import {Command} from "../game/command";
 
 const firstTouchMilliSeconds = 300
 const intervalMilliSeconds = 80
 
-export const useLongPressMobile = (command: Command, f: (command: Command) => void) => {
+export const useLongPressMobile = (f: () => void) => {
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
@@ -19,11 +18,11 @@ export const useLongPressMobile = (command: Command, f: (command: Command) => vo
         target.addEventListener('touchstart', (e: any) => {
             e.preventDefault()
 
-            f(command)
+            f()
 
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
-                    f(command)
+                    f()
                 }, intervalMilliSeconds)
             }, firstTouchMilliSeconds)
         }, {passive: false})
@@ -42,17 +41,17 @@ export const useLongPressMobile = (command: Command, f: (command: Command) => vo
     }, [])
 }
 
-export const useLongPressDesktop = (command: Command, f:(command: Command) => void) => {
+export const useLongPressDesktop = (f:() => void) => {
     const [pressed, setPressed] = useState(false)
     let intervalRef: any = useRef(null)
     let timeoutRef: any = useRef(null)
 
     useEffect(() => {
         if (pressed) {
-            f(command)
+            f()
             timeoutRef.current = setTimeout(() => {
                 intervalRef.current = setInterval(() => {
-                    f(command)
+                    f()
                 }, intervalMilliSeconds)
             }, firstTouchMilliSeconds)
         } else {
