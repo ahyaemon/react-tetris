@@ -8,7 +8,7 @@ import {RenCounter} from "../game/RenCounter";
 
 export type GameStore = ReturnType<typeof createGameStore>
 
-function createGameStore(key: string, game: Game) {
+export function createGameStore(key: string, game: Game) {
     const gameHistory = atom<Game[]>({
         key: key + "gameHistory",
         default: [game],
