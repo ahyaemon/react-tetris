@@ -1,20 +1,17 @@
 import css from "./EndlessLeft.module.scss"
 import React from "react";
-import {useRecoilValue} from "recoil";
-import {endlessStore} from "../../stores/GameStore";
-import {useGameUpdater} from "../../hooks/useGameUpdater";
 import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
+import {useEndlessProps} from "./useEndlessProps";
 
 export const EndlessLeft: React.FC = () => {
 
-    const clearedLineCount = useRecoilValue(endlessStore.clearedLineCount)
-
-    const renCount = useRecoilValue(endlessStore.renCount)
-
-    const { back } = useGameUpdater(endlessStore)
-
-    const historySize = useRecoilValue(endlessStore.historySize)
+    const { game: {
+        clearedLineCount,
+        renCount,
+        historySize,
+        back,
+    }} = useEndlessProps()
 
     return (
         <>

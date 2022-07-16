@@ -8,7 +8,7 @@ import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {BoardState} from "../../game/game";
 import {Color, Row} from "../../game/color";
-import {useKeyCallbacks2} from "../../hooks/useKeyCallbacks";
+import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
 import {useResponsive} from "../../hooks/useResponsive";
@@ -74,7 +74,7 @@ export function PracticePage() {
 
     const { game: { board, rows, input }} = usePracticeProps()
 
-    const keyCallbacks = useKeyCallbacks2(input)
+    const keyCallbacks = useKeyCallbacks(input)
 
     useKeyDown(keyCallbacks)
 

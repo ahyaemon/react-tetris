@@ -2,8 +2,7 @@ import css from "./ReloadPopup.module.scss"
 import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
-import {useGameUpdater} from "../../hooks/useGameUpdater";
-import {endlessStore} from "../../stores/GameStore";
+import {useEndlessProps} from "./useEndlessProps";
 
 export const ReloadPopup: React.FC = () => {
     return (
@@ -29,7 +28,7 @@ type ButtonProps = {
 
 const NewButton: React.FC<ButtonProps> = ({ close }) => {
 
-    const { newGame } = useGameUpdater(endlessStore)
+    const { game: { newGame } } = useEndlessProps()
 
     return (
         <button
@@ -45,7 +44,7 @@ const NewButton: React.FC<ButtonProps> = ({ close }) => {
 
 const RetryButton:React.FC<ButtonProps> = ({ close }) => {
 
-    const { retry } = useGameUpdater(endlessStore)
+    const { game: { retry } } = useEndlessProps()
 
     return (
         <button
