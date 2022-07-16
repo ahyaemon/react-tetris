@@ -1,10 +1,5 @@
 import {atom, selector} from "recoil";
 import {Game} from "../game/game";
-import {minoFactory} from "../game/mino";
-import {CurrentMino} from "../game/CurrentMino";
-import {Color} from "../game/color";
-import {Random} from "../game/random";
-import {RenCounter} from "../game/RenCounter";
 
 type GameUpdater = () => void
 
@@ -66,18 +61,3 @@ export function createGameStore(key: string, game: Game) {
 }
 
 export const endlessStore = createGameStore("endless", Game.create(Math.random() * 1000000))
-
-const seed = Math.random() * 1000000
-export const practiceStore = createGameStore(
-    "practice",
-    new Game(
-        CurrentMino.create(minoFactory.i()),
-        Array(20).fill(0).map(_ => Array(10).fill(Color.None)),
-        null,
-        [minoFactory.o(), minoFactory.s(), minoFactory.z(), minoFactory.l(), minoFactory.j(), minoFactory.t()],
-        new Random(seed),
-        seed,
-        0,
-        RenCounter.create()
-    )
-)

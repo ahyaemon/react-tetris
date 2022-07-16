@@ -2,8 +2,7 @@ import css from "./ReloadPopup.module.scss"
 import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
-import {useGameUpdater} from "../../hooks/useGameUpdater";
-import {practiceStore} from "../../stores/GameStore";
+import {usePracticeProps} from "./usePracticeProps";
 
 export const ReloadPopup: React.FC = () => {
     return (
@@ -28,7 +27,7 @@ type ButtonProps = {
 
 const RetryButton:React.FC<ButtonProps> = ({ close }) => {
 
-    const { retry } = useGameUpdater(practiceStore)
+    const { game: { retry } } = usePracticeProps()
 
     return (
         <button

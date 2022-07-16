@@ -1,8 +1,28 @@
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {practiceStore} from "../../stores/GameStore";
+import {createGameStore} from "../../stores/GameStore";
 import {Game} from "../../game/game";
 import {Command} from "../../game/command";
+import {CurrentMino} from "../../game/CurrentMino";
+import {minoFactory} from "../../game/mino";
+import {Color} from "../../game/color";
+import {Random} from "../../game/random";
+import {RenCounter} from "../../game/RenCounter";
 
+const seed = Math.random() * 1000000
+
+const practiceStore = createGameStore(
+    "practice",
+    new Game(
+        CurrentMino.create(minoFactory.i()),
+        Array(20).fill(0).map(_ => Array(10).fill(Color.None)),
+        null,
+        [minoFactory.o(), minoFactory.s(), minoFactory.z(), minoFactory.l(), minoFactory.j(), minoFactory.t()],
+        new Random(seed),
+        seed,
+        0,
+        RenCounter.create()
+    )
+)
 export function usePracticeProps() {
 
     const nextMinos = useRecoilValue(practiceStore.nextMinos)
