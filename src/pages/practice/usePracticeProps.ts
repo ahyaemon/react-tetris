@@ -58,6 +58,7 @@ export function usePracticeProps() {
                 left: () => updateRecentlyGame(game => game.input(Command.Left)),
                 rotationRight:　() => updateRecentlyGame(game => game.input(Command.RotationRight)),
                 rotationLeft:　() => updateRecentlyGame(game => game.input(Command.RotationLeft)),
+                hold: () => addGame(game => game.hold()),
             },
         },
     }

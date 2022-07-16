@@ -1,4 +1,4 @@
-import {GameStore} from "../stores/GameStore";
+import {GameStore, GameUpdateMethods} from "../stores/GameStore";
 import {useGameUpdater} from "./useGameUpdater";
 import {Command} from "../game/command";
 import {Game} from "../game/game";
@@ -28,7 +28,7 @@ function input(command: Command) {
 // practice では、テンプレートの更新も入る
 // どう処理を分ける？
 // -> 各 Command に対する更新処理を、store に持っておく？（場面によってコマンドの動きが変わる時は？ -> それは Game 側に任せる）
-export function useKeyCallbacks (gameStore: GameStore) {
+export function useKeyCallbacks (gameStore: GameStore, methods?: GameUpdateMethods) {
     const { updateRecentlyGame, addGame } = useGameUpdater(gameStore)
     // FIXME レンダリングされるたびにメソッドが再生成される問題をどうにかできないか
     return[
@@ -47,5 +47,25 @@ export function useKeyCallbacks (gameStore: GameStore) {
         { key: key.x,  f: () => { updateRecentlyGame(input(Command.RotationRight)) }},
 
         { key: key.shift,  f: () => { addGame(game => game.hold()) }},
+    ]
+}
+
+export function useKeyCallbacks2(methods: GameUpdateMethods) {
+    return [
+        { key: key.s,  f: () => { methods.down() }},
+        { key: key.w,  f: () => { methods.up() }},
+        { key: key.d,  f: () => { methods.right() }},
+        { key: key.a,  f: () => { methods.left() }},
+        { key: key.k,  f: () => { methods.rotationLeft() }},
+        { key: key.l,  f: () => { methods.rotationRight() }},
+
+        { key: key.down,  f: () => { methods.down() }},
+        { key: key.up,  f: () => { methods.up() }},
+        { key: key.right,  f: () => { methods.right() }},
+        { key: key.left,  f: () => { methods.left() }},
+        { key: key.z,  f: () => { methods.rotationLeft() }},
+        { key: key.x,  f: () => { methods.rotationRight() }},
+
+        { key: key.shift,  f: () => { methods.hold() }},
     ]
 }

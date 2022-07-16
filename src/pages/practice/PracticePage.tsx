@@ -8,14 +8,12 @@ import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {BoardState} from "../../game/game";
 import {Color, Row} from "../../game/color";
-import {useRecoilValue} from "recoil";
 import {practiceStore} from "../../stores/GameStore";
-import {useGameUpdater} from "../../hooks/useGameUpdater";
-import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
+import {useKeyCallbacks2} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
 import {useResponsive} from "../../hooks/useResponsive";
-import {Command} from "../../game/command";
+import {usePracticeProps} from "./usePracticeProps";
 
 type BoardTemplate = BoardState
 
@@ -73,15 +71,11 @@ function matchTemplate(rows: Row[], template: BoardTemplate): boolean {
 
 export function PracticePage() {
 
-    const boardState = useRecoilValue(practiceStore.board)
-
-    const { updateRecentlyGame, addGame } = useGameUpdater(practiceStore)
-
-    const rows = useRecoilValue(practiceStore.rows)
-
     const { isDesktop } = useResponsive()
 
-    const keyCallbacks = useKeyCallbacks(practiceStore)
+    const { game: { board, rows, input }} = usePracticeProps()
+
+    const keyCallbacks = useKeyCallbacks2(input)
 
     useKeyDown(keyCallbacks)
 
@@ -91,13 +85,6 @@ export function PracticePage() {
         templates.shift()
     }
 
-    const input = {
-        up: () => addGame(game => game.input(Command.Up)),
-        right: () => updateRecentlyGame(game => game.input(Command.Right)),
-        down: () => updateRecentlyGame(game => game.input(Command.Down)),
-        left: () => updateRecentlyGame(game => game.input(Command.Left)),
-    }
-
     return (
         <div>
             <div className={css.top}>
@@ -105,7 +92,7 @@ export function PracticePage() {
                     <PracticeLeft/>
                 </div>
                 <div className={css.board}>
-                    <Board boardState={createBoardStateWithTemplate(templates[0], boardState)}/>
+                    <Board boardState={createBoardStateWithTemplate(templates[0], board)}/>
                 </div>
                 <div>
                     <PracticeRight/>

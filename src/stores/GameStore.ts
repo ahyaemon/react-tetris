@@ -6,6 +6,18 @@ import {Color} from "../game/color";
 import {Random} from "../game/random";
 import {RenCounter} from "../game/RenCounter";
 
+type GameUpdater = () => void
+
+export type GameUpdateMethods = {
+    up: GameUpdater,
+    right: GameUpdater,
+    down: GameUpdater,
+    left: GameUpdater,
+    rotationRight:　GameUpdater,
+    rotationLeft:　GameUpdater,
+    hold: GameUpdater,
+}
+
 export type GameStore = ReturnType<typeof createGameStore>
 
 export function createGameStore(key: string, game: Game) {
