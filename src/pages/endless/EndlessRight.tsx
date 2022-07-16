@@ -13,13 +13,17 @@ export const EndlessRight: React.FC = () => {
     const heldMino = useRecoilValue(endlessStore.heldMino)
     const {addGame} = useGameUpdater(endlessStore)
 
+    const hold = () => {
+        addGame(game => game.hold())
+    }
+
     return (
         <>
             <div className={css.nextMinos}>
                 <NextMinos minos={nextMinos}/>
             </div>
             <div className={css.hold}>
-                <Hold heldMino={heldMino} addGame={addGame}/>
+                <Hold heldMino={heldMino} hold={hold}/>
             </div>
         </>
     )

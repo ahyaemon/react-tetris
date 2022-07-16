@@ -3,20 +3,19 @@
 import {css} from "@emotion/react";
 import {MinoFrame} from "./MinoFrame";
 import {Mino} from "../../../game/mino";
-import {Game} from "../../../game/game";
 import React from "react";
 
 type HoldProps = {
-    heldMino: Mino | null
-    addGame: (f: (game: Game) => Game) => void
+    heldMino: Mino | null,
+    hold: () => void,
 }
 
-export const Hold: React.FC<HoldProps> = ({ heldMino, addGame }) =>
+export const Hold: React.FC<HoldProps> = ({ heldMino, hold }) =>
     <div
         css={css({
             width: '60px',
         })}
-        onClick={ () => addGame(game => game.hold()) }
+        onClick={ () => hold() }
     >
         <p
             css={css({

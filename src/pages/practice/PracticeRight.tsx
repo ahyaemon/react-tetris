@@ -13,13 +13,17 @@ export const PracticeRight: React.FC = () => {
     const heldMino = useRecoilValue(practiceStore.heldMino)
     const {addGame} = useGameUpdater(practiceStore)
 
+    const hold = () => {
+        addGame(game => game.hold())
+    }
+
     return (
         <>
             <div className={css.nextMinos}>
                 <NextMinos minos={nextMinos}/>
             </div>
             <div className={css.hold}>
-                <Hold heldMino={heldMino} addGame={addGame}/>
+                <Hold heldMino={heldMino} hold={hold}/>
             </div>
         </>
     )
