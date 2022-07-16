@@ -1,28 +1,26 @@
 import React from 'react';
 import './RotationKeys.scss';
-import {Command} from "../../../game/command";
-import {useGameUpdater} from "../../../hooks/useGameUpdater";
-import {GameStore} from "../../../stores/GameStore";
 
 type RotationKeysProps = {
-    gameStore: GameStore
+    input: {
+        rotationRight: () => void,
+        rotationLeft: () => void,
+    }
 }
 
-export const RotationKeys: React.FC<RotationKeysProps> = (props) => {
-    const { updateRecentlyGame } = useGameUpdater(props.gameStore)
-
+export const RotationKeys: React.FC<RotationKeysProps> = ({ input }) => {
     return (
         <div className="rotationKeys">
             <div className="rotationKeys__right">
                 <button
                     type="button"
-                    onClick={() => { updateRecentlyGame(game => game.input(Command.RotationRight)) }}
+                    onClick={() => { input.rotationRight() }}
                 >R</button>
             </div>
             <div className="rotationKeys__left">
                 <button
                     type="button"
-                    onClick={() => { updateRecentlyGame(game => game.input(Command.RotationLeft)) }}
+                    onClick={() => { input.rotationLeft() }}
                 >L</button>
             </div>
         </div>

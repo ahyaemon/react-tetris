@@ -8,7 +8,6 @@ import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {BoardState} from "../../game/game";
 import {Color, Row} from "../../game/color";
-import {practiceStore} from "../../stores/GameStore";
 import {useKeyCallbacks2} from "../../hooks/useKeyCallbacks";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {sampleTemplates} from "./sample";
@@ -103,7 +102,7 @@ export function PracticePage() {
                     <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
-                    <RotationKeys gameStore={practiceStore}/>
+                    <RotationKeys input={input}/>
                 </div>
             </div>
             {

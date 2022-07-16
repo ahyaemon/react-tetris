@@ -31,6 +31,8 @@ export function EndlessPage() {
         right: () => updateRecentlyGame(game => game.input(Command.Right)),
         down: () => updateRecentlyGame(game => game.input(Command.Down)),
         left: () => updateRecentlyGame(game => game.input(Command.Left)),
+        rotationRight: () => updateRecentlyGame(game => game.input(Command.RotationRight)),
+        rotationLeft: () => updateRecentlyGame(game => game.input(Command.RotationLeft)),
     }
 
     return (
@@ -51,7 +53,7 @@ export function EndlessPage() {
                     <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
-                    <RotationKeys gameStore={endlessStore}/>
+                    <RotationKeys input={input}/>
                 </div>
             </div>
             {
