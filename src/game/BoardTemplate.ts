@@ -1,7 +1,7 @@
-import {BoardState} from "./game";
+import {Board} from "./game";
 import {Color, Row} from "./color";
 
-export type BoardTemplate = BoardState
+export type BoardTemplate = Board
 
 function createTemplateMap(): Map<Color, Color> {
     const map = new Map()
@@ -38,7 +38,7 @@ export function matchTemplate(rows: Row[], template: BoardTemplate): boolean {
     return true
 }
 
-export function createBoardStateWithTemplate(template: BoardTemplate, boardState: BoardState): BoardState {
+export function createBoardStateWithTemplate(template: BoardTemplate, boardState: Board): Board {
     const rows = []
     for (let i = 0; i < 20; i++) {
         const colors = []

@@ -1,10 +1,10 @@
 import React from 'react';
 import CellC from "./cell/CellC";
-import {BoardState} from "../../../game/game";
+import {Board} from "../../../game/game";
 import styles from "./Board.module.scss";
 
 type BoardProps = {
-    boardState: BoardState,
+    boardState: Board,
 }
 
 export const BoardFC: React.FC<BoardProps> = (props) => {
