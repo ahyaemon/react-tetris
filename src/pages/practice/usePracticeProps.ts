@@ -1,13 +1,14 @@
 import {useRecoilValue, useSetRecoilState} from "recoil";
 import {createGameStore} from "../../stores/GameStore";
-import {BoardState, Game} from "../../game/game";
+import {Game} from "../../game/game";
 import {Command} from "../../game/command";
 import {CurrentMino} from "../../game/CurrentMino";
-import {Color, Row} from "../../game/color";
+import {Color} from "../../game/color";
 import {Random} from "../../game/random";
 import {RenCounter} from "../../game/RenCounter";
 import {createBoardTemplateStore} from "../../stores/TemplateStore";
 import {sampleMinos} from "./sample";
+import {createBoardStateWithTemplate, matchTemplate} from "../../game/BoardTemplate";
 
 const seed = Math.random() * 1000000
 
@@ -26,60 +27,6 @@ const practiceStore = createGameStore(
 )
 
 const templateStore = createBoardTemplateStore()
-
-type BoardTemplate = BoardState
-
-function createTemplateMap(): Map<Color, Color> {
-    const map = new Map()
-    map.set(Color.OrangeTemplate, Color.Orange)
-    map.set(Color.PurpleTemplate, Color.Purple)
-    map.set(Color.RedTemplate, Color.Red)
-    map.set(Color.GreenTemplate, Color.Green)
-    map.set(Color.YellowTemplate, Color.Yellow)
-    map.set(Color.BlueTemplate, Color.Blue)
-    map.set(Color.LightBlueTemplate, Color.LightBlue)
-    map.set(Color.None, Color.None)
-    return map
-}
-
-const templateMap = createTemplateMap()
-
-function templateToRows(template: BoardTemplate): Row[] {
-    return template.rows.map(
-        row => row.map(
-            cell => templateMap.get(cell)!
-        )
-    )
-}
-
-function matchTemplate(rows: Row[], template: BoardTemplate): boolean {
-    const templateRows = templateToRows(template)
-    for(let i = 0; i < 20; i++) {
-        for(let j = 0; j < 10; j++) {
-            if (rows[i][j] !== templateRows[i][j]) {
-                return false
-            }
-        }
-    }
-    return true
-}
-
-function createBoardStateWithTemplate(template: BoardTemplate, boardState: BoardState): BoardState {
-    const rows = []
-    for (let i = 0; i < 20; i++) {
-        const colors = []
-        for (let j = 0; j < 10; j++) {
-            if (boardState.rows[i][j] === Color.None) {
-                colors.push(template.rows[i][j])
-            } else {
-                colors.push(boardState.rows[i][j])
-            }
-
-        }
-        rows.push(colors)
-    }
-    return { rows }
-}
 
 export function usePracticeProps() {
 
