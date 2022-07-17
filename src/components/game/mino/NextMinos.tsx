@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import {MinoFrame} from "./MinoFrame";
 import {Mino} from "../../../game/mino";
 import React from "react";

@@ -1,9 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
-import {css} from "@emotion/react";
 import {MinoFrame} from "./MinoFrame";
 import {Mino} from "../../../game/mino";
 import React from "react";
+import styles from"./Hold.module.scss";
 
 type HoldProps = {
     heldMino: Mino | null,
@@ -11,18 +9,8 @@ type HoldProps = {
 }
 
 export const Hold: React.FC<HoldProps> = ({ heldMino, hold }) =>
-    <div
-        css={css({
-            width: '60px',
-        })}
-        onClick={ () => hold() }
-    >
-        <p
-            css={css({
-                margin: 0,
-                padding: 0,
-            })}
-        >
+    <div className={styles.container} onClick={ () => hold() }>
+        <p className={styles.font}>
             Hold
         </p>
         <MinoFrame mino={heldMino}/>
