@@ -1,8 +1,6 @@
-import {Board} from "../game/game";
 import {atom, selector} from "recoil";
 import {sampleTemplates} from "../pages/practice/sample";
-
-type BoardTemplate = Board
+import {BoardTemplate} from "../game/BoardTemplate";
 
 export function createBoardTemplateStore() {
     const boardTemplates = atom<BoardTemplate[]>({
