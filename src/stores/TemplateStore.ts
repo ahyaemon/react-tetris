@@ -18,6 +18,12 @@ export function createBoardTemplateStore() {
                 const templates = get(boardTemplates)
                 return templates[0]
             }
+        }),
+        length: selector({
+            key: 'length',
+            get: ({get}) => {
+                return get(boardTemplates).length
+            }
         })
     }
 }

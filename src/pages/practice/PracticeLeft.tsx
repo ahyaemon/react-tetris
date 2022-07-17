@@ -6,15 +6,26 @@ import {usePracticeProps} from "./usePracticeProps";
 
 export const PracticeLeft: React.FC = () => {
 
-    const { game: {
+    const {
+        game: {
             clearedLineCount,
             renCount,
             back,
             historySize,
-    }} = usePracticeProps()
+        },
+        template: {
+            isCleared,
+        }
+    } = usePracticeProps()
 
     return (
         <>
+            {isCleared &&
+                <div className={css.clear}>
+                    <div>合</div>
+                    <div>格</div>
+                </div>
+            }
             <div>
                 REN: {renCount}
             </div>

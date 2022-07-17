@@ -127,6 +127,7 @@ export function usePracticeProps() {
     }
 
     const currentTemplateBoard = useRecoilValue(templateStore.currentBoard)
+    const templatesLength = useRecoilValue(templateStore.length)
     const setTemplateBoards = useSetRecoilState(templateStore.boardTemplates)
 
     return {
@@ -138,6 +139,7 @@ export function usePracticeProps() {
             board,
             historySize,
             rows,
+            // TODO back した時に、template も戻さないといけない
             back: () => {
                 setGameHistory( gameHistory => {
                     return gameHistory.slice(1, gameHistory.length)
@@ -167,7 +169,8 @@ export function usePracticeProps() {
         },
         template: {
             currentTemplateBoard,
-            boardWithTemplate: createBoardStateWithTemplate(currentTemplateBoard, board)
+            boardWithTemplate: createBoardStateWithTemplate(currentTemplateBoard, board),
+            isCleared: templatesLength === 1,
         },
     }
 }
