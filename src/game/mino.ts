@@ -1,5 +1,5 @@
 import {getRandomInt, Random, shuffle} from "./random";
-import {Color} from "./color";
+import {Cell} from "./cell";
 import {Rotation} from "./rotation";
 import {Shape} from "./shape";
 
@@ -63,7 +63,7 @@ export class Mino {
     constructor(
         readonly minoType: MinoType,
         readonly rotation: Rotation,
-        readonly color: Color,
+        readonly color: Cell,
     ) {}
 
     public getShape(direction: Direction): Shape {
@@ -109,49 +109,49 @@ export const minoFactory = {
         return new Mino(
             MinoType.I,
             rotations.i,
-            Color.LightBlue,
+            Cell.LightBlue,
         )
     },
     o(): Mino {
         return new Mino(
             MinoType.O,
             rotations.o,
-            Color.Yellow,
+            Cell.Yellow,
         )
     },
     t(): Mino {
         return new Mino(
             MinoType.T,
             rotations.t,
-            Color.Purple,
+            Cell.Purple,
         )
     },
     s(): Mino {
         return new Mino(
             MinoType.S,
             rotations.s,
-            Color.Green,
+            Cell.Green,
         )
     },
     z(): Mino {
         return new Mino(
             MinoType.Z,
             rotations.z,
-            Color.Red,
+            Cell.Red,
         )
     },
     l(): Mino {
         return new Mino(
             MinoType.L,
             rotations.l,
-            Color.Orange,
+            Cell.Orange,
         )
     },
     j(): Mino {
         return new Mino(
             MinoType.J,
             rotations.j,
-            Color.Blue,
+            Cell.Blue,
         )
     },
     random(): Mino {

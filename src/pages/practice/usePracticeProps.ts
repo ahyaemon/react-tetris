@@ -3,7 +3,7 @@ import {createGameStore} from "../../stores/GameStore";
 import {Game} from "../../game/game";
 import {Command} from "../../game/command";
 import {CurrentMino} from "../../game/CurrentMino";
-import {Color} from "../../game/color";
+import {Cell} from "../../game/cell";
 import {Random} from "../../game/random";
 import {RenCounter} from "../../game/RenCounter";
 import {createBoardTemplateStore} from "../../stores/TemplateStore";
@@ -16,7 +16,7 @@ const practiceStore = createGameStore(
     "practice",
     new Game(
         CurrentMino.create(sampleMinos[0]),
-        Array(20).fill(0).map(_ => Array(10).fill(Color.None)),
+        Array(20).fill(0).map(_ => Array(10).fill(Cell.None)),
         null,
         sampleMinos.slice(1),
         new Random(seed),

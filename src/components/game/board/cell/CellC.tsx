@@ -1,9 +1,9 @@
 import React from 'react';
 import './Cell.scss';
-import {Color} from "../../../../game/color";
+import {Cell} from "../../../../game/cell";
 
 type CellProps = {
-    color: Color
+    color: Cell
 }
 
 export default function CellC({ color }: CellProps) {

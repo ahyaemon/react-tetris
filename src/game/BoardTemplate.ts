@@ -1,27 +1,23 @@
 import {Board} from "./game";
-import {Color, Row} from "./color";
+import {Cell, Row} from "./cell";
 
 export type BoardTemplate = Board
 
-function createTemplateMap(): Map<Color, Color> {
-    const map = new Map()
-    map.set(Color.OrangeTemplate, Color.Orange)
-    map.set(Color.PurpleTemplate, Color.Purple)
-    map.set(Color.RedTemplate, Color.Red)
-    map.set(Color.GreenTemplate, Color.Green)
-    map.set(Color.YellowTemplate, Color.Yellow)
-    map.set(Color.BlueTemplate, Color.Blue)
-    map.set(Color.LightBlueTemplate, Color.LightBlue)
-    map.set(Color.None, Color.None)
-    return map
-}
-
-const templateMap = createTemplateMap()
+const fromTemplateMap = new Map([
+    [Cell.OrangeTemplate, Cell.Orange],
+    [Cell.PurpleTemplate, Cell.Purple],
+    [Cell.RedTemplate, Cell.Red],
+    [Cell.GreenTemplate, Cell.Green],
+    [Cell.YellowTemplate, Cell.Yellow],
+    [Cell.BlueTemplate, Cell.Blue],
+    [Cell.LightBlueTemplate, Cell.LightBlue],
+    [Cell.None, Cell.None],
+])
 
 function templateToRows(template: BoardTemplate): Row[] {
     return template.map(
         row => row.map(
-            cell => templateMap.get(cell)!
+            cell => fromTemplateMap.get(cell)!
         )
     )
 }
@@ -43,7 +39,7 @@ export function createBoardStateWithTemplate(template: BoardTemplate, boardState
     for (let i = 0; i < 20; i++) {
         const colors = []
         for (let j = 0; j < 10; j++) {
-            if (boardState[i][j] === Color.None) {
+            if (boardState[i][j] === Cell.None) {
                 colors.push(template[i][j])
             } else {
                 colors.push(boardState[i][j])

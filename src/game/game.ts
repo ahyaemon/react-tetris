@@ -1,5 +1,5 @@
 import {Mino, minoFactory} from "./mino";
-import {Color, createEmptyRow, isFilled, Row, toGhost} from "./color";
+import {Cell, createEmptyRow, isFilled, Row, toGhost} from "./cell";
 import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
 import {Random} from "./random";
@@ -28,7 +28,7 @@ export class Game {
         const random = new Random(seed)
         const rows = Array(this.nrow)
             .fill(0)
-            .map(_ => Array(this.ncol).fill(Color.None))
+            .map(_ => Array(this.ncol).fill(Cell.None))
         const minoSets = minoFactory.createMinoSets(random.nextRandom())
         const currentMino = CurrentMino.create(minoSets[0])
         const nextMinos = minoSets.slice(1, minoSets.length)

@@ -1,4 +1,4 @@
-export enum Color {
+export enum Cell {
     None = 'none',
 
     LightBlue = 'lightBlue',
@@ -26,34 +26,26 @@ export enum Color {
     BlueTemplate = 'blue--template',
 }
 
-export function toGhost(color: Color): Color {
-    if (color === Color.LightBlue) {
-        return Color.LightBlueGhost
-    } else if (color === Color.Yellow) {
-        return Color.YellowGhost
-    } else if (color === Color.Purple) {
-        return Color.PurpleGhost
-    } else if (color === Color.Green) {
-        return Color.GreenGhost
-    } else if (color === Color.Red){
-        return Color.RedGhost
-    } else if (color === Color.Orange) {
-        return Color.OrangeGhost
-    } else if (color === Color.Blue) {
-        return Color.BlueGhost
-    }
+const toGhostMap = new Map([
+    [Cell.LightBlue, Cell.LightBlueGhost],
+    [Cell.Yellow, Cell.YellowGhost],
+    [Cell.Purple, Cell.PurpleGhost],
+    [Cell.Green, Cell.GreenGhost],
+    [Cell.Red, Cell.RedGhost],
+    [Cell.Orange, Cell.OrangeGhost],
+    [Cell.Blue, Cell.BlueGhost],
+])
 
-    return Color.None
+export function toGhost(cell: Cell): Cell {
+    return toGhostMap.get(cell) ?? Cell.None
 }
-
-export type Cell = Color
 
 export type Row = Cell[]
 
 export function isFilled(row: Row): boolean {
-    return !row.includes(Color.None)
+    return !row.includes(Cell.None)
 }
 
 export function createEmptyRow(ncol: number): Row {
-    return Array(ncol).fill(Color.None)
+    return Array(ncol).fill(Cell.None)
 }

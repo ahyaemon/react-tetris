@@ -1,7 +1,7 @@
 import {Direction, Mino} from "./mino";
 import {Position} from "./potision";
 import {Shape} from "./shape";
-import {Color, Row} from "./color";
+import {Cell, Row} from "./cell";
 
 export class CurrentMino {
 
@@ -98,7 +98,7 @@ export class CurrentMino {
 
     public collided(rows: Row[]): boolean {
         return this.cellPositions().find(p => {
-            return rows[p.row][p.col] !== Color.None
+            return rows[p.row][p.col] !== Cell.None
         }) !== undefined
     }
 
