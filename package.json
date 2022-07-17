@@ -41,7 +41,8 @@
     "deploy": "gh-pages -d build",
     "vitedev": "vite",
     "vitebuild": "tsc --noEmit && vite build",
-    "vitepreview": "vite preview"
+    "vitepreview": "vite preview",
+    "vitedeploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [

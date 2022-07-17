@@ -8,7 +8,5 @@ export default defineConfig({
     build: {
         sourcemap: true,
     },
-    // build: {
-    //     outDir: "build", // CRAに合わせて指定
-    // },
+    base: "/react-tetris/"
 })
