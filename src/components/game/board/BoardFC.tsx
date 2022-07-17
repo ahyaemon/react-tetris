@@ -7,7 +7,7 @@ type BoardProps = {
     boardState: BoardState,
 }
 
-export const Board: React.FC<BoardProps> = (props) => {
+export const BoardFC: React.FC<BoardProps> = (props) => {
     return (
         <div className={styles.board}>
             { props.boardState.rows.map((row, index) => (

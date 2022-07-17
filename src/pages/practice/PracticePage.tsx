@@ -1,5 +1,5 @@
 import css from "../endless/EndlessPage.module.scss";
-import {Board} from "../../components/game/board/Board";
+import {BoardFC} from "../../components/game/board/BoardFC";
 import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
@@ -36,7 +36,7 @@ export function PracticePage() {
                     <PracticeLeft/>
                 </div>
                 <div className={css.board}>
-                    <Board boardState={boardWithTemplate}/>
+                    <BoardFC boardState={boardWithTemplate}/>
                 </div>
                 <div>
                     <PracticeRight/>

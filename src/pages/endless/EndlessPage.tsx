@@ -1,6 +1,6 @@
 import css from "./EndlessPage.module.scss"
 import {useKeyDown} from "../../hooks/useKeyDown";
-import {Board} from "../../components/game/board/Board";
+import {BoardFC} from "../../components/game/board/BoardFC";
 import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
@@ -31,7 +31,7 @@ export function EndlessPage() {
                     <EndlessLeft/>
                 </div>
                 <div className={css.board}>
-                    <Board boardState={board}/>
+                    <BoardFC boardState={board}/>
                 </div>
                 <div>
                     <EndlessRight/>
