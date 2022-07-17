@@ -23,7 +23,6 @@
     "react-icons": "^4.3.1",
     "react-responsive": "^9.0.0-beta.6",
     "react-router-dom": "6",
-    "react-scripts": "5.0.1",
     "reactjs-popup": "^2.0.5",
     "recoil": "^0.7.2",
     "sass": "^1.32.12",
@@ -33,22 +32,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "vitedev": "vite",
-    "vitebuild": "tsc --noEmit && vite build",
-    "vitepreview": "vite preview",
-    "vitedeploy": "gh-pages -d dist"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "browserslist": {
     "production": [
@@ -61,6 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://ahyaemon.github.io/react-tetris"
+  }
 }
