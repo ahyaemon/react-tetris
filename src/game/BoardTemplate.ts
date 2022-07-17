@@ -19,7 +19,7 @@ function createTemplateMap(): Map<Color, Color> {
 const templateMap = createTemplateMap()
 
 function templateToRows(template: BoardTemplate): Row[] {
-    return template.rows.map(
+    return template.map(
         row => row.map(
             cell => templateMap.get(cell)!
         )
@@ -43,14 +43,14 @@ export function createBoardStateWithTemplate(template: BoardTemplate, boardState
     for (let i = 0; i < 20; i++) {
         const colors = []
         for (let j = 0; j < 10; j++) {
-            if (boardState.rows[i][j] === Color.None) {
-                colors.push(template.rows[i][j])
+            if (boardState[i][j] === Color.None) {
+                colors.push(template[i][j])
             } else {
-                colors.push(boardState.rows[i][j])
+                colors.push(boardState[i][j])
             }
 
         }
         rows.push(colors)
     }
-    return { rows }
+    return rows
 }

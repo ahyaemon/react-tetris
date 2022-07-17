@@ -181,11 +181,11 @@ function rows4(): Color[][] {
 }
 
 export const sampleTemplates = [
-    { rows: rows1() },
-    { rows: rows2() },
-    { rows: rows3() },
-    { rows: rows4() },
-    { rows: createRows() },
+    rows1(),
+    rows2(),
+    rows3(),
+    rows4(),
+    createRows(),
 ]
 
 export const sampleMinos = [

@@ -36,7 +36,7 @@ export function PracticePage() {
                     <PracticeLeft/>
                 </div>
                 <div className={css.board}>
-                    <BoardFC boardState={boardWithTemplate}/>
+                    <BoardFC board={boardWithTemplate}/>
                 </div>
                 <div>
                     <PracticeRight/>

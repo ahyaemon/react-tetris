@@ -6,9 +6,7 @@ import {Random} from "./random";
 import {Position} from "./potision";
 import {RenCounter} from "./RenCounter";
 
-export type Board = {
-    rows: Row[]
-}
+export type Board = Row[]
 
 export class Game {
 
@@ -57,7 +55,7 @@ export class Game {
             rows[this.currentMino.position.row + position.row][this.currentMino.position.col + position.col] = this.currentMino.mino.color
         })
 
-        return { rows }
+        return rows
     }
 
     public input(command: Command): Game {
@@ -76,7 +74,7 @@ export class Game {
             )
 
             // rows を state().rows に置き換え（接地）
-            const rows = newGame.state.rows
+            const rows = newGame.state
 
             // 揃ったラインを消す
             const clearedRows = this.clearRows(rows, Game.ncol)

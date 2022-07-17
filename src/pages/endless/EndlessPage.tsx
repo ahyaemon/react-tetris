@@ -31,7 +31,7 @@ export function EndlessPage() {
                     <EndlessLeft/>
                 </div>
                 <div className={css.board}>
-                    <BoardFC boardState={board}/>
+                    <BoardFC board={board}/>
                 </div>
                 <div>
                     <EndlessRight/>

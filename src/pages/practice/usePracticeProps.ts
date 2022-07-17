@@ -58,7 +58,7 @@ export function usePracticeProps() {
 
         // ラインが消える時の判定は、newGame.rows だと消えた後の状態との比較になるため、currentGame と比較する
         // currentGame.state.rows にすることで、ドロップ直前の状態を得る
-        if (matchTemplate(currentGame.state.rows, currentTemplateBoard)) {
+        if (matchTemplate(currentGame.state, currentTemplateBoard)) {
             setTemplateBoards(templates => templates.slice(1))
         }
         else if (matchTemplate(newGame.rows, currentTemplateBoard)) {
