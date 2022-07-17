@@ -1,4 +1,4 @@
-import css from "./ReloadPopup.module.scss"
+import css from "./ReloadPopup.module.css";
 import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
