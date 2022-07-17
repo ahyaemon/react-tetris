@@ -59,5 +59,3 @@ export function createGameStore(key: string, game: Game) {
         })
     }
 }
-
-export const endlessStore = createGameStore("endless", Game.create(Math.random() * 1000000))

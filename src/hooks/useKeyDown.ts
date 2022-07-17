@@ -29,5 +29,5 @@ export function useKeyDown(keyCallbacks: KeyCallback[], showKey: boolean = false
             document.removeEventListener("keydown", eventListener)
         }
         // eslint-disable-next-line
-    }, [showKey])
+    }, [keyCallbacks, showKey])
 }
