@@ -39,8 +39,7 @@ export class Game {
 
     // FIXME この変換ロジックはここに入れるべき？
     // 表示用に color をセットするだけだから表示側？
-    // 名前も state と言うよりは rowColors と思われる
-    get state(): Board {
+    get board(): Board {
         // 地形をコピー
         const rows = this.rows.map(row => row.map(cell => cell))
 
@@ -73,8 +72,8 @@ export class Game {
                 this.renCounter,
             )
 
-            // rows を state().rows に置き換え（接地）
-            const rows = newGame.state
+            // rows を board().rows に置き換え（接地）
+            const rows = newGame.board
 
             // 揃ったラインを消す
             const clearedRows = this.clearRows(rows, Game.ncol)

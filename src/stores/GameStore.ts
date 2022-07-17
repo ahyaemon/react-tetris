@@ -45,7 +45,7 @@ export function createGameStore(key: string, game: Game) {
 
         board: selector({
             key: key + 'board',
-            get: ({get}) => get(gameHistory)[0].state
+            get: ({get}) => get(gameHistory)[0].board
         }),
 
         historySize: selector({
