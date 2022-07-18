@@ -8,8 +8,7 @@ export const PracticeLeft: React.FC = () => {
 
     const {
         game: {
-            clearedLineCount,
-            renCount,
+            currentGame,
             back,
             historySize,
         },
@@ -27,10 +26,10 @@ export const PracticeLeft: React.FC = () => {
                 </div>
             }
             <div>
-                REN: {renCount}
+                REN: {currentGame.renCount()}
             </div>
             <div>
-                LINE: {clearedLineCount}
+                LINE: {currentGame.clearedRowCount}
             </div>
             <div>
                 <ReloadPopup/>

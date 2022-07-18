@@ -14,8 +14,8 @@ import {useEndlessProps} from "./useEndlessProps";
 export function EndlessPage() {
 
     const { game: {
+        currentGame,
         input,
-        board,
     }} = useEndlessProps()
 
     const keyCallbacks = useKeyCallbacks(input)
@@ -31,7 +31,7 @@ export function EndlessPage() {
                     <EndlessLeft/>
                 </div>
                 <div className={css.board}>
-                    <BoardFC board={board}/>
+                    <BoardFC board={currentGame.board}/>
                 </div>
                 <div>
                     <EndlessRight/>

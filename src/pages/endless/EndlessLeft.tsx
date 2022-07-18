@@ -7,8 +7,7 @@ import {useEndlessProps} from "./useEndlessProps";
 export const EndlessLeft: React.FC = () => {
 
     const { game: {
-        clearedLineCount,
-        renCount,
+        currentGame,
         historySize,
         back,
     }} = useEndlessProps()
@@ -16,10 +15,10 @@ export const EndlessLeft: React.FC = () => {
     return (
         <>
             <div>
-                REN: {renCount}
+                REN: {currentGame.renCount()}
             </div>
             <div>
-                LINE: {clearedLineCount}
+                LINE: {currentGame.clearedRowCount}
             </div>
             <div>
                 <ReloadPopup/>

@@ -1,18 +1,6 @@
 import {atom, selector} from "recoil";
 import {Game} from "../game/game";
 
-type GameUpdater = () => void
-
-export type GameUpdateMethods = {
-    up: GameUpdater,
-    right: GameUpdater,
-    down: GameUpdater,
-    left: GameUpdater,
-    rotationRight:　GameUpdater,
-    rotationLeft:　GameUpdater,
-    hold: GameUpdater,
-}
-
 export type GameStore = ReturnType<typeof createGameStore>
 
 export function createGameStore(key: string, game: Game) {
@@ -23,39 +11,14 @@ export function createGameStore(key: string, game: Game) {
 
     return {
         gameHistory,
-        nextMinos: selector({
-            key: key + 'nextMinos',
-            get: ({get}) => get(gameHistory)[0].nextMinos
-        }),
-
-        heldMino: selector({
-            key: key + 'heldMino',
-            get: ({get}) => get(gameHistory)[0].heldMino
-        }),
-
-        clearedLineCount: selector({
-            key: key + 'clearedLineCount',
-            get: ({get}) => get(gameHistory)[0].clearedRowCount
-        }),
-
-        renCount: selector({
-            key: key + 'renCount',
-            get: ({get}) => get(gameHistory)[0].renCount()
-        }),
-
-        board: selector({
-            key: key + 'board',
-            get: ({get}) => get(gameHistory)[0].board
+        currentGame: selector({
+            key: key + 'currentGame',
+            get: ({get}) => get(gameHistory)[0],
         }),
 
         historySize: selector({
             key: key + 'historySize',
             get: ({get}) => get(gameHistory).length
         }),
-
-        rows: selector({
-            key: key + 'rows',
-            get: ({get}) => get(gameHistory)[0].rows
-        })
     }
 }

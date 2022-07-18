@@ -30,13 +30,8 @@ const templateStore = createBoardTemplateStore()
 
 export function usePracticeProps() {
 
-    const nextMinos = useRecoilValue(practiceStore.nextMinos)
-    const heldMino = useRecoilValue(practiceStore.heldMino)
-    const clearedLineCount = useRecoilValue(practiceStore.clearedLineCount)
-    const renCount = useRecoilValue(practiceStore.renCount)
-    const board = useRecoilValue(practiceStore.board)
+    const currentGame = useRecoilValue(practiceStore.currentGame)
     const historySize = useRecoilValue(practiceStore.historySize)
-    const rows = useRecoilValue(practiceStore.rows)
     const gameHistory = useRecoilValue(practiceStore.gameHistory)
     const setGameHistory = useSetRecoilState(practiceStore.gameHistory)
 
@@ -79,13 +74,12 @@ export function usePracticeProps() {
 
     return {
         game: {
-            nextMinos,
-            heldMino,
-            clearedLineCount,
-            renCount,
-            board,
+            currentGame,
+            // clearedLineCount,
+            // renCount,
+            // board,
             historySize,
-            rows,
+            // rows,
             // TODO back した時に、template も戻さないといけない
             back: () => {
                 setGameHistory( gameHistory => {
@@ -116,7 +110,7 @@ export function usePracticeProps() {
         },
         template: {
             currentTemplateBoard,
-            boardWithTemplate: createBoardStateWithTemplate(currentTemplateBoard, board),
+            boardWithTemplate: createBoardStateWithTemplate(currentTemplateBoard, currentGame.board),
             isCleared: templatesLength === 1,
         },
     }

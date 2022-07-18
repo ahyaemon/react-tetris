@@ -7,14 +7,8 @@ const endlessStore = createGameStore("endless", Game.create(Math.random() * 1000
 
 export function useEndlessProps() {
 
-    const nextMinos = useRecoilValue(endlessStore.nextMinos)
-    const heldMino = useRecoilValue(endlessStore.heldMino)
-    const clearedLineCount = useRecoilValue(endlessStore.clearedLineCount)
-    const renCount = useRecoilValue(endlessStore.renCount)
-    const board = useRecoilValue(endlessStore.board)
+    const currentGame = useRecoilValue(endlessStore.currentGame)
     const historySize = useRecoilValue(endlessStore.historySize)
-    const rows = useRecoilValue(endlessStore.rows)
-
     const setGameHistory = useSetRecoilState(endlessStore.gameHistory)
 
     const addGame = (gameUpdateCallback: (game: Game) => Game) => {
@@ -33,13 +27,8 @@ export function useEndlessProps() {
 
     return {
         game: {
-            nextMinos,
-            heldMino,
-            clearedLineCount,
-            renCount,
-            board,
+            currentGame,
             historySize,
-            rows,
             back: () => {
                 setGameHistory( gameHistory => {
                     return gameHistory.slice(1, gameHistory.length)

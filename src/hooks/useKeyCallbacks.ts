@@ -1,5 +1,3 @@
-import {GameUpdateMethods} from "../stores/GameStore";
-
 const key = {
     w: 'w',
     a: 'a',
@@ -15,6 +13,18 @@ const key = {
     x: 'x',
     shift: 'Shift',
     space: ' ',
+}
+
+type GameUpdater = () => void
+
+type GameUpdateMethods = {
+    up: GameUpdater,
+    right: GameUpdater,
+    down: GameUpdater,
+    left: GameUpdater,
+    rotationRight:　GameUpdater,
+    rotationLeft:　GameUpdater,
+    hold: GameUpdater,
 }
 
 export function useKeyCallbacks(methods: GameUpdateMethods) {
