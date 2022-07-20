@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
 import {useEndlessProps} from "./useEndlessProps";
+import {Command} from "../../game/command";
 
 export const ReloadPopup: React.FC = () => {
     return (
@@ -28,12 +29,12 @@ type ButtonProps = {
 
 const NewButton: React.FC<ButtonProps> = ({ close }) => {
 
-    const { game: { newGame } } = useEndlessProps()
+    const { input } = useEndlessProps()
 
     return (
         <button
             onClick={() => {
-                newGame()
+                input(Command.NewGame)
                 close()
             }}
         >
@@ -44,13 +45,13 @@ const NewButton: React.FC<ButtonProps> = ({ close }) => {
 
 const RetryButton:React.FC<ButtonProps> = ({ close }) => {
 
-    const { game: { retry } } = useEndlessProps()
+    const { input } = useEndlessProps()
 
     return (
         <button
             className={css.retryButton}
             onClick={() => {
-                retry()
+                input(Command.Retry)
                 close()
             }}
         >

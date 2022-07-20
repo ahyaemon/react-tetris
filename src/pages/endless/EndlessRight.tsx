@@ -3,15 +3,11 @@ import React from "react";
 import {NextMinos} from "../../components/game/mino/NextMinos";
 import {Hold} from "../../components/game/mino/Hold";
 import {useEndlessProps} from "./useEndlessProps";
+import {Command} from "../../game/command";
 
 export const EndlessRight: React.FC = () => {
 
-    const { game: {
-        currentGame,
-        input: {
-            hold
-        }
-    }} = useEndlessProps()
+    const { currentGame, input } = useEndlessProps()
 
     return (
         <>
@@ -19,7 +15,7 @@ export const EndlessRight: React.FC = () => {
                 <NextMinos minos={currentGame.nextMinos}/>
             </div>
             <div className={css.hold}>
-                <Hold heldMino={currentGame.heldMino} hold={hold}/>
+                <Hold heldMino={currentGame.heldMino} hold={() => { input(Command.Hold) }}/>
             </div>
         </>
     )

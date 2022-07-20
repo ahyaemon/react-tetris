@@ -3,14 +3,11 @@ import React from "react";
 import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 import {useEndlessProps} from "./useEndlessProps";
+import {Command} from "../../game/command";
 
 export const EndlessLeft: React.FC = () => {
 
-    const { game: {
-        currentGame,
-        historySize,
-        back,
-    }} = useEndlessProps()
+    const {　currentGame, historySize, input } = useEndlessProps()
 
     return (
         <>
@@ -24,7 +21,7 @@ export const EndlessLeft: React.FC = () => {
                 <ReloadPopup/>
             </div>
             <div className={css.historyBack}>
-                <HistoryBack back={back} historySize={historySize}/>
+                <HistoryBack back={() => { input(Command.Back) }} historySize={historySize}/>
             </div>
         </>
     )

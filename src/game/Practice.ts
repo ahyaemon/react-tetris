@@ -4,11 +4,6 @@ import {Cell, Row} from "./cell";
 
 type BoardTemplate = Board
 
-// PracticeGame, EndlessGame の両クラスを作った方が良い？
-// で、両方とも Command を受け取る input メソッドを持っていて、
-// コマンドによる動作の振り分けはその中で行う
-// back とか hold もコマンドになりそう
-// ストアを使う usePracticeProps とかがシンプルになりそう
 export class Practice {
 
     private constructor(

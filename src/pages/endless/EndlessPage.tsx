@@ -1,28 +1,22 @@
 import css from "./EndlessPage.module.scss"
-import {useKeyDown} from "../../hooks/useKeyDown";
+import {useKeyDown, useKeyDown2} from "../../hooks/useKeyDown";
 import {BoardFC} from "../../components/game/board/BoardFC";
-import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
-import {RotationKeys} from "../../components/game/rotation-keys/RotationKeys";
+import {CrossKeys, CrossKeys2} from "../../components/game/cross-keys/CrossKeys";
+import {RotationKeys, RotationKeys2} from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import {EndlessRight} from "./EndlessRight";
 import {EndlessLeft} from "./EndlessLeft";
-import {useKeyCallbacks} from "../../hooks/useKeyCallbacks";
 import {useResponsive} from "../../hooks/useResponsive";
 import {useEndlessProps} from "./useEndlessProps";
 
 export function EndlessPage() {
 
-    const { game: {
-        currentGame,
-        input,
-    }} = useEndlessProps()
-
-    const keyCallbacks = useKeyCallbacks(input)
-
-    useKeyDown(keyCallbacks)
+    const { currentGame,　input　} = useEndlessProps()
 
     const { isDesktop } = useResponsive()
+
+    useKeyDown2(input)
 
     return (
         <div>
@@ -39,10 +33,10 @@ export function EndlessPage() {
             </div>
             <div className={css.bottom}>
                 <div>
-                    <CrossKeys input={input}/>
+                    <CrossKeys2 input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
-                    <RotationKeys input={input}/>
+                    <RotationKeys2 input={input}/>
                 </div>
             </div>
             {
