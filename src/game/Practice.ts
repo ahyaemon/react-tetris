@@ -78,11 +78,10 @@ export class Practice {
         )
     }
 
-    // FIXME 下の行から判定していった方が早い
     private matchTemplate(rows: Row[]): boolean {
         const templateRows = this.templateToRows()
-        for(let i = 0; i < 20; i++) {
-            for(let j = 0; j < 10; j++) {
+        for(let i = 19; i >= 0; i--) {
+            for(let j = 19; j >= 0; j--) {
                 if (rows[i][j] !== templateRows[i][j]) {
                     return false
                 }
