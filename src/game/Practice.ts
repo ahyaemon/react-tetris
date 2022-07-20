@@ -2,10 +2,7 @@ import {Board, Game} from "./game";
 import {Command} from "./command";
 import {Cell, Row} from "./cell";
 
-type BoardTemplate = {
-    board: Board,
-    index: number,
-}
+type BoardTemplate = Board
 
 // PracticeGame, EndlessGame の両クラスを作った方が良い？
 // で、両方とも Command を受け取る input メソッドを持っていて、
@@ -74,7 +71,7 @@ export class Practice {
     }
 
     private templateToRows(): Row[] {
-        return this.currentTemplate.board.map(
+        return this.currentTemplate.map(
             row => row.map(
                 cell => this.fromTemplateMap.get(cell)!
             )
@@ -112,7 +109,7 @@ export class Practice {
 
     get boardWithTemplate(): Board {
         const board = this.currentGame.board
-        const template = this.currentTemplate.board
+        const template = this.currentTemplate
 
         const rows = []
         for (let i = 0; i < 20; i++) {
