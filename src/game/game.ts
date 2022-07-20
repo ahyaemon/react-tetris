@@ -108,13 +108,14 @@ export class Game {
             return this.updateCurrentMino(this.rotationRight())
         } else if (command === Command.RotationLeft) {
             return this.updateCurrentMino(this.rotationLeft())
+        } else if (command === Command.Hold) {
+            return this.hold()
         } else {
             throw Error("no command found")
         }
     }
 
     public hold(): Game {
-        // TODO
         if (this.heldMino === null) {
             const heldMino = this.currentMino.mino
             const currentMino = CurrentMino.create(this.nextMinos[0])

@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import {MdRefresh} from "react-icons/md";
 import React from "react";
 import {usePracticeProps} from "./usePracticeProps";
+import {Command} from "../../game/command";
 
 export const ReloadPopup: React.FC = () => {
     return (
@@ -27,13 +28,13 @@ type ButtonProps = {
 
 const RetryButton:React.FC<ButtonProps> = ({ close }) => {
 
-    const { game: { retry } } = usePracticeProps()
+    const { game: { input } } = usePracticeProps()
 
     return (
         <button
             className={css.retryButton}
             onClick={() => {
-                retry()
+                input(Command.Retry)
                 close()
             }}
         >

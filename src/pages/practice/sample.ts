@@ -1,5 +1,6 @@
 import {Cell} from "../../game/cell";
 import {minoFactory} from "../../game/mino";
+import {create} from "domain";
 
 function createRows(): Cell[][] {
     const rows = []
@@ -186,6 +187,14 @@ export const sampleTemplates = [
     rows3(),
     rows4(),
     createRows(),
+]
+
+export const sampleTemplates2 = [
+    { board: rows1(), index: 0 },
+    { board: rows2(), index: 6 },
+    { board: rows3(), index: 7 },
+    { board: rows4(), index: 8 },
+    { board: createRows(), index: 13 },
 ]
 
 export const sampleMinos = [

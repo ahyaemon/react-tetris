@@ -3,13 +3,15 @@ import React from "react";
 import {ReloadPopup} from "./ReloadPopup";
 import {HistoryBack} from "../../components/game/history-back/HistoryBack";
 import {usePracticeProps} from "./usePracticeProps";
+import {Command} from "../../game/command";
 
 export const PracticeLeft: React.FC = () => {
 
     const {
         game: {
             currentGame,
-            back,
+            input,
+            // back,
             historySize,
         },
         template: {
@@ -35,7 +37,7 @@ export const PracticeLeft: React.FC = () => {
                 <ReloadPopup/>
             </div>
             <div className={css.historyBack}>
-                <HistoryBack back={back} historySize={historySize}/>
+                <HistoryBack back={() => { input(Command.Back) }} historySize={historySize}/>
             </div>
         </>
     )
