@@ -108,23 +108,11 @@ export class Practice {
     }
 
     get boardWithTemplate(): Board {
-        const board = this.currentGame.board
-        const template = this.currentTemplate
-
-        const rows = []
-        for (let i = 0; i < 20; i++) {
-            const colors = []
-            for (let j = 0; j < 10; j++) {
-                if (board[i][j] === Cell.None) {
-                    colors.push(template[i][j])
-                } else {
-                    colors.push(board[i][j])
-                }
-
-            }
-            rows.push(colors)
-        }
-        return rows
+        return this.currentGame.board.map((row, irow) =>
+            row.map((cell, icell) =>
+                cell === Cell.None ? this.currentTemplate[irow][icell] : cell
+            )
+        )
     }
 
     get isCleared(): boolean {
