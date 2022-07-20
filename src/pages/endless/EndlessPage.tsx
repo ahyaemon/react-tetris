@@ -1,8 +1,8 @@
 import css from "./EndlessPage.module.scss"
-import {useKeyDown, useKeyDown2} from "../../hooks/useKeyDown";
+import {useKeyDown} from "../../hooks/useKeyDown";
 import {BoardFC} from "../../components/game/board/BoardFC";
-import {CrossKeys, CrossKeys2} from "../../components/game/cross-keys/CrossKeys";
-import {RotationKeys, RotationKeys2} from "../../components/game/rotation-keys/RotationKeys";
+import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
+import {RotationKeys2} from "../../components/game/rotation-keys/RotationKeys";
 import React from "react";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import {EndlessRight} from "./EndlessRight";
@@ -16,7 +16,7 @@ export function EndlessPage() {
 
     const { isDesktop } = useResponsive()
 
-    useKeyDown2(input)
+    useKeyDown(input)
 
     return (
         <div>
@@ -33,7 +33,7 @@ export function EndlessPage() {
             </div>
             <div className={css.bottom}>
                 <div>
-                    <CrossKeys2 input={input}/>
+                    <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
                     <RotationKeys2 input={input}/>

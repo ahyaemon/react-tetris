@@ -19,20 +19,6 @@ function createEventListener(keyCallbacks: KeyCallback[], showKey: boolean) {
     }
 }
 
-export function useKeyDown(keyCallbacks: KeyCallback[], showKey: boolean = false) {
-
-    useEffect(() => {
-        const eventListener = createEventListener(keyCallbacks, showKey)
-
-        document.addEventListener("keydown", eventListener, false)
-
-        return () => {
-            document.removeEventListener("keydown", eventListener)
-        }
-        // eslint-disable-next-line
-    }, [keyCallbacks, showKey])
-}
-
 const key = {
     w: 'w',
     a: 'a',
@@ -50,7 +36,7 @@ const key = {
     space: ' ',
 }
 
-export function useKeyDown2(callback: (command: Command) => void, showKey: boolean = false) {
+export function useKeyDown(callback: (command: Command) => void, showKey: boolean = false) {
 
     const keyCallbacks = [
         { key: key.s,  f: () => { callback(Command.Down) }},

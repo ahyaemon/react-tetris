@@ -1,12 +1,12 @@
 import css from "../endless/EndlessPage.module.scss";
 import {BoardFC} from "../../components/game/board/BoardFC";
-import { CrossKeys2} from "../../components/game/cross-keys/CrossKeys";
+import { CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import {RotationKeys2} from "../../components/game/rotation-keys/RotationKeys";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
 import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
-import {useKeyDown2} from "../../hooks/useKeyDown";
+import {useKeyDown} from "../../hooks/useKeyDown";
 import {useResponsive} from "../../hooks/useResponsive";
 import {usePracticeProps} from "./usePracticeProps";
 
@@ -24,7 +24,7 @@ export function PracticePage() {
         }
     } = usePracticeProps()
 
-    useKeyDown2(input)
+    useKeyDown(input)
 
     return (
         <div>
@@ -41,7 +41,7 @@ export function PracticePage() {
             </div>
             <div className={css.bottom}>
                 <div>
-                    <CrossKeys2 input={input}/>
+                    <CrossKeys input={input}/>
                 </div>
                 <div className={css.rotationKeys}>
                     <RotationKeys2 input={input}/>
