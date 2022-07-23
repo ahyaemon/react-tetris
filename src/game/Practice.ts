@@ -1,8 +1,12 @@
 import {Board, Game} from "./game";
 import {Command} from "./command";
 import {Cell, Row} from "./cell";
+import {BoardTemplate} from "./BoardTemplate";
 
-type BoardTemplate = Board
+export type PracticeInitializationProps = {
+    templates: BoardTemplate[],
+    seed: number,
+}
 
 export class Practice {
 
