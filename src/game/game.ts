@@ -19,7 +19,7 @@ export class Game {
         readonly heldMino: Mino | null,
         readonly nextMinos: Mino[],
         private readonly random: Random,
-        private readonly seed: number,
+        readonly seed: number,
         readonly clearedRowCount: number,
         private readonly renCounter: RenCounter,
     ) {}
@@ -54,6 +54,15 @@ export class Game {
             rows[this.currentMino.position.row + position.row][this.currentMino.position.col + position.col] = this.currentMino.mino.color
         })
 
+        return rows
+    }
+
+    get minoDroppedBoard(): Board {
+        const rows = this.rows.map(row => row.map(cell => cell))
+        const ghost = this.drop()
+        ghost.getShape().positions.forEach(position => {
+            rows[ghost.position.row + position.row][ghost.position.col + position.col] = this.currentMino.mino.color
+        })
         return rows
     }
 
