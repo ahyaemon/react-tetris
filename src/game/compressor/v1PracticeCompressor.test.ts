@@ -1,0 +1,127 @@
+import {v1PracticeCompressor} from "./v1PracticeCompressor";
+import {PracticeInitializationProps} from "../Practice";
+import {Cell} from "../cell";
+
+const props: PracticeInitializationProps = {
+    templates:[
+        [
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.OrangeTemplate,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.GreenTemplate,Cell.None,Cell.None,Cell.None],
+            [Cell.OrangeTemplate,Cell.None,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.GreenTemplate,Cell.GreenTemplate,Cell.YellowTemplate,Cell.YellowTemplate],
+            [Cell.OrangeTemplate,Cell.OrangeTemplate,Cell.None,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.GreenTemplate,Cell.YellowTemplate,Cell.YellowTemplate]
+        ],
+        [
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.OrangeTemplate,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.GreenTemplate,Cell.None,Cell.None,Cell.None],
+            [Cell.OrangeTemplate,Cell.PurpleTemplate,Cell.PurpleTemplate,Cell.PurpleTemplate,Cell.RedTemplate,Cell.RedTemplate,Cell.GreenTemplate,Cell.GreenTemplate,Cell.YellowTemplate,Cell.YellowTemplate],
+            [Cell.OrangeTemplate,Cell.OrangeTemplate,Cell.PurpleTemplate,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.LightBlueTemplate,Cell.GreenTemplate,Cell.YellowTemplate,Cell.YellowTemplate]
+        ],
+        [
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.LightBlueTemplate],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.LightBlueTemplate],
+            [Cell.None,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.None,Cell.None,Cell.YellowTemplate,Cell.YellowTemplate,Cell.LightBlueTemplate],
+            [Cell.GreenTemplate,Cell.None,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.YellowTemplate,Cell.YellowTemplate,Cell.LightBlueTemplate],
+            [Cell.GreenTemplate,Cell.GreenTemplate,Cell.None,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.OrangeTemplate],
+            [Cell.OrangeTemplate,Cell.GreenTemplate,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.GreenTemplate,Cell.OrangeTemplate,Cell.OrangeTemplate,Cell.OrangeTemplate]
+        ],
+        [
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.LightBlueTemplate],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.LightBlueTemplate],
+            [Cell.None,Cell.None,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.None,Cell.None,Cell.YellowTemplate,Cell.YellowTemplate,Cell.LightBlueTemplate],
+            [Cell.GreenTemplate,Cell.PurpleTemplate,Cell.PurpleTemplate,Cell.PurpleTemplate,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.YellowTemplate,Cell.YellowTemplate,Cell.LightBlueTemplate],
+            [Cell.GreenTemplate,Cell.GreenTemplate,Cell.PurpleTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.BlueTemplate,Cell.OrangeTemplate],
+            [Cell.OrangeTemplate,Cell.GreenTemplate,Cell.None,Cell.RedTemplate,Cell.RedTemplate,Cell.BlueTemplate,Cell.GreenTemplate,Cell.OrangeTemplate,Cell.OrangeTemplate,Cell.OrangeTemplate]
+        ],
+        [
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None],
+            [Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None,Cell.None]
+        ]
+    ],
+    seed:966504.8330976967
+}
+
+
+test("圧縮と解凍ができる", () => {
+    const compressed = v1PracticeCompressor.compress(props)
+    console.log({length: compressed.length, compressed})
+    const decompressed = v1PracticeCompressor.decompress(compressed)
+    expect(decompressed).toStrictEqual(props)
+})

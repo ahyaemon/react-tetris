@@ -9,10 +9,12 @@ export class Endless {
     private constructor(
         private readonly games: Game[],
         private readonly templates: BoardTemplate[],
+        private readonly addedTemplatesNumbers: number[]
+        // TODO back した時に、テンプレートをいくつ取り除く必要があるかを保持しておく
     ) {}
 
     public static create(games: Game[]): Endless {
-        return new Endless(games, [])
+        return new Endless(games, [], [])
     }
 
     get historySize(): number {
@@ -25,15 +27,19 @@ export class Endless {
 
     public input(command: Command): Endless {
         if (command === Command.Back) {
-            return new Endless(this.games.slice(1), this.templates)
+            const newGame = this.games.slice(1)
+            const i = this.addedTemplatesNumbers.slice(-1)[0]
+            const newTemplates = this.templates.slice(0, -i)
+            const newAddedTemplatesNumbers = this.addedTemplatesNumbers.slice(0, -1)
+            return new Endless(newGame, newTemplates, newAddedTemplatesNumbers)
         }
 
         if (command === Command.NewGame) {
-            return new Endless([Game.create(Math.random() * 1000000)], this.templates)
+            return Endless.create([Game.create(Math.random() * 1000000)])
         }
 
         if (command === Command.Retry) {
-            return new Endless(this.games.slice(-1), this.templates)
+            return Endless.create(this.games.slice(-1))
         }
 
         const newGame = this.currentGame.input(command)
@@ -42,21 +48,29 @@ export class Endless {
             if (newGame.clearedRowCount > this.currentGame.clearedRowCount) {
                 if (newGame.renCount() >= 2) {
                     const beforeRows = this.currentGame.minoDroppedBoard
-                    return new Endless(this.addGame(newGame), [...this.templates, beforeRows])
+                    return new Endless(
+                        this.addGame(newGame),
+                        [...this.templates, beforeRows],
+                        [...this.addedTemplatesNumbers, 1],
+                    )
                 } else {
                     const beforeRowsWithoutMino = this.currentGame.rows
                     const beforeRows = this.currentGame.minoDroppedBoard
-                    return new Endless(this.addGame(newGame), [...this.templates, beforeRowsWithoutMino, beforeRows])
+                    return new Endless(
+                        this.addGame(newGame),
+                        [...this.templates, beforeRowsWithoutMino, beforeRows],
+                        [...this.addedTemplatesNumbers, 2],
+                    )
                 }
             }
-            return new Endless(this.addGame(newGame), this.templates)
+            return new Endless(this.addGame(newGame), this.templates, [...this.addedTemplatesNumbers, 0])
         }
 
         if (command === Command.Hold) {
-            return new Endless(this.addGame(newGame), this.templates)
+            return new Endless(this.addGame(newGame), this.templates, [...this.addedTemplatesNumbers, 0])
         }
 
-        return new Endless(this.updateRecentlyGame(newGame), this.templates)
+        return new Endless(this.updateRecentlyGame(newGame), this.templates, this.addedTemplatesNumbers)
     }
 
     private addGame(game: Game): Game[] {
