@@ -49,3 +49,11 @@ export function isFilled(row: Row): boolean {
 export function createEmptyRow(ncol: number): Row {
     return Array(ncol).fill(Cell.None)
 }
+
+export function createEmptyRows(nrow: number, ncol: number): Row[] {
+    const ar = Array(nrow)
+    for (let i = 0; i < nrow; i++) {
+        ar[i] = createEmptyRow(ncol)
+    }
+    return ar
+}
