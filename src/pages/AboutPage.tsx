@@ -1,23 +1,10 @@
-/** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
+import css from "./AboutPage.module.scss";
 
 export function AboutPage() {
     return (
-        <div
-            css={css({
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                paddingTop: "20px",
-                maxWidth: "400px",
-            })}
-        >
+        <div className={css.about}>
             <h1>About</h1>
-            <div
-                css={css({
-                    marginTop: "20px",
-                })}
-            >
+            <div className={css.content}>
                 <p>落ち着いてテトリスを練習するためのページ</p>
                 <p>作者: あひゃえもん</p>
                 <a href="https://github.com/ahyaemon/react-tetris" target="_blank">ソースコード</a>

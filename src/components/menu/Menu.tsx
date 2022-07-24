@@ -1,9 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
 import { slide as BurgerMenu } from "react-burger-menu";
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import {css} from "@emotion/react";
+import css from "./Menu.module.scss";
 
 type LinkWithCloseProps = {
     to: string,
@@ -31,11 +29,7 @@ export function Menu() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
-        <div
-            css={css({
-                lineHeight: "2",
-            })}
-        >
+        <div className={css.menu}>
             <BurgerMenu width="280px" isOpen={isOpen} onOpen={() => setIsOpen(true)} onClose={() => setIsOpen(false)}>
                 <ul>
                     <li>
