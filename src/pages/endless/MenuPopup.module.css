@@ -2,6 +2,11 @@
     width: 100%;
 }
 
+.copiedMessage {
+    margin-left: 10px;
+    color: green;
+}
+
 .newButton {
     display: flex;
     flex-direction: column;

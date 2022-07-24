@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {useEndlessProps} from "./useEndlessProps";
 import {Command} from "../../game/command";
 import {BiCopy, FiExternalLink} from "react-icons/all";
+import copy from "copy-to-clipboard";
 
 export const MenuPopup: React.FC = () => {
     return (
@@ -33,6 +34,8 @@ const TemplateButton: React.FC = () => {
 
     const [url, setUrl] = useState<string | undefined>(undefined)
 
+    const [copiedCount, setCopiedCount] = useState<number>(0)
+
     return (
         <div>
             <button
@@ -45,12 +48,18 @@ const TemplateButton: React.FC = () => {
                     setUrl(url)
                 } }
             >テンプレ練習 URL 作成</button>
+            {copiedCount >= 1 &&
+                <span className={css.copiedMessage}>コピーしたよ{"！".repeat(copiedCount)}</span>
+            }
             {url &&
                 <div className={css.templateAreaContainer}>
                     <textarea readOnly value={url} className={css.templateTextArea}/>
                     <div className={css.templateIconContainer}>
                         <div>
-                            <BiCopy size={30}/>
+                            <BiCopy size={30} onClick={() => {
+                                copy(url)
+                                setCopiedCount(c => c + 1)
+                            }}/>
                         </div>
                         <div>
                             <FiExternalLink size={30} onClick={() => {
