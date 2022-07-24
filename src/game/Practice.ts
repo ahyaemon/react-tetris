@@ -31,6 +31,11 @@ export class Practice {
         return new Practice([game], templates, [0])
     }
 
+    public static initialize(props: PracticeInitializationProps): Practice {
+        const game = Game.create(props.seed)
+        return Practice.create(game, props.templates)
+    }
+
     get currentGame(): Game {
         return this.games[0]
     }
