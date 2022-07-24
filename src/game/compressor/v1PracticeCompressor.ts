@@ -52,16 +52,16 @@ export function decompressTemplates(s: string): BoardTemplate[] {
 }
 
 // export for test
-export function compressStringToEncodedUri(s: string): string {
-    const compressed = Zlib.gzipSync(s)
+export function deflateStringToEncodedUri(s: string): string {
+    const compressed = Zlib.deflateSync(s)
     const base64 = compressed.toString("base64")
-    return encodeURI(base64);
+    return encodeURIComponent(base64);
 }
 
 // export for test
-export function decompressEncodedUri(s: string): string {
-    const buffer = Buffer.from(decodeURI(s), 'base64')
-    return Zlib.unzipSync(buffer).toString()
+export function inflateEncodedUri(s: string): string {
+    const buffer = Buffer.from(decodeURIComponent(s), 'base64')
+    return Zlib.inflateSync(buffer).toString()
 }
 
 export const v1PracticeCompressor: PracticeCompressor = {
@@ -72,11 +72,11 @@ export const v1PracticeCompressor: PracticeCompressor = {
             t: compressTemplates(props.templates)
         }
         const s = JSON.stringify(newProps)
-        return compressStringToEncodedUri(s)
+        return deflateStringToEncodedUri(s)
     },
 
     decompress(s: string): PracticeInitializationProps {
-        const decompressed = decompressEncodedUri(s)
+        const decompressed = inflateEncodedUri(s)
         const json = JSON.parse(decompressed) as { s: number, t: string }
         return {
             seed: json.s,
