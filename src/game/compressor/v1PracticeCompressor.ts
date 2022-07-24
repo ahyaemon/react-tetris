@@ -3,6 +3,7 @@ import {PracticeCompressor} from "./PracticeCompressor";
 import * as Zlib from "zlib";
 import {Cell, createEmptyRows} from "../cell";
 import {BoardTemplate} from "../BoardTemplate";
+import pako from "pako";
 
 const cellToNumberTuples: [Cell, number][] = [
     [Cell.None, 0],
@@ -53,15 +54,15 @@ export function decompressTemplates(s: string): BoardTemplate[] {
 
 // export for test
 export function deflateStringToEncodedUri(s: string): string {
-    const compressed = Zlib.deflateSync(s)
-    const base64 = compressed.toString("base64")
-    return encodeURIComponent(base64);
+    const deflated = pako.deflate(s)
+    return encodeURIComponent(btoa(String.fromCharCode(...deflated)))
 }
 
 // export for test
 export function inflateEncodedUri(s: string): string {
-    const buffer = Buffer.from(decodeURIComponent(s), 'base64')
-    return Zlib.inflateSync(buffer).toString()
+    const raw = atob(decodeURIComponent(s))
+    const ar = Uint8Array.from(raw.split("").map(x => x.charCodeAt(0)))
+    return new TextDecoder().decode(pako.inflate(ar))
 }
 
 export const v1PracticeCompressor: PracticeCompressor = {
