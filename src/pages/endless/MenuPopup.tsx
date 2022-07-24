@@ -1,10 +1,10 @@
-import css from "./ReloadPopup.module.css";
+import css from "./MenuPopup.module.css";
 import Popup from "reactjs-popup";
 import React, {useState} from "react";
 import {useEndlessProps} from "./useEndlessProps";
 import {Command} from "../../game/command";
 
-export const ReloadPopup: React.FC = () => {
+export const MenuPopup: React.FC = () => {
     const { createPracticeQueryParam } = useEndlessProps()
     const [url, setUrl] = useState<string | undefined>(undefined)
 
