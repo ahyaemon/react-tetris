@@ -18,3 +18,18 @@
 .templateButton {
     margin-top: 10px;
 }
+
+.templateAreaContainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.templateTextArea {
+    flex-grow: 1;
+}
+
+.templateIconContainer {
+    margin-left: 10px;
+}

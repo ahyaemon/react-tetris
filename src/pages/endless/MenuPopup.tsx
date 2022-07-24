@@ -3,11 +3,9 @@ import Popup from "reactjs-popup";
 import React, {useState} from "react";
 import {useEndlessProps} from "./useEndlessProps";
 import {Command} from "../../game/command";
+import {BiCopy, FiExternalLink} from "react-icons/all";
 
 export const MenuPopup: React.FC = () => {
-    const { createPracticeQueryParam } = useEndlessProps()
-    const [url, setUrl] = useState<string | undefined>(undefined)
-
     return (
         <Popup trigger={
             <button className={css.triggerButton} type="button">
@@ -22,23 +20,47 @@ export const MenuPopup: React.FC = () => {
 
                     <hr className={css.bar}/>
 
-                    <button
-                        type="button"
-                        className={css.templateButton}
-                        onClick={ () => {
-                            const param = createPracticeQueryParam()
-                            // FIXME パスは hooks で作る？ router が不要なら hooks じゃなくても良さそうだけど
-                            const url = location.origin + `/react-tetris/#/practice?v=1&p=${param}`
-                            console.log(url)
-                            setUrl(url)
-                        } }
-                    >テンプレ練習 URL 作成</button>
-                    {url &&
-                        <textarea readOnly value={url}/>
-                    }
+                    <TemplateButton/>
                 </div>
             )}
         </Popup>
+    )
+}
+
+const TemplateButton: React.FC = () => {
+
+    const { createPracticeQueryParam } = useEndlessProps()
+
+    const [url, setUrl] = useState<string | undefined>(undefined)
+
+    return (
+        <div>
+            <button
+                type="button"
+                className={css.templateButton}
+                onClick={ () => {
+                    const param = createPracticeQueryParam()
+                    // FIXME パスは hooks で作る？ router が不要なら hooks じゃなくても良さそうだけど
+                    const url = location.origin + `/react-tetris/#/practice?v=1&p=${param}`
+                    setUrl(url)
+                } }
+            >テンプレ練習 URL 作成</button>
+            {url &&
+                <div className={css.templateAreaContainer}>
+                    <textarea readOnly value={url} className={css.templateTextArea}/>
+                    <div className={css.templateIconContainer}>
+                        <div>
+                            <BiCopy size={30}/>
+                        </div>
+                        <div>
+                            <FiExternalLink size={30} onClick={() => {
+                                window.open(url, '_blank');
+                            }}/>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     )
 }
 
