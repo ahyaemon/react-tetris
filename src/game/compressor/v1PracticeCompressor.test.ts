@@ -1,4 +1,9 @@
-import {v1PracticeCompressor} from "./v1PracticeCompressor";
+import {
+    compressStringToEncodedUri,
+    compressTemplates, decompressEncodedUri,
+    decompressTemplates,
+    v1PracticeCompressor
+} from "./v1PracticeCompressor";
 import {PracticeInitializationProps} from "../Practice";
 import {Cell} from "../cell";
 
@@ -119,9 +124,21 @@ const props: PracticeInitializationProps = {
 }
 
 
-test("圧縮と解凍ができる", () => {
+test("templates の圧縮と解凍ができる", () => {
+    const compressed = compressTemplates(props.templates)
+    const decompressed = decompressTemplates(compressed)
+    expect(decompressed).toStrictEqual(props.templates)
+})
+
+test("文字列の圧縮と解凍ができる", () => {
+    const s = `{"s":966504.8330976967,"t":"0006660000-1003364000-1000334455-1107777455_0006660000-1003364000-1222334455-1127777455_0000000007-0000000007-0003300557-4000336557-4406666661-1403364111_0000000007-0000000007-0003300557-4222336557-4426666661-1403364111_"}`
+    const compressed = compressStringToEncodedUri(s)
+    const decompressed = decompressEncodedUri(compressed)
+    expect(decompressed).toStrictEqual(s)
+})
+
+test("PracticeInitializationProps の圧縮と解凍ができる", () => {
     const compressed = v1PracticeCompressor.compress(props)
-    console.log({length: compressed.length, compressed})
     const decompressed = v1PracticeCompressor.decompress(compressed)
     expect(decompressed).toStrictEqual(props)
 })
