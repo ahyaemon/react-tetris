@@ -1,1 +1,2 @@
-https://ahyaemon.github.io/react-tetris/
+動いてるものはここで触れる
+https://tet-simulator.ahyaemon.com/
