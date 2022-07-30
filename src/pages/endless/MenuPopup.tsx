@@ -43,8 +43,7 @@ const TemplateButton: React.FC = () => {
                 className={css.templateButton}
                 onClick={ () => {
                     const param = createPracticeQueryParam()
-                    // FIXME パスは hooks で作る？ router が不要なら hooks じゃなくても良さそうだけど
-                    const url = location.origin + `/react-tetris/#/practice?v=1&p=${param}`
+                    const url = location.origin + `/practice?v=1&p=${param}`
                     setUrl(url)
                 } }
             >テンプレ練習 URL 作成</button>

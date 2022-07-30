@@ -16,11 +16,11 @@ function LinkWithClose(props: LinkWithCloseProps) {
 const practiceParameters: { title: string, queryString: string }[] = [
     {
         title: "TSD → TSD",
-        queryString: "v=1&p=eJyNjUsOwkAMQ%2B%2BSdYOcTD5ML9NDwA5xd9JpVVGpSHhhvYX1%2FKIHzT3CYbd7a%2BgZPXKiJ80EICKqwQK0FrZjsZk7iyArhcuPraoeW%2F3abkk%2BY%2F3DPdkGx0BbvRVhseEVkT8M43g36IWB3h%2FnTDKU",
+        queryString: "v=1&p=eJx1jTEOhDAMBP%2FimqBdx7EDn%2BER0KH7%2B5kIoSuOLawpZten7LLWpQds9sU7YET3SQ5ZBYC750UhUKvbjclmrRUSkUncXlxVfVz9cTNxCWMLkdVig6O1RLvGElloY4zkW228uGv6pyafL%2FuULqE%3D",
     },
     {
         title: "DT砲",
-        queryString: "v=1&p=eJytjTsSAkEIBe9C7GwBj4%2FuZTyEZtbeXWacXRNNLAmoDqD7QTdaxczzvMAvcFWN9BPdaSXuY301ZhE2eyELUJgtgkUB90Lmes2JdZpANvciyQA6ihRGXH%2F1Fhxe%2Febtk20PTByFHLXiLpu14f1Y%2B4dXD6%2Fq26u7l7Ynk4pMwA%3D%3D",
+        queryString: "v=1&p=eJytjUEOAkEIBP%2FC2TFAA7PZz%2FiI9Wb8uz2rs170YiSEVAJU32STtWyJ0HOZsnNJnOQqq%2BioGKOpmmnEE9UAYm9Vag5kElXdvb%2BQpx3oLZNkvYCBZsSqy69ewuH1z97Owi7LLK4nBni0pxUfI2YafV%2FS%2FuH1w%2Bv%2B9vr0yv0BV1pMzA%3D%3D",
     }
 ]
 
