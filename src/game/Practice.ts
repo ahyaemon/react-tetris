@@ -122,6 +122,10 @@ export class Practice {
         )
     }
 
+    get board(): Board {
+        return this.currentGame.board
+    }
+
     get isCleared(): boolean {
         return this.currentTemplateIndex === this.templates.length - 1
     }

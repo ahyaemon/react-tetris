@@ -11,11 +11,11 @@ export const PracticeLeft: React.FC = () => {
         game: {
             currentGame,
             input,
-            // back,
             historySize,
         },
         template: {
             isCleared,
+            toggleTemplateShowing
         }
     } = usePracticeProps()
 
@@ -27,6 +27,9 @@ export const PracticeLeft: React.FC = () => {
                     <div>格</div>
                 </div>
             }
+            <div>
+                <button type="button" onClick={() => toggleTemplateShowing()}>テンプレ<br/>表示切替</button>
+            </div>
             <div>
                 REN: {currentGame.renCount()}
             </div>

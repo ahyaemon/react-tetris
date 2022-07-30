@@ -26,8 +26,15 @@ const practiceState = atom({
     default: Practice.create(game, sampleTemplates)
 })
 
+const templateShowingState = atom({
+    key: 'templateShowing',
+    default: true,
+})
+
 export function usePracticeProps() {
     const [practice, setPractice] = useRecoilState(practiceState)
+
+    const [templateShowing, setTemplateShowing] = useRecoilState(templateShowingState)
 
     return {
         initialize: (props: PracticeInitializationProps) => {
@@ -41,8 +48,11 @@ export function usePracticeProps() {
             },
         },
         template: {
-            boardWithTemplate: practice.boardWithTemplate,
+            board: templateShowing ? practice.boardWithTemplate : practice.board,
             isCleared: practice.isCleared,
+            toggleTemplateShowing: () => {
+                setTemplateShowing(b => !b)
+            }
         },
     }
 }

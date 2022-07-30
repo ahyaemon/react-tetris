@@ -22,7 +22,7 @@ export function PracticePage() {
             input
         },
         template: {
-            boardWithTemplate,
+            board,
         }
     } = usePracticeProps()
 
@@ -37,7 +37,7 @@ export function PracticePage() {
                     <PracticeLeft/>
                 </div>
                 <div className={css.board}>
-                    <BoardFC board={boardWithTemplate}/>
+                    <BoardFC board={board}/>
                 </div>
                 <div>
                     <PracticeRight/>
