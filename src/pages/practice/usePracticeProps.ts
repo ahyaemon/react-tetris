@@ -7,9 +7,6 @@ import {Random} from "../../game/random";
 import {RenCounter} from "../../game/RenCounter";
 import {sampleMinos, sampleTemplates} from "./sample";
 import {Practice, PracticeInitializationProps} from "../../game/Practice";
-import {useSearchParams} from "react-router-dom";
-import {v1PracticeCompressor} from "../../game/compressor/v1PracticeCompressor";
-import {useEffect} from "react";
 
 const seed = Math.random() * 1000000
 
