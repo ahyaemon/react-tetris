@@ -93,10 +93,18 @@ export class Game {
 
             // 次のミノに切り替え
             const currentMino = CurrentMino.create(this.nextMinos[0])
-            const nextRandom = this.random.nextRandom()
-            const nextMinos = (this.nextMinos.length <= 5) ?
-                [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())] :
-                this.nextMinos.slice(1, this.nextMinos.length)
+
+            // nextMinos が 5 個以下の時、新たに random を作って次の 7 個を得る
+            let nextRandom
+            let nextMinos
+            if (this.nextMinos.length <= 5) {
+                nextRandom = this.random.nextRandom()
+                nextMinos = [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())]
+            } else {
+                nextRandom = this.random
+                nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
+            }
+
             return new Game(
                 currentMino,
                 clearedRows,
