@@ -3,7 +3,7 @@ import {Cell} from "./cell";
 import {Rotation} from "./rotation";
 import {Shape} from "./shape";
 
-enum MinoType {
+export enum MinoType {
     I,
     O,
     T,

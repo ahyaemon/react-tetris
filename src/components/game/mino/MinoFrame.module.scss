@@ -3,8 +3,42 @@
     height: 50px;
     border: 1px solid grey;
     margin-bottom: 2px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mino {
     width: 80%;
 }
+
+$cell-length: 15px;
+$cell-length-small: 12px;
+.twoThreeGrid {
+    display: grid;
+    grid-template-rows: $cell-length $cell-length;
+    grid-template-columns: $cell-length $cell-length $cell-length;
+}
+.twoTwoGrid {
+    display: grid;
+    grid-template-rows: $cell-length $cell-length;
+    grid-template-columns: $cell-length $cell-length;
+}
+.oneFourGrid {
+    display: grid;
+    grid-template-rows: $cell-length-small;
+    grid-template-columns: $cell-length-small $cell-length-small $cell-length-small $cell-length-small;
+}
+
+@mixin cell($color) {
+    border: 0.5px solid grey;
+    background-color: $color;
+}
+.tCell { @include cell(purple) }
+.jCell { @include cell(blue) }
+.lCell { @include cell(orange) }
+.sCell { @include cell(#4ec14e) }
+.zCell { @include cell(red) }
+.oCell { @include cell(yellow) }
+.iCell { @include cell(lightblue) }
