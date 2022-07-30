@@ -155,7 +155,7 @@ export const minoFactory = {
         )
     },
     random(): Mino {
-        const rand =　getRandomInt(7)
+        const rand = getRandomInt(7)
         switch (rand) {
             case 0: return this.i()
             case 1: return this.o()

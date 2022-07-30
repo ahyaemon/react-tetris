@@ -22,8 +22,8 @@ type GameUpdateMethods = {
     right: GameUpdater,
     down: GameUpdater,
     left: GameUpdater,
-    rotationRight:　GameUpdater,
-    rotationLeft:　GameUpdater,
+    rotationRight: GameUpdater,
+    rotationLeft: GameUpdater,
     hold: GameUpdater,
 }
 

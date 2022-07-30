@@ -12,7 +12,7 @@ import {useEndlessProps} from "./useEndlessProps";
 
 export function EndlessPage() {
 
-    const { currentGame,　input　} = useEndlessProps()
+    const { currentGame, input } = useEndlessProps()
 
     const { isDesktop } = useResponsive()
 

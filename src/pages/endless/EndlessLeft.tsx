@@ -7,7 +7,7 @@ import {Command} from "../../game/command";
 
 export const EndlessLeft: React.FC = () => {
 
-    const {　currentGame, historySize, input } = useEndlessProps()
+    const { currentGame, historySize, input } = useEndlessProps()
 
     return (
         <>
