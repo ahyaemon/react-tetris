@@ -46,6 +46,10 @@ export class Practice {
 
     public input(command: Command): Practice {
         if (command === Command.Back) {
+            if (this.games.length === 1) {
+                return this
+            }
+
             return new Practice(this.games.slice(1), this.templates, this.templateIndices.slice(0, this.templateIndices.length - 1))
         }
 

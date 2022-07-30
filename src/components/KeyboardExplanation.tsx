@@ -7,5 +7,6 @@ export const KeyboardExplanation: React.FC = () => (
         <p>回転 : [z][x] or [k][l]</p>
         <p>ハードドロップ : [↑] or [w]</p>
         <p>ホールド : [Shift]</p>
+        <p>一手戻る : [Space]</p>
     </div>
 )

@@ -54,6 +54,7 @@ export function useKeyDown(callback: (command: Command) => void, showKey: boolea
         { key: key.x,  f: () => { callback(Command.RotationRight) }},
 
         { key: key.shift,  f: () => { callback(Command.Hold) }},
+        { key: key.space,  f: () => { callback(Command.Back) }},
     ]
 
     useEffect(() => {

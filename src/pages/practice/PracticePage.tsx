@@ -1,16 +1,14 @@
 import css from "../endless/EndlessPage.module.scss";
 import {BoardFC} from "../../components/game/board/BoardFC";
-import { CrossKeys} from "../../components/game/cross-keys/CrossKeys";
+import {CrossKeys} from "../../components/game/cross-keys/CrossKeys";
 import {RotationKeys2} from "../../components/game/rotation-keys/RotationKeys";
 import {KeyboardExplanation} from "../../components/KeyboardExplanation";
-import React, {useEffect} from "react";
+import React from "react";
 import {PracticeLeft} from "./PracticeLeft";
 import {PracticeRight} from "./PracticeRight";
 import {useKeyDown} from "../../hooks/useKeyDown";
 import {useResponsive} from "../../hooks/useResponsive";
 import {usePracticeProps} from "./usePracticeProps";
-import {useSearchParams} from "react-router-dom";
-import {v1PracticeCompressor} from "../../game/compressor/v1PracticeCompressor";
 import {usePracticeInitializer} from "./usePracticeInitializer";
 
 

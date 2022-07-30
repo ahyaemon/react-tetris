@@ -27,6 +27,10 @@ export class Endless {
 
     public input(command: Command): Endless {
         if (command === Command.Back) {
+            if (this.games.length === 1) {
+                return this
+            }
+
             const newGame = this.games.slice(1)
             const i = this.addedTemplatesNumbers.slice(-1)[0]
             const newTemplates = this.templates.slice(0, -i)
