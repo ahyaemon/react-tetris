@@ -7,7 +7,7 @@ import {Seed} from "../../game/seed";
 
 const endlessState= atom({
     key: 'endless',
-    default: Endless.create([Game.create(Seed.random().value)])
+    default: Endless.create([Game.create(Seed.random())])
 })
 
 export function useEndlessProps() {

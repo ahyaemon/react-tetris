@@ -1,4 +1,5 @@
 import seedrandom from "seedrandom";
+import {Seed} from "./seed";
 
 export function getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
@@ -10,8 +11,8 @@ export class Random {
 
     public _value: number
 
-    constructor(readonly seed: number) {
-        this.prng = seedrandom(seed.toString())
+    constructor(readonly seed: Seed) {
+        this.prng = seedrandom(seed.value.toString())
         this._value = this.prng.int32()
     }
 
@@ -20,7 +21,7 @@ export class Random {
     }
 
     public nextRandom(): Random {
-        return new Random(this.value(1000000))
+        return new Random(new Seed(this.value(1000000)))
     }
 }
 

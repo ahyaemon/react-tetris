@@ -19,7 +19,7 @@ function input(endless: Endless, commands: [Command, number][]): Endless {
     return e
 }
 
-const seed = Seed.random().value
+const seed = Seed.random()
 
 describe("createPracticeInitializationProps", () => {
 
@@ -63,7 +63,7 @@ describe("createPracticeInitializationProps", () => {
         ])
 
         const practiceInitializationProps = inputted.createPracticeInitializationProps()
-        expect(practiceInitializationProps.seed).toStrictEqual(seed)
+        expect(practiceInitializationProps.seed).toStrictEqual(seed.value)
         expect(practiceInitializationProps.templates[0]).toStrictEqual(sampleTemplates[0])
         expect(practiceInitializationProps.templates[1]).toStrictEqual(sampleTemplates[1])
         expect(practiceInitializationProps.templates[2]).toStrictEqual(sampleTemplates[2])
@@ -137,7 +137,7 @@ describe("createPracticeInitializationProps", () => {
         expected3[19][9] = Cell.LightBlueTemplate
 
         const practiceInitializationProps = inputted.createPracticeInitializationProps()
-        expect(practiceInitializationProps.seed).toStrictEqual(seed)
+        expect(practiceInitializationProps.seed).toStrictEqual(seed.value)
         expect(practiceInitializationProps.templates[0]).toStrictEqual(expected1)
         expect(practiceInitializationProps.templates[1]).toStrictEqual(expected2)
         expect(practiceInitializationProps.templates[2]).toStrictEqual(expected3)

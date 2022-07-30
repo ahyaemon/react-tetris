@@ -9,7 +9,7 @@ import {sampleMinos, sampleTemplates} from "./sample";
 import {Practice, PracticeInitializationProps} from "../../game/Practice";
 import {Seed} from "../../game/seed";
 
-const seed = Seed.random().value
+const seed = Seed.random()
 
 const game = new Game(
     CurrentMino.create(sampleMinos[0]),

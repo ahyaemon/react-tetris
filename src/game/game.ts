@@ -5,6 +5,7 @@ import {CurrentMino} from "./CurrentMino";
 import {Random} from "./random";
 import {Position} from "./potision";
 import {RenCounter} from "./RenCounter";
+import {Seed} from "./seed";
 
 export type Board = Row[]
 
@@ -19,12 +20,12 @@ export class Game {
         readonly heldMino: Mino | null,
         readonly nextMinos: Mino[],
         private readonly random: Random,
-        readonly seed: number,
+        readonly seed: Seed,
         readonly clearedRowCount: number,
         private readonly renCounter: RenCounter,
     ) {}
 
-    static create(seed: number): Game {
+    static create(seed: Seed): Game {
         const random = new Random(seed)
         const rows = Array(this.nrow)
             .fill(0)

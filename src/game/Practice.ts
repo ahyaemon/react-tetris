@@ -2,6 +2,7 @@ import {Board, Game} from "./game";
 import {Command} from "./command";
 import {Cell, Row} from "./cell";
 import {BoardTemplate} from "./BoardTemplate";
+import {Seed} from "./seed";
 
 export type PracticeInitializationProps = {
     templates: BoardTemplate[],
@@ -32,7 +33,7 @@ export class Practice {
     }
 
     public static initialize(props: PracticeInitializationProps): Practice {
-        const game = Game.create(props.seed)
+        const game = Game.create(new Seed(props.seed))
         return Practice.create(game, props.templates)
     }
 

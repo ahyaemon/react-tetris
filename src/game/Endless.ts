@@ -40,7 +40,7 @@ export class Endless {
         }
 
         if (command === Command.NewGame) {
-            return Endless.create([Game.create(Seed.random().value)])
+            return Endless.create([Game.create(Seed.random())])
         }
 
         if (command === Command.Retry) {
@@ -87,7 +87,7 @@ export class Endless {
     }
 
     public createPracticeInitializationProps(): PracticeInitializationProps {
-        const seed = this.games.slice(-1)[0].seed
+        const seed = this.games.slice(-1)[0].seed.value
         const templates = this.templates.map(rows => {
             return rows.map(row => {
                 return row.map(cell =>{

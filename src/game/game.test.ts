@@ -1,8 +1,9 @@
 import {Game} from "./game";
 import {Cell, createEmptyRows, Row} from "./cell";
 import {Command} from "./command";
+import {Seed} from "./seed";
 
-const game = Game.create(1)
+const game = Game.create(new Seed(1))
 
 describe("minoDroppedBoard", () => {
 
