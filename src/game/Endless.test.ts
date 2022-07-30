@@ -7,6 +7,7 @@ import {Cell, createEmptyRows} from "./cell";
 import {Random} from "./random";
 import {RenCounter} from "./RenCounter";
 import {minoFactory} from "./mino";
+import {Seed} from "./seed";
 
 function input(endless: Endless, commands: [Command, number][]): Endless {
     let e = endless
@@ -18,7 +19,7 @@ function input(endless: Endless, commands: [Command, number][]): Endless {
     return e
 }
 
-const seed = Math.random() * 1000000
+const seed = Seed.random().value
 
 describe("createPracticeInitializationProps", () => {
 

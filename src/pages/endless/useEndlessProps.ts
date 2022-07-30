@@ -3,10 +3,11 @@ import {atom, useRecoilState} from "recoil";
 import {Command} from "../../game/command";
 import {Endless} from "../../game/Endless";
 import {v1PracticeCompressor} from "../../game/compressor/v1PracticeCompressor";
+import {Seed} from "../../game/seed";
 
 const endlessState= atom({
     key: 'endless',
-    default: Endless.create([Game.create(Math.random() * 1000000)])
+    default: Endless.create([Game.create(Seed.random().value)])
 })
 
 export function useEndlessProps() {

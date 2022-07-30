@@ -3,6 +3,7 @@ import {Command} from "./command";
 import {BoardTemplate} from "./BoardTemplate";
 import {Cell, createEmptyRows} from "./cell";
 import {PracticeInitializationProps} from "./Practice";
+import {Seed} from "./seed";
 
 export class Endless {
 
@@ -39,7 +40,7 @@ export class Endless {
         }
 
         if (command === Command.NewGame) {
-            return Endless.create([Game.create(Math.random() * 1000000)])
+            return Endless.create([Game.create(Seed.random().value)])
         }
 
         if (command === Command.Retry) {

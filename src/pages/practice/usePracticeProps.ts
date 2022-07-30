@@ -7,8 +7,9 @@ import {Random} from "../../game/random";
 import {RenCounter} from "../../game/RenCounter";
 import {sampleMinos, sampleTemplates} from "./sample";
 import {Practice, PracticeInitializationProps} from "../../game/Practice";
+import {Seed} from "../../game/seed";
 
-const seed = Math.random() * 1000000
+const seed = Seed.random().value
 
 const game = new Game(
     CurrentMino.create(sampleMinos[0]),
