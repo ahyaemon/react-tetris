@@ -36,13 +36,13 @@ describe("bug: ホールドするとネクストミノの生成がおかしく�
             .input(Command.Hold)
             .input(Command.Up)
             .input(Command.Up)
-        const mionsWithHold = gameWithHold.nextMinos.map(mino => mino.minoType)
+        const mionsWithHold = gameWithHold.nextMinosHolder.minos.map(mino => mino.minoType)
 
         const gameWithoutHold = game
             .input(Command.Up)
             .input(Command.Up)
             .input(Command.Up)
-        const minosWithoutHold = gameWithoutHold.nextMinos.map(mino => mino.minoType)
+        const minosWithoutHold = gameWithoutHold.nextMinosHolder.minos.map(mino => mino.minoType)
 
         expect(mionsWithHold).toStrictEqual(minosWithoutHold)
     })

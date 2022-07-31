@@ -4,10 +4,11 @@ import {Game} from "./game";
 import {CurrentMino} from "./CurrentMino";
 import {sampleMinos, sampleTemplates} from "../pages/practice/sample";
 import {Cell, createEmptyRows} from "./cell";
-import {Random} from "./random";
 import {RenCounter} from "./RenCounter";
 import {minoFactory} from "./mino";
 import {Seed} from "./seed";
+import {NextMinosHolder} from "./NextMinosHolder";
+import {Random} from "./random";
 
 function input(endless: Endless, commands: [Command, number][]): Endless {
     let e = endless
@@ -24,15 +25,14 @@ const seed = Seed.random()
 describe("createPracticeInitializationProps", () => {
 
     test("開幕 DT -> DT", () => {
+        const nextMinosHolder = new NextMinosHolder(sampleMinos.slice(1), seed, new Random(seed))
         const game = new Game(
             CurrentMino.create(sampleMinos[0]),
             createEmptyRows(20, 10),
             null,
-            sampleMinos.slice(1),
-            new Random(seed),
-            seed,
+            nextMinosHolder,
             0,
-            RenCounter.create()
+            RenCounter.create(),
         )
         const endless = Endless.create([game])
         const inputted = input(endless, [
@@ -63,7 +63,7 @@ describe("createPracticeInitializationProps", () => {
         ])
 
         const practiceInitializationProps = inputted.createPracticeInitializationProps()
-        expect(practiceInitializationProps.seed).toStrictEqual(seed.value)
+        expect(practiceInitializationProps.seed).toStrictEqual(nextMinosHolder.seed.value)
         expect(practiceInitializationProps.templates[0]).toStrictEqual(sampleTemplates[0])
         expect(practiceInitializationProps.templates[1]).toStrictEqual(sampleTemplates[1])
         expect(practiceInitializationProps.templates[2]).toStrictEqual(sampleTemplates[2])
@@ -73,15 +73,14 @@ describe("createPracticeInitializationProps", () => {
     })
 
     test("連続でラインが消える場合", () => {
+        const nextMinosHolder = new NextMinosHolder([minoFactory.o(), minoFactory.o(), minoFactory.i(), minoFactory.i()], seed, new Random(seed))
         const game = new Game(
             CurrentMino.create(minoFactory.o()),
             createEmptyRows(20, 10),
             null,
-            [minoFactory.o(), minoFactory.o(), minoFactory.i(), minoFactory.i()],
-            new Random(seed),
-            seed,
+            nextMinosHolder,
             0,
-            RenCounter.create()
+            RenCounter.create(),
         )
         const endless = Endless.create([game])
         const inputted = input(endless, [
@@ -137,7 +136,7 @@ describe("createPracticeInitializationProps", () => {
         expected3[19][9] = Cell.LightBlueTemplate
 
         const practiceInitializationProps = inputted.createPracticeInitializationProps()
-        expect(practiceInitializationProps.seed).toStrictEqual(seed.value)
+        expect(practiceInitializationProps.seed).toStrictEqual(nextMinosHolder.seed.value)
         expect(practiceInitializationProps.templates[0]).toStrictEqual(expected1)
         expect(practiceInitializationProps.templates[1]).toStrictEqual(expected2)
         expect(practiceInitializationProps.templates[2]).toStrictEqual(expected3)

@@ -1,11 +1,11 @@
-import {Mino, minoFactory} from "./mino";
+import {Mino} from "./mino";
 import {Cell, createEmptyRow, isFilled, Row, toGhost} from "./cell";
 import {Command} from "./command";
 import {CurrentMino} from "./CurrentMino";
-import {Random} from "./random";
 import {Position} from "./potision";
 import {RenCounter} from "./RenCounter";
 import {Seed} from "./seed";
+import {NextMinosHolder} from "./NextMinosHolder";
 
 export type Board = Row[]
 
@@ -18,24 +18,21 @@ export class Game {
         private readonly currentMino: CurrentMino,
         readonly rows: Row[],
         readonly heldMino: Mino | null,
-        readonly nextMinos: Mino[],
-        private readonly random: Random,
-        readonly seed: Seed,
+        readonly nextMinosHolder: NextMinosHolder,
         readonly clearedRowCount: number,
         private readonly renCounter: RenCounter,
     ) {}
 
     static create(seed: Seed): Game {
-        const random = new Random(seed)
         const rows = Array(this.nrow)
             .fill(0)
             .map(_ => Array(this.ncol).fill(Cell.None))
-        const minoSets = minoFactory.createMinoSets(random.nextRandom())
-        const currentMino = CurrentMino.create(minoSets[0])
-        const nextMinos = minoSets.slice(1, minoSets.length)
+        const nextMinosHolder = NextMinosHolder.create(seed)
+        const [firstMino, restHolder] = nextMinosHolder.pop()
+        const currentMino = CurrentMino.create(firstMino)
         const renCounter = RenCounter.create()
 
-        return new Game(currentMino, rows, null, nextMinos, random, seed, 0, renCounter)
+        return new Game(currentMino, rows, null, restHolder, 0, renCounter)
     }
 
     // FIXME この変換ロジックはここに入れるべき？
@@ -75,9 +72,7 @@ export class Game {
                 droppedMino,
                 this.rows,
                 this.heldMino,
-                this.nextMinos,
-                this.random,
-                this.seed,
+                this.nextMinosHolder,
                 this.clearedRowCount,
                 this.renCounter,
             )
@@ -93,26 +88,14 @@ export class Game {
             const renCounter = this.renCounter.next(clearingAmount !== 0)
 
             // 次のミノに切り替え
-            const currentMino = CurrentMino.create(this.nextMinos[0])
-
-            // nextMinos が 5 個以下の時、新たに random を作って次の 7 個を得る
-            let nextRandom
-            let nextMinos
-            if (this.nextMinos.length <= 5) {
-                nextRandom = this.random.nextRandom()
-                nextMinos = [...this.nextMinos.slice(1, this.nextMinos.length), ...minoFactory.createMinoSets(nextRandom.nextRandom())]
-            } else {
-                nextRandom = this.random
-                nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
-            }
+            const [first, restHolder] = this.nextMinosHolder.pop()
+            const currentMino = CurrentMino.create(first)
 
             return new Game(
                 currentMino,
                 clearedRows,
                 this.heldMino,
-                nextMinos,
-                nextRandom,
-                this.seed,
+                restHolder,
                 this.clearedRowCount + this.getClearingAmount(rows),
                 renCounter,
             )
@@ -136,15 +119,13 @@ export class Game {
     public hold(): Game {
         if (this.heldMino === null) {
             const heldMino = this.currentMino.mino
-            const currentMino = CurrentMino.create(this.nextMinos[0])
-            const nextMinos = this.nextMinos.slice(1, this.nextMinos.length)
+            const [first, restHolder] = this.nextMinosHolder.pop()
+            const currentMino = CurrentMino.create(first)
             return new Game(
                 currentMino,
                 this.rows,
                 heldMino,
-                nextMinos,
-                this.random,
-                this.seed,
+                restHolder,
                 this.clearedRowCount,
                 this.renCounter,
             )
@@ -155,9 +136,7 @@ export class Game {
                 currentMino,
                 this.rows,
                 heldMino,
-                this.nextMinos,
-                this.random,
-                this.seed,
+                this.nextMinosHolder,
                 this.clearedRowCount,
                 this.renCounter,
             )
@@ -169,9 +148,7 @@ export class Game {
             currentMino,
             this.rows,
             this.heldMino,
-            this.nextMinos,
-            this.random,
-            this.seed,
+            this.nextMinosHolder,
             this.clearedRowCount,
             this.renCounter,
         )
@@ -454,5 +431,9 @@ export class Game {
 
     public renCount(): number {
         return this.renCounter.count
+    }
+
+    get nextMinos(): Mino[] {
+        return this.nextMinosHolder.minos
     }
 }

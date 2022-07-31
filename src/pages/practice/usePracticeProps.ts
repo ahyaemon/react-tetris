@@ -8,16 +8,15 @@ import {RenCounter} from "../../game/RenCounter";
 import {sampleMinos, sampleTemplates} from "./sample";
 import {Practice, PracticeInitializationProps} from "../../game/Practice";
 import {Seed} from "../../game/seed";
+import {NextMinosHolder} from "../../game/NextMinosHolder";
 
-const seed = Seed.random()
+const nextMinosHolder = NextMinosHolder.create(Seed.random())
 
 const game = new Game(
     CurrentMino.create(sampleMinos[0]),
     Array(20).fill(0).map(_ => Array(10).fill(Cell.None)),
     null,
-    sampleMinos.slice(1),
-    new Random(seed),
-    seed,
+    nextMinosHolder,
     0,
     RenCounter.create()
 )

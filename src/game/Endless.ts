@@ -11,7 +11,6 @@ export class Endless {
         private readonly games: Game[],
         private readonly templates: BoardTemplate[],
         private readonly addedTemplatesNumbers: number[]
-        // TODO back した時に、テンプレートをいくつ取り除く必要があるかを保持しておく
     ) {}
 
     public static create(games: Game[]): Endless {
@@ -87,7 +86,7 @@ export class Endless {
     }
 
     public createPracticeInitializationProps(): PracticeInitializationProps {
-        const seed = this.games.slice(-1)[0].seed.value
+        const seed = this.games.slice(-1)[0].nextMinosHolder.seed.value
         const templates = this.templates.map(rows => {
             return rows.map(row => {
                 return row.map(cell =>{
