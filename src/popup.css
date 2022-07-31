@@ -2,7 +2,7 @@
     margin: auto;
     background: rgb(255, 255, 255);
     border-radius: 4px;
-    width: 50%;
+    min-width: 50%;
     padding: 15px;
     -webkit-animation: content 0.1s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
 }

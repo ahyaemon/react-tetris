@@ -25,6 +25,10 @@ export function useEndlessProps() {
         input: (command: Command) => {
             setEndless(endless => endless.input(command))
         },
+        newWithSeed: (seed: Seed) => {
+            setEndless(Endless.createBySeed(seed))
+        },
         createPracticeQueryParam,
+        seed: endless.firstSeed,
     }
 }

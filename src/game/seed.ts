@@ -1,15 +1,17 @@
 export class Seed {
 
-    private static max: number = 99_999_999
+    static max: number = 99_999_999
+
+    static min: number = 0
 
     value: number
 
     constructor(value: number) {
-        if (value > 99_999_999) {
+        if (value > Seed.max) {
             throw Error("seed には 8 桁以内の数値を設定して")
         }
 
-        if (value < 0) {
+        if (value < Seed.min) {
             throw Error("seed には 0 以上の数値を設定して")
         }
 

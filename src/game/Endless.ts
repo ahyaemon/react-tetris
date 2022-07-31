@@ -17,12 +17,20 @@ export class Endless {
         return new Endless(games, [], [])
     }
 
+    public static createBySeed(seed: Seed): Endless {
+        return new Endless([Game.create(seed)], [], [])
+    }
+
     get historySize(): number {
         return this.games.length
     }
 
     get currentGame(): Game {
         return this.games[0]
+    }
+
+    get firstSeed(): Seed {
+        return this.games[this.historySize - 1].seed
     }
 
     public input(command: Command): Endless {

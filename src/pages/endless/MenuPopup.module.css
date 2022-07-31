@@ -7,25 +7,34 @@
     color: green;
 }
 
-.newButton {
+.buttons {
     display: flex;
     flex-direction: column;
 }
 
-.retryButton {
+.newButton {
+    width: 100%;
     margin-top: 10px;
+}
+
+.retryButtonContainer {
+    margin-top: 20px;
+}
+
+.retryButton {
+    width: 100%;
 }
 
 .bar {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .templateButton {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .templateAreaContainer {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -37,4 +46,8 @@
 
 .templateIconContainer {
     margin-left: 10px;
+}
+
+.seedInput {
+    width: 100px;
 }

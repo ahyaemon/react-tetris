@@ -436,4 +436,8 @@ export class Game {
     get nextMinos(): Mino[] {
         return this.nextMinosHolder.minos
     }
+
+    get seed(): Seed {
+        return this.nextMinosHolder.seed
+    }
 }
