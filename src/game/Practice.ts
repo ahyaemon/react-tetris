@@ -14,7 +14,7 @@ export class Practice {
     private constructor(
         private readonly games: Game[],
         private readonly templates: BoardTemplate[],
-        private readonly templateIndices: number[],
+        readonly templateIndices: number[],
     ) {}
 
     private fromTemplateMap = new Map([
@@ -65,7 +65,7 @@ export class Practice {
         const newGame = this.currentGame.input(command)
 
         if (command === Command.Up) {
-            const nextIndex = (this.matchTemplate(newGame.rows) || this.matchTemplate(this.currentGame.board)) ?
+            const nextIndex = (this.matchTemplate(newGame.rows) || this.matchTemplate(this.currentGame.minoDroppedBoard)) ?
                 this.currentTemplateIndex + 1:
                 this.currentTemplateIndex
 
