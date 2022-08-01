@@ -4,14 +4,20 @@ import {MdRefresh} from "react-icons/md";
 import React from "react";
 import {usePracticeProps} from "./usePracticeProps";
 import {Command} from "../../game/command";
+import {blurFocusedElement} from "../../lib/element";
 
 export const ReloadPopup: React.FC = () => {
     return (
-        <Popup trigger={
-            <button className={css.triggerButton} type="button">
-                <MdRefresh size={'2em'}/>
-            </button>
-        } position="right center" modal>
+        <Popup
+            trigger={
+                <button className={css.triggerButton} type="button">
+                    <MdRefresh size={'2em'}/>
+                </button>
+            }
+            position="right center"
+            modal
+            onClose={() => { blurFocusedElement() }}
+        >
             {/* @ts-ignore */}
             {(close: any) => (
                 <div className={css.newButton}>

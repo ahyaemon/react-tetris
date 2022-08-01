@@ -4,14 +4,20 @@ import React from "react";
 import {NewButton} from "./MenuPopup/NewButton";
 import {TemplateButton} from "./MenuPopup/TemplateButton";
 import {RetryButton} from "./MenuPopup/RetryButton";
+import {blurFocusedElement} from "../../lib/element";
 
 export const MenuPopup: React.FC = () => {
     return (
-        <Popup trigger={
-            <button className={css.triggerButton} type="button">
-                メニュー
-            </button>
-        } position="right center" modal>
+        <Popup
+            trigger={
+                <button className={css.triggerButton} type="button">
+                    メニュー
+                </button>
+            }
+            position="right center"
+            modal
+            onClose={() => { blurFocusedElement() }}
+        >
             {/* @ts-ignore */}
             {(close: any) => (
                 <div className={css.buttons}>
