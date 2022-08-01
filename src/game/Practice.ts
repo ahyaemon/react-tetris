@@ -3,6 +3,7 @@ import {Command} from "./command";
 import {Cell, Row} from "./cell";
 import {BoardTemplate} from "./BoardTemplate";
 import {Seed} from "./seed";
+import {lastOf, removeFirstOf} from "../lib/array";
 
 export type PracticeInitializationProps = {
     templates: BoardTemplate[],
@@ -51,7 +52,7 @@ export class Practice {
                 return this
             }
 
-            return new Practice(this.games.slice(1), this.templates, this.templateIndices.slice(0, this.templateIndices.length - 1))
+            return new Practice(removeFirstOf(this.games), this.templates, this.templateIndices.slice(0, this.templateIndices.length - 1))
         }
 
         if (command === Command.NewGame) {
@@ -108,7 +109,7 @@ export class Practice {
     }
 
     private get currentTemplateIndex(): number {
-        return this.templateIndices.slice(-1)[0]
+        return lastOf(this.templateIndices)
     }
 
     private get currentTemplate(): BoardTemplate {

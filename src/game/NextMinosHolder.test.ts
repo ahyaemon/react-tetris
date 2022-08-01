@@ -2,6 +2,7 @@ import {NextMinosHolder} from "./NextMinosHolder";
 import {minoFactory} from "./mino";
 import {Seed} from "./seed";
 import {Random} from "./random";
+import {removeFirstOf} from "../lib/array";
 
 const seed = Seed.random()
 const random = new Random(seed)
@@ -22,7 +23,7 @@ describe("pop", () => {
         const [mino, restHolder] = holder.pop()
 
         expect(mino).toStrictEqual(minoFactory.l())
-        expect(restHolder.minos.map(it => it.minoType)).toStrictEqual(minos.slice(1).map(it => it.minoType))
+        expect(restHolder.minos.map(it => it.minoType)).toStrictEqual(removeFirstOf(minos).map(it => it.minoType))
     })
 
     test("pop 前に要素数が 5 つの場合、新たに 7 つプラスされて残りは 11", () => {

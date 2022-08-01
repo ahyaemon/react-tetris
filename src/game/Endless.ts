@@ -4,6 +4,7 @@ import {BoardTemplate} from "./BoardTemplate";
 import {Cell, createEmptyRows} from "./cell";
 import {PracticeInitializationProps} from "./Practice";
 import {Seed} from "./seed";
+import {lastOf, removeFirstOf, removeLastOf} from "../lib/array";
 
 export class Endless {
 
@@ -39,10 +40,10 @@ export class Endless {
                 return this
             }
 
-            const newGame = this.games.slice(1)
-            const i = this.addedTemplatesNumbers.slice(-1)[0]
-            const newTemplates = this.templates.slice(0, -i)
-            const newAddedTemplatesNumbers = this.addedTemplatesNumbers.slice(0, -1)
+            const newGame = removeFirstOf(this.games)
+            const i = lastOf(this.addedTemplatesNumbers)
+            const newTemplates = removeLastOf(this.templates, i)
+            const newAddedTemplatesNumbers = removeLastOf(this.addedTemplatesNumbers, 1)
             return new Endless(newGame, newTemplates, newAddedTemplatesNumbers)
         }
 
@@ -94,7 +95,7 @@ export class Endless {
     }
 
     public createPracticeInitializationProps(): PracticeInitializationProps {
-        const seed = this.games.slice(-1)[0].nextMinosHolder.seed.value
+        const seed = lastOf(this.games).nextMinosHolder.seed.value
         const templates = this.templates.map(rows => {
             return rows.map(row => {
                 return row.map(cell =>{

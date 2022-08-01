@@ -23,6 +23,7 @@ export function removeFirstOf<T>(ar: T[]): T[] {
  * 配列の最後から n 個の要素を削除し、残りの配列を返す。
  * 配列が空の場合は空の配列を返す。
  * @param ar
+ * @param n
  */
 export function removeLastOf<T>(ar: T[], n: number): T[] {
     return ar.slice(0, -n)

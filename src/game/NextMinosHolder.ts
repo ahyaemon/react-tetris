@@ -1,6 +1,7 @@
 import {Mino, minoFactory} from "./mino";
 import {Seed} from "./seed";
 import {Random} from "./random";
+import {removeFirstOf} from "../lib/array";
 
 export class NextMinosHolder {
 
@@ -28,11 +29,11 @@ export class NextMinosHolder {
             const nextRandom = this.random.nextRandom()
             const nextMinos = [...this.minos, ...minoFactory.createMinoSets(nextRandom.nextRandom())]
             const first = nextMinos[0]
-            const restHolder = new NextMinosHolder(nextMinos.slice(1), this.seed, nextRandom)
+            const restHolder = new NextMinosHolder(removeFirstOf(nextMinos), this.seed, nextRandom)
             return [first, restHolder]
         } else {
             const first = this.minos[0]
-            const restHolder = new NextMinosHolder(this.minos.slice(1), this.seed, this.random)
+            const restHolder = new NextMinosHolder(removeFirstOf(this.minos), this.seed, this.random)
             return [first, restHolder]
         }
     }
