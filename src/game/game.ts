@@ -166,7 +166,7 @@ export class Game {
                 return this.moveHitRelations(
                     m,
                     [
-                        { row: 0, col: -1 },
+                        { row: 0, col: -2 },
                         { row: 0, col: 3 },
                         { row: 1, col: -3 },
                         { row: -3, col: 3 },
@@ -178,7 +178,7 @@ export class Game {
                     [
                         { row: 0, col: -1 },
                         { row: 0, col: 3 },
-                        { row: -3, col: 2 },
+                        { row: -2, col: -3 },
                         { row: 3, col: 3 },
                     ]) || this.currentMino
             } else if (this.currentMino.isCDirection) {
@@ -196,9 +196,9 @@ export class Game {
                 return this.moveHitRelations(
                     m,
                     [
-                        { row: 0, col: -2 },
-                        { row: 0, col: 3 },
-                        { row: 2, col: 0 },
+                        { row: 0, col: 1 },
+                        { row: 0, col: -3 },
+                        { row: 2, col: 3 },
                         { row: -3, col: -3 },
                     ]) || this.currentMino
             }
@@ -272,7 +272,7 @@ export class Game {
                         { row: 0, col: 2 },
                         { row: 0, col: -3 },
                         { row: -1, col: 3 },
-                        { row: -3, col: 3 },
+                        { row: 3, col: -3 },
                     ]) || this.currentMino
             } else if (this.currentMino.isCDirection) {
                 // C -> B
@@ -289,10 +289,10 @@ export class Game {
                 return this.moveHitRelations(
                     m,
                     [
-                        { row: 0, col: 1 },
-                        { row: 0, col: -3 },
-                        { row: 0, col: 1 },
-                        { row: 3, col: 3 },
+                        { row: 0, col: -2 },
+                        { row: 0, col: 3 },
+                        { row: 1, col: -3 },
+                        { row: -3, col: 3 },
                     ]) || this.currentMino
             }
         } else {
